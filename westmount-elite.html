@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1006 Westmount Drive — A Record of Process Failure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   RESET + VARIABLES
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+
+:root {
+  --navy: #0A1628;
+  --navy-light: #0F1F38;
+  --white: #F8F6F2;
+  --white-pure: #FFFFFF;
+  --cream: #F0EDE6;
+  --teal: #1A6B5A;
+  --teal-light: #228B73;
+  --red-brown: #8B3A3A;
+  --green: #2A5A3A;
+  --green-bg: #F0F7F2;
+  --green-border: #B8D4C0;
+  --amber: #7A5C1A;
+  --amber-bg: #FBF6EB;
+  --red-bg: #FDF4F4;
+  --red-border: #E0C0C0;
+  --ink: #1A1A1A;
+  --ink2: #3A3A3A;
+  --ink3: #6A6A6A;
+  --ink4: #9A9A9A;
+  --rule: #D0CCC4;
+  --sans: 'Raleway', 'Helvetica Neue', sans-serif;
+  --serif: 'Cormorant Garamond', 'Georgia', serif;
+  --max-w: 900px;
+}
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════
+   PROGRESS BAR
+═══════════════════════════════════════ */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+  width: 0%; z-index: 9999;
+  transition: width 0.1s linear;
+  will-change: width;
+}
+
+/* ═══════════════════════════════════════
+   SIDE NAV
+═══════════════════════════════════════ */
+#sidenav {
+  position: fixed; left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 200px; padding: 0 1.25rem;
+  display: flex; flex-direction: column; gap: 0.6rem;
+  z-index: 100;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+#sidenav.visible { opacity: 1; pointer-events: auto; }
+.nav-link {
+  font-family: var(--sans); font-size: 0.62rem;
+  font-weight: 300; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink4);
+  text-decoration: none; padding-left: 0.8rem;
+  border-left: 1px solid #D0CCC4;
+  transition: all 0.3s ease;
+  line-height: 1.5;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--teal); border-left-color: var(--teal);
+  border-left-width: 2px;
+}
+@media (max-width: 1200px) { #sidenav { display: none; } }
+
+/* ═══════════════════════════════════════
+   MOBILE NAV
+═══════════════════════════════════════ */
+#mobile-nav-btn {
+  display: none; position: fixed; top: 1rem; right: 1rem;
+  z-index: 1001; background: var(--navy); color: var(--white);
+  border: none; width: 44px; height: 44px; border-radius: 4px;
+  font-family: var(--sans); font-size: 0.6rem; font-weight: 300;
+  letter-spacing: 0.1em; cursor: pointer;
+  opacity: 0; transition: opacity 0.4s;
+}
+#mobile-nav-btn.visible { opacity: 1; }
+@media (max-width: 1200px) { #mobile-nav-btn { display: flex; align-items: center; justify-content: center; } }
+
+#mobile-nav {
+  display: none; position: fixed; inset: 0;
+  background: rgba(10,22,40,0.95); z-index: 1000;
+  flex-direction: column; align-items: center;
+  justify-content: center; gap: 1.25rem;
+}
+#mobile-nav.open { display: flex; }
+#mobile-nav a {
+  font-family: var(--sans); font-size: 0.85rem;
+  font-weight: 200; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(248,246,242,0.7);
+  text-decoration: none; transition: color 0.3s;
+}
+#mobile-nav a:hover { color: var(--white); }
+
+/* ═══════════════════════════════════════
+   LAYOUT CONTAINERS
+═══════════════════════════════════════ */
+.content-w {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+@media (max-width: 600px) { .content-w { padding: 0 1.5rem; } }
+
+/* Full-bleed sections */
+.full-bleed {
+  width: 100%; position: relative;
+}
+.full-bleed.navy {
+  background: var(--navy); color: var(--white);
+}
+.full-bleed.cream {
+  background: var(--cream);
+}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+#hero {
+  min-height: 100vh; display: flex;
+  flex-direction: column; justify-content: center;
+  align-items: center; text-align: center;
+  background: var(--white); position: relative;
+  padding: 4rem 2rem;
+}
+.hero-address {
+  font-family: var(--sans); font-weight: 100;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: 0.04em; color: var(--ink);
+  opacity: 0; animation: fadeUp 1.2s ease 0.3s forwards;
+  line-height: 1.1;
+}
+.hero-subtitle {
+  font-family: var(--serif); font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  color: var(--ink3); margin-top: 1.5rem;
+  opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
+  max-width: 700px; line-height: 1.5;
+}
+.hero-meta {
+  font-family: var(--sans); font-weight: 200;
+  font-size: clamp(0.6rem, 1vw, 0.72rem);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink4); margin-top: 3rem;
+  opacity: 0; animation: fadeUp 0.8s ease 1.4s forwards;
+  line-height: 2;
+}
+.hero-scroll {
+  position: absolute; bottom: 3rem;
+  font-family: var(--sans); font-weight: 200;
+  font-size: 0.6rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--ink4);
+  opacity: 0; animation: fadeUp 0.6s ease 2s forwards;
+}
+.hero-scroll::after {
+  content: ''; display: block;
+  width: 1px; height: 30px;
+  background: var(--rule); margin: 0.75rem auto 0;
+  animation: pulse 2s ease infinite;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════
+   STAKES SPLIT
+═══════════════════════════════════════ */
+#stakes {
+  min-height: 100vh; display: flex;
+  align-items: stretch;
+}
+.stakes-col {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; padding: 4rem 3rem;
+  min-height: 100vh;
+}
+.stakes-col.resolve {
+  background: #F0F7F2; border-right: 1px solid var(--green-border);
+}
+.stakes-col.escalate { background: var(--navy); color: var(--white); }
+.stakes-label {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.65rem; letter-spacing: 0.25em;
+  text-transform: uppercase; margin-bottom: 2rem;
+}
+.stakes-col.resolve .stakes-label { color: var(--green); }
+.stakes-col.escalate .stakes-label { color: rgba(248,246,242,0.4); }
+.stakes-heading {
+  font-family: var(--sans); font-weight: 200;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  line-height: 1.3; margin-bottom: 1.5rem;
+}
+.stakes-col.resolve .stakes-heading { color: var(--green); }
+.stakes-text {
+  font-family: var(--serif); font-size: 1.1rem;
+  line-height: 1.8;
+}
+.stakes-col.escalate .stakes-text { color: rgba(248,246,242,0.8); }
+.stakes-item {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.9rem; line-height: 1.7;
+  padding: 0.5rem 0; border-bottom: 1px solid rgba(248,246,242,0.08);
+}
+@media (max-width: 768px) {
+  #stakes { flex-direction: column; }
+  .stakes-col { min-height: 80vh; padding: 3rem 2rem; }
+}
+
+/* ═══════════════════════════════════════
+   STAT SCREENS
+═══════════════════════════════════════ */
+.stat-screen {
+  min-height: 100vh; display: flex;
+  flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+  background: var(--navy); color: var(--white);
+  padding: 2rem;
+}
+.stat-number {
+  font-family: var(--sans); font-weight: 100;
+  font-size: clamp(5rem, 15vw, 10rem);
+  line-height: 1; letter-spacing: -0.02em;
+}
+.stat-unit {
+  font-family: var(--sans); font-weight: 100;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  letter-spacing: 0.1em; color: rgba(248,246,242,0.4);
+  margin-top: 0.5rem;
+}
+.stat-context {
+  font-family: var(--serif); font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: rgba(248,246,242,0.6);
+  margin-top: 1.5rem; max-width: 500px;
+}
+
+/* ═══════════════════════════════════════
+   PART HEADERS
+═══════════════════════════════════════ */
+.part-banner {
+  padding: 6rem 2rem;
+  background: var(--white);
+  text-align: center;
+}
+.part-banner-num {
+  font-family: var(--sans); font-weight: 100;
+  font-size: 5rem; color: var(--teal);
+  line-height: 1; margin-bottom: 1rem;
+}
+.part-banner-title {
+  font-family: var(--sans); font-weight: 200;
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  letter-spacing: -0.01em; color: var(--ink);
+  max-width: 700px; margin: 0 auto;
+  line-height: 1.3;
+}
+.part-banner-sub {
+  font-family: var(--serif); font-weight: 300;
+  font-style: italic; font-size: 1.1rem;
+  color: var(--ink3); margin-top: 1.5rem;
+  max-width: 600px; margin-left: auto; margin-right: auto;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════ */
+.section {
+  padding: 6rem 0;
+  border-bottom: 1px solid #E8E4DE;
+}
+.section:last-child { border-bottom: none; }
+
+.section-label {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.65rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--ink4);
+  margin-bottom: 1rem;
+}
+.section-heading {
+  font-family: var(--sans); font-weight: 200;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  line-height: 1.25; color: var(--ink);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+.section-lede {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 1.15rem; line-height: 1.8;
+  color: var(--ink2); margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #E8E4DE;
+}
+
+/* ═══════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════ */
+.timeline {
+  position: relative; padding-left: 2.5rem;
+  margin: 2rem 0;
+}
+.timeline::before {
+  content: ''; position: absolute;
+  left: 0.4rem; top: 0.5rem; bottom: 0;
+  width: 1px; background: var(--rule);
+}
+.tl-item { position: relative; margin-bottom: 2rem; }
+.tl-item::before {
+  content: ''; position: absolute;
+  left: -2.15rem; top: 0.5rem;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--rule); border: 2px solid var(--ink4);
+}
+.tl-item.key::before { background: var(--teal); border-color: var(--teal); }
+.tl-date {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink4);
+  margin-bottom: 0.3rem;
+}
+.tl-item.key .tl-date { color: var(--teal); font-weight: 400; }
+.tl-body {
+  font-family: var(--serif); font-size: 1rem;
+  color: var(--ink2); line-height: 1.75;
+}
+.tl-body strong { color: var(--ink); }
+
+/* ═══════════════════════════════════════
+   COMPARISON TABLE
+═══════════════════════════════════════ */
+.ev-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.95rem; margin: 2rem 0;
+}
+.ev-table th {
+  background: var(--navy); color: var(--white);
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.62rem; letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.1rem; text-align: left;
+}
+.ev-table td {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid #E8E4DE;
+  font-family: var(--serif); color: var(--ink2);
+  vertical-align: top; line-height: 1.65;
+}
+.ev-table td:first-child {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.88rem; color: var(--ink);
+}
+.ev-table tr:nth-child(even) td { background: rgba(240,237,230,0.4); }
+.td-good { color: var(--green) !important; font-weight: 500; }
+.td-bad { color: var(--red-brown) !important; font-weight: 500; }
+.table-wrap { overflow-x: auto; margin: 2rem 0; }
+
+/* ═══════════════════════════════════════
+   STAT ROW
+═══════════════════════════════════════ */
+.stat-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; border: 1px solid var(--rule); margin: 2rem 0;
+}
+@media (max-width: 700px) { .stat-row { grid-template-columns: 1fr 1fr; } }
+.stat-cell {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--rule);
+  background: var(--cream);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-cell-num {
+  font-family: var(--sans); font-weight: 100;
+  font-size: 3.2rem; line-height: 1; color: var(--teal);
+  margin-bottom: 0.4rem;
+}
+.stat-cell-num .unit {
+  font-size: 1.1rem; font-weight: 200;
+}
+.stat-cell-label {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.72rem; letter-spacing: 0.05em;
+  color: var(--ink3); line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════
+   GRADE SVG DIAGRAM
+═══════════════════════════════════════ */
+.diagram-container {
+  border: 1px solid var(--rule);
+  background: var(--cream); padding: 2rem;
+  margin: 2.5rem 0;
+}
+.diagram-container svg { width: 100%; height: auto; display: block; }
+.diagram-caption {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.65rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink4);
+  text-align: center; margin-top: 1rem;
+}
+
+/* ═══════════════════════════════════════
+   QUOTE BLOCKS
+═══════════════════════════════════════ */
+.big-quote {
+  margin: 3rem 0; padding: 2rem 2.5rem;
+  background: var(--cream);
+  border-left: 4px solid var(--red-brown);
+}
+.big-quote-text {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  line-height: 1.65; color: var(--ink);
+  margin-bottom: 1rem;
+}
+.big-quote-attr {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.68rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink4);
+}
+.big-quote-note {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.85rem; color: var(--ink3);
+  line-height: 1.7; margin-top: 1rem;
+  padding-top: 1rem; border-top: 1px solid #D8D4CC;
+}
+
+/* ═══════════════════════════════════════
+   CONTRADICTION CARDS
+═══════════════════════════════════════ */
+.contra-pair {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--rule); margin: 2.5rem 0;
+  overflow: hidden;
+}
+@media (max-width: 700px) { .contra-pair { grid-template-columns: 1fr; } }
+.contra-side {
+  padding: 2rem;
+}
+.contra-side.city {
+  background: var(--green-bg);
+  border-right: 1px solid var(--green-border);
+}
+.contra-side.reality { background: var(--red-bg); }
+.contra-side-label {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 0.85rem;
+}
+.contra-side.city .contra-side-label { color: var(--green); }
+.contra-side.reality .contra-side-label { color: var(--red-brown); }
+.contra-side-text {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.05rem; line-height: 1.7; color: var(--ink);
+}
+.contra-side-src {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.65rem; color: var(--ink4);
+  margin-top: 0.85rem; letter-spacing: 0.03em;
+  line-height: 1.5;
+}
+.contra-connector {
+  text-align: center; padding: 1rem;
+  background: var(--cream);
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.72rem; letter-spacing: 0.1em;
+  color: var(--ink3);
+}
+
+/* ═══════════════════════════════════════
+   CALLOUT BOXES
+═══════════════════════════════════════ */
+.callout {
+  border: 1px solid var(--rule);
+  padding: 1.75rem 2rem;
+  margin: 2rem 0;
+  background: var(--cream);
+}
+.callout.red { border-color: var(--red-border); background: var(--red-bg); }
+.callout.green { border-color: var(--green-border); background: var(--green-bg); }
+.callout.gold { border-color: #D8C480; background: var(--amber-bg); }
+.callout-label {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 0.75rem;
+}
+.callout.red .callout-label { color: var(--red-brown); }
+.callout.green .callout-label { color: var(--green); }
+.callout.gold .callout-label { color: var(--amber); }
+.callout p {
+  font-family: var(--serif); font-size: 1.05rem;
+  line-height: 1.8; color: var(--ink2);
+}
+.callout p + p { margin-top: 0.75rem; }
+.callout strong { color: var(--ink); }
+
+/* ═══════════════════════════════════════
+   KEY POINT BANDS (full-bleed navy)
+═══════════════════════════════════════ */
+.key-band {
+  background: var(--navy); color: var(--white);
+  padding: 4rem 2rem;
+}
+.key-band .content-w {
+  max-width: 800px;
+}
+.key-band-text {
+  font-family: var(--sans); font-weight: 200;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  line-height: 1.65; letter-spacing: -0.005em;
+}
+.key-band-text strong {
+  font-weight: 500; color: #A8D8C8;
+}
+
+/* ═══════════════════════════════════════
+   DOUBLE STANDARD COMPARISON
+═══════════════════════════════════════ */
+.property-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; margin: 2.5rem 0;
+  border: 1px solid var(--rule);
+}
+@media (max-width: 700px) { .property-cards { grid-template-columns: 1fr; } }
+.prop-card {
+  padding: 2.5rem; position: relative;
+}
+.prop-card.approved { background: var(--green-bg); }
+.prop-card.denied {
+  background: var(--red-bg);
+  border-left: 1px solid var(--rule);
+}
+@media (max-width: 700px) {
+  .prop-card.denied { border-left: none; border-top: 1px solid var(--rule); }
+}
+.prop-card-address {
+  font-family: var(--sans); font-weight: 200;
+  font-size: 1.6rem; margin-bottom: 0.3rem;
+}
+.prop-card.approved .prop-card-address { color: var(--green); }
+.prop-card.denied .prop-card-address { color: var(--red-brown); }
+.prop-card-status {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 1.5rem;
+}
+.prop-card.approved .prop-card-status { color: var(--green); }
+.prop-card.denied .prop-card-status { color: var(--red-brown); }
+.prop-metric {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.88rem; color: var(--ink2);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  line-height: 1.5;
+}
+.prop-metric strong { font-weight: 500; }
+
+/* ═══════════════════════════════════════
+   REBUTTAL BLOCKS
+═══════════════════════════════════════ */
+.rebuttal {
+  border: 1px solid var(--rule);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+.rebuttal-claim {
+  background: var(--red-bg);
+  border-bottom: 1px solid var(--red-border);
+  padding: 1.25rem 1.75rem;
+}
+.rebuttal-claim-label {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.58rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--red-brown);
+  margin-bottom: 0.4rem;
+}
+.rebuttal-claim p {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.05rem; line-height: 1.7; color: var(--ink);
+}
+.rebuttal-response {
+  padding: 1.25rem 1.75rem; background: var(--white-pure);
+}
+.rebuttal-response-label {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.58rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--green);
+  margin-bottom: 0.4rem;
+}
+.rebuttal-response p {
+  font-family: var(--serif); font-size: 1rem;
+  line-height: 1.8; color: var(--ink2);
+}
+
+/* ═══════════════════════════════════════
+   DEMANDS
+═══════════════════════════════════════ */
+.demand-list {
+  list-style: none; margin: 2rem 0;
+  counter-reset: demand;
+}
+.demand-item {
+  counter-increment: demand;
+  display: grid; grid-template-columns: 4.5rem 1fr;
+  border: 1px solid var(--rule);
+  margin-bottom: -1px;
+}
+.demand-num-cell {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--teal); color: var(--white);
+  font-family: var(--sans); font-weight: 200;
+  font-size: 1.8rem; min-height: 100px;
+}
+.demand-content {
+  padding: 1.5rem 2rem;
+  background: var(--cream);
+}
+.demand-title {
+  font-family: var(--sans); font-weight: 500;
+  font-size: 1rem; color: var(--ink);
+  margin-bottom: 0.5rem; line-height: 1.4;
+}
+.demand-text {
+  font-family: var(--serif); font-size: 0.98rem;
+  line-height: 1.8; color: var(--ink2);
+}
+.demand-basis {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.62rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink4);
+  margin-top: 0.6rem;
+}
+
+/* ═══════════════════════════════════════
+   ESCALATION
+═══════════════════════════════════════ */
+.esc-card {
+  background: rgba(248,246,242,0.06);
+  border: 1px solid rgba(248,246,242,0.12);
+  padding: 2rem; margin-bottom: 1.5rem;
+}
+.esc-card-title {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.95rem; color: var(--white);
+  margin-bottom: 0.75rem;
+}
+.esc-card-text {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 1rem; line-height: 1.8;
+  color: rgba(248,246,242,0.7);
+}
+
+/* ═══════════════════════════════════════
+   DATA GRID
+═══════════════════════════════════════ */
+.data-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--rule);
+  border: 1px solid var(--rule); margin: 2rem 0;
+}
+@media (max-width: 600px) { .data-grid { grid-template-columns: 1fr; } }
+.data-cell {
+  background: var(--cream); padding: 2rem;
+}
+.data-cell-num {
+  font-family: var(--sans); font-weight: 100;
+  font-size: 2.8rem; line-height: 1; color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.data-cell-desc {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.82rem; color: var(--ink3); line-height: 1.55;
+}
+.data-cell-src {
+  font-family: var(--sans); font-weight: 200;
+  font-size: 0.6rem; color: var(--ink4);
+  margin-top: 0.6rem; letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════
+   DISCLOSURE TIMELINE
+═══════════════════════════════════════ */
+.disclosure-item {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 1.5rem; margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #E8E4DE;
+}
+@media (max-width: 600px) { .disclosure-item { grid-template-columns: 1fr; gap: 0.5rem; } }
+.disclosure-date {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.72rem; letter-spacing: 0.1em;
+  color: var(--ink3);
+}
+.disclosure-text {
+  font-family: var(--serif); font-size: 1rem;
+  line-height: 1.75; color: var(--ink2);
+}
+
+/* ═══════════════════════════════════════
+   MAP CARD + LIGHTBOX
+═══════════════════════════════════════ */
+.map-card {
+  display: block; position: relative;
+  border: 1px solid var(--rule);
+  margin: 2.5rem 0; cursor: pointer;
+  overflow: hidden; text-decoration: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.map-card:hover {
+  border-color: var(--teal);
+  box-shadow: 0 4px 20px rgba(10,22,40,0.12);
+}
+.map-card-visual {
+  height: 220px; background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.map-card-visual::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 42% 50%, rgba(26,107,90,0.25) 0%, transparent 50%),
+    radial-gradient(circle at 58% 50%, rgba(139,58,58,0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #0A1628 0%, #0F1F38 100%);
+}
+.map-card-svg { position: relative; z-index: 1; }
+.map-card-bar {
+  background: var(--cream); padding: 1rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.map-card-label {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.72rem; letter-spacing: 0.08em;
+  color: var(--ink2);
+}
+.map-card-cta {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.62rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--teal);
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.map-card-cta svg { transition: transform 0.3s; }
+.map-card:hover .map-card-cta svg { transform: translateX(3px); }
+
+/* Lightbox */
+#map-lightbox {
+  display: none; position: fixed; inset: 0;
+  background: rgba(10,22,40,0.92);
+  z-index: 10000; align-items: center; justify-content: center;
+  flex-direction: column; padding: 2rem;
+}
+#map-lightbox.open { display: flex; }
+#map-lightbox-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: none; border: 1px solid rgba(248,246,242,0.3);
+  color: var(--white); font-family: var(--sans);
+  font-weight: 200; font-size: 0.7rem; letter-spacing: 0.15em;
+  text-transform: uppercase; padding: 0.5rem 1rem;
+  cursor: pointer; transition: border-color 0.3s;
+}
+#map-lightbox-close:hover { border-color: var(--white); }
+.lightbox-content {
+  max-width: 900px; width: 100%; text-align: center;
+}
+.lightbox-content img {
+  max-width: 100%; max-height: 70vh;
+  border: 1px solid rgba(248,246,242,0.1);
+}
+.lightbox-caption {
+  font-family: var(--sans); font-weight: 200;
+  font-size: 0.75rem; color: rgba(248,246,242,0.5);
+  margin-top: 1.5rem; letter-spacing: 0.08em;
+}
+.lightbox-link {
+  display: inline-block; margin-top: 1rem;
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.72rem; letter-spacing: 0.1em;
+  color: var(--teal-light); text-decoration: none;
+  border-bottom: 1px solid rgba(34,139,115,0.3);
+  padding-bottom: 0.15rem;
+  transition: border-color 0.3s;
+}
+.lightbox-link:hover { border-color: var(--teal-light); }
+
+/* Map SVG illustration */
+.map-pin {
+  animation: pinBounce 2s ease infinite;
+}
+.map-pin.delayed { animation-delay: 0.3s; }
+@keyframes pinBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+#doc-footer {
+  border-top: 3px double var(--rule);
+  padding: 3rem 2rem;
+  text-align: center; background: var(--cream);
+}
+.footer-text {
+  font-family: var(--sans); font-weight: 200;
+  font-size: 0.62rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink4);
+  line-height: 2.2;
+}
+
+/* ═══════════════════════════════════════
+   DEADLINE RIBBON
+═══════════════════════════════════════ */
+.deadline-ribbon {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--navy); color: rgba(248,246,242,0.5);
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.6rem; letter-spacing: 0.18em;
+  text-transform: uppercase; text-align: center;
+  padding: 0.5rem; z-index: 90;
+  opacity: 0; transition: opacity 0.5s;
+}
+.deadline-ribbon.visible { opacity: 1; }
+.deadline-ribbon strong { color: var(--teal-light); font-weight: 400; }
+
+/* ═══════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════ */
+.gs-reveal {
+  opacity: 0; transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+/* ═══════════════════════════════════════
+   PRINT STYLES
+═══════════════════════════════════════ */
+@media print {
+  * { animation: none !important; transition: none !important; }
+  .gs-reveal { opacity: 1 !important; transform: none !important; }
+  #progress-bar, #sidenav, #mobile-nav-btn, #mobile-nav,
+  .hero-scroll, .deadline-ribbon { display: none !important; }
+  .stat-screen { min-height: auto; padding: 2rem; page-break-inside: avoid; }
+  .stat-number { font-size: 3rem; }
+  #stakes { flex-direction: column; }
+  .stakes-col { min-height: auto; padding: 2rem; }
+  .full-bleed.navy { background: #F0F0F0 !important; color: #1A1A1A !important; }
+  .full-bleed.navy * { color: #1A1A1A !important; }
+  .key-band { background: #F0F0F0 !important; }
+  .key-band * { color: #1A1A1A !important; }
+  .esc-card { background: #F5F5F5 !important; border-color: #CCC !important; }
+  .esc-card * { color: #1A1A1A !important; }
+  section, .section { page-break-inside: avoid; }
+  body { font-size: 11pt; }
+}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- DEADLINE RIBBON -->
+<div class="deadline-ribbon" id="deadline-ribbon">
+  Bill 25 Compliance Deadline: <strong>June 30, 2026 — 92 Days</strong>
+</div>
+
+<!-- SIDE NAV -->
+<nav id="sidenav">
+  <a href="#hero" class="nav-link">Cover</a>
+  <a href="#stakes" class="nav-link">The Stakes</a>
+  <a href="#history" class="nav-link">Project History</a>
+  <a href="#site" class="nav-link">The Site</a>
+  <a href="#record" class="nav-link">On the Record</a>
+  <a href="#contradictions" class="nav-link">Contradictions</a>
+  <a href="#double-standard" class="nav-link">Double Standard</a>
+  <a href="#disclosure" class="nav-link">Non-Disclosure</a>
+  <a href="#rebuttals" class="nav-link">Rebuttals</a>
+  <a href="#part2" class="nav-link">Part II — SSMUH</a>
+  <a href="#housing-demand" class="nav-link">Housing Demand</a>
+  <a href="#seniors" class="nav-link">Seniors Crisis</a>
+  <a href="#province" class="nav-link">Provincial Law</a>
+  <a href="#chilling" class="nav-link">Chilling Effect</a>
+  <a href="#demands" class="nav-link">Demands</a>
+  <a href="#escalation" class="nav-link">Escalation</a>
+</nav>
+
+<!-- MOBILE NAV -->
+<button id="mobile-nav-btn" aria-label="Menu">NAV</button>
+<div id="mobile-nav">
+  <a href="#hero">Cover</a>
+  <a href="#stakes">The Stakes</a>
+  <a href="#history">Project History</a>
+  <a href="#site">The Site</a>
+  <a href="#record">On the Record</a>
+  <a href="#contradictions">Contradictions</a>
+  <a href="#double-standard">Double Standard</a>
+  <a href="#disclosure">Non-Disclosure</a>
+  <a href="#rebuttals">Rebuttals</a>
+  <a href="#part2">Part II — SSMUH</a>
+  <a href="#demands">Demands</a>
+  <a href="#escalation">Escalation</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-address">1006 Westmount Drive</div>
+  <div class="hero-subtitle">A Record of Process Failure and a Pattern of Systemic Obstruction</div>
+  <div class="hero-meta">
+    File MDP000108 &middot; March 30, 2026<br>
+    Presented to the Mayor, City Manager &amp; General Manager of Community Development
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     THE STAKES
+════════════════════════════════════════════════ -->
+<section id="stakes">
+  <div class="stakes-col resolve gs-reveal">
+    <div class="stakes-label">If Resolved Today</div>
+    <div class="stakes-heading">A family gets their permit.</div>
+    <div class="stakes-text">Port Moody adds four units to its housing target. The provincial compliance record stays clean. The file closes. Five years of process failure ends quietly, here, in this room.</div>
+  </div>
+  <div class="stakes-col escalate gs-reveal">
+    <div class="stakes-label">If Not Resolved Today</div>
+    <div class="stakes-heading" style="color:var(--white);">The record goes public.</div>
+    <div class="stakes-item">Minister of Housing notified — Christine Boyle receives this document in full</div>
+    <div class="stakes-item">Board of Variance application filed under LGA Section 536</div>
+    <div class="stakes-item">Full public record — transcripts, letters, five years of contradictory instructions — disclosed to media and community</div>
+    <div class="stakes-item" style="border-bottom:none; margin-top:1rem; color: rgba(248,246,242,0.5); font-style:italic;">The applicant would still prefer resolution here.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     STAT SCREENS
+════════════════════════════════════════════════ -->
+<div class="stat-screen" id="stat-years">
+  <div class="stat-number counter" data-target="5">0</div>
+  <div class="stat-unit">Years</div>
+  <div class="stat-context">The same family. The same property. The same goal. Five years in the City's process.</div>
+</div>
+
+<div class="stat-screen" id="stat-apps">
+  <div class="stat-number counter" data-target="4">0</div>
+  <div class="stat-unit">Applications</div>
+  <div class="stat-context">Each time, the rules changed. Each time, the family started over.</div>
+</div>
+
+<div class="stat-screen" id="stat-cost">
+  <div class="stat-number"><span class="counter-prefix">$</span><span class="counter" data-target="250000" data-format="comma">0</span></div>
+  <div class="stat-unit">Spent</div>
+  <div class="stat-context">Architects, engineers, consultants, application fees. Four years of professional services. No permit.</div>
+</div>
+
+<div class="stat-screen" id="stat-permits">
+  <div class="stat-number counter" data-target="0" data-hold="true">0</div>
+  <div class="stat-unit">Permits Issued</div>
+  <div class="stat-context">Five years. Four applications. $250,000. This number.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PART I BANNER
+════════════════════════════════════════════════ -->
+<div class="part-banner gs-reveal" id="part1">
+  <div class="part-banner-num">I</div>
+  <div class="part-banner-title">The Westmount Project</div>
+  <div class="part-banner-sub">A documented record of process failure — four years of contradictory instructions, blanket policy applied where individual assessment is required, and critical information never proactively disclosed.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: PROJECT HISTORY
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="history">
+    <div class="section-label gs-reveal">The History of This File</div>
+    <h2 class="section-heading gs-reveal">Four Years. Four Applications. One Property. One Family.</h2>
+    <p class="section-lede gs-reveal">Same property. Same goal. Same four families. Everything the City asked for changed completely.</p>
+
+    <div class="timeline gs-reveal">
+      <div class="tl-item">
+        <div class="tl-date">2021 — Application 1</div>
+        <div class="tl-body"><strong>RS-1S bare land strata subdivision.</strong> Front-to-back lot split. 4 dwellings. City instruction at the time: daylight the ditch along Grouse Lane. All parking accessed from Westmount Drive at the front. Front access was not only permitted — it was the direction staff gave.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2021–2023</div>
+        <div class="tl-body">Application stalls. City begins internal work on a "front-and-back zone" concept intended to address exactly this type of lot. That concept is never enacted. The applicant waits.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">November 2023</div>
+        <div class="tl-body">Bill 44 receives Royal Assent. SSMUH mandated. Applicant pivots to the new framework. Same property. Same goal. New process.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">June 2024</div>
+        <div class="tl-body">Port Moody updates its zoning bylaw to comply with Bill 44 SSMUH requirements.</div>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">July 2, 2025 — Application 4</div>
+        <div class="tl-body"><strong>SSMUH development permit application submitted.</strong> Architrix Design Studio. File MDP000108. 4 dwellings. Same property. Over $100,000 already spent across prior applications.</div>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">October 8, 2025</div>
+        <div class="tl-body"><strong>Staff comments letter.</strong> Instruction: all parking must now be accessed from Grouse Lane at the rear. Front access not permitted. Ditch: no longer required to be daylighted — now just bridged with a culvert. Environmental concern that justified daylighting in 2021 is not addressed.</div>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">March 30, 2026 — Today</div>
+        <div class="tl-body">Still no permit. Access decision unresolved. BC Hydro queue at risk. Same applicant. Same property. Same four families.</div>
+      </div>
+    </div>
+
+    <!-- Side-by-side -->
+    <div class="callout red gs-reveal">
+      <div class="callout-label">The Argument the City Will Make — and the Response</div>
+      <p>Staff will note that the 2021 application was a subdivision under RS-1S and the 2025 application is an SSMUH development permit — different application types with different regulatory frameworks. That is correct as far as it goes.</p>
+      <p>It does not go far enough. In both cases: <strong>four dwellings, four families, same lot, same physical site conditions.</strong> The application type changed. The land did not. The grade did not. The ditch did not. What changed is what the City required — and in several cases those requirements directly contradict each other.</p>
+    </div>
+
+    <div class="table-wrap gs-reveal">
+    <table class="ev-table">
+      <thead><tr><th style="width:24%">Requirement</th><th style="width:38%">2021 — RS-1S Subdivision</th><th style="width:38%">2025 — SSMUH Dev Permit</th></tr></thead>
+      <tbody>
+        <tr><td>Vehicle access</td><td class="td-good">Front access from Westmount Drive — explicitly directed by staff</td><td class="td-bad">Lane-only access from Grouse Lane — front access prohibited</td></tr>
+        <tr><td>The ditch</td><td class="td-bad">Required to be daylighted — full environmental works</td><td class="td-good">Culvert + headwalls only — daylighting no longer required</td></tr>
+        <tr><td>Parking</td><td>Adequate parking required — more was acceptable</td><td class="td-bad">Hard cap of 4 stalls — applicant originally requested 9</td></tr>
+        <tr><td>Review process</td><td class="td-good">Address comments → Council → proceed</td><td class="td-bad">Full Development Permit: form/character, massing, facade articulation, bird-friendly design, energy modelling, Step Code</td></tr>
+        <tr><td>Infrastructure</td><td>Standard DCCs, modest CAC, basic servicing</td><td class="td-bad">Potential watermain upgrade, sanitary inspection, fire flow analysis, utility undergrounding, sidewalk, street lighting</td></tr>
+        <tr><td>Scale of process</td><td class="td-good">Matched project scale</td><td class="td-bad">Townhouse/multifamily complexity applied to a 4-unit infill build</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- DITCH PARADOX BAND -->
+<div class="key-band gs-reveal">
+  <div class="content-w">
+    <div class="key-band-text">The ditch: <strong>in 2021 it was important enough to require full daylighting. In 2025 it's fine with a culvert — but all parking now goes over it.</strong> The environmental requirement got lighter while the traffic load got heavier. Nobody has explained this.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: THE SITE
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="site">
+    <div class="section-label gs-reveal">The Property</div>
+    <h2 class="section-heading gs-reveal">What Lane-Only Access Actually Means at This Address</h2>
+    <p class="section-lede gs-reveal">The City requires all parking to enter from the rear lane — 20.8 feet below street grade. Here is what that means physically.</p>
+
+    <div class="stat-row gs-reveal">
+      <div class="stat-cell">
+        <div class="stat-cell-num">20.8<span class="unit">ft</span></div>
+        <div class="stat-cell-label">Surveyed grade drop, Westmount Dr to Grouse Lane</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-num">34</div>
+        <div class="stat-cell-label">Stairs from rear garage to front door entry</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-num">150<span class="unit">ft</span></div>
+        <div class="stat-cell-label">Distance from rear garage to front building entry</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell-num">0</div>
+        <div class="stat-cell-label">Comparable properties on Westmount with lane-only access</div>
+      </div>
+    </div>
+
+    <!-- GRADE SVG DIAGRAM -->
+    <div class="diagram-container gs-reveal">
+      <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" id="grade-svg">
+        <defs>
+          <marker id="arr-end" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L7 4L1 7" fill="none" stroke="#8B3A3A" stroke-width="1.5" stroke-linejoin="round"/></marker>
+          <marker id="arr-start" viewBox="0 0 8 8" refX="1" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M7 1L1 4L7 7" fill="none" stroke="#8B3A3A" stroke-width="1.5" stroke-linejoin="round"/></marker>
+          <pattern id="hatch" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#C8C4BC" stroke-width="0.8"/>
+          </pattern>
+        </defs>
+        <rect width="800" height="280" fill="#F0EDE6"/>
+        <!-- Ground -->
+        <polygon points="0,110 220,110 580,195 800,195 800,280 0,280" fill="#E4E0D8"/>
+        <polygon points="0,110 220,110 580,195 800,195 800,280 0,280" fill="url(#hatch)" opacity="0.4"/>
+        <polyline points="0,110 220,110 580,195 800,195" fill="none" stroke="#B0A898" stroke-width="1.5"/>
+        <!-- Westmount Drive -->
+        <rect x="0" y="100" width="220" height="12" fill="#D8D4CC" rx="1"/>
+        <text x="110" y="93" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="10" fill="#6A6A6A" letter-spacing="2">WESTMOUNT DRIVE</text>
+        <text x="14" y="93" font-family="Raleway, sans-serif" font-weight="300" font-size="8" fill="#8B3A3A" letter-spacing="0.5">EL. 443.9 ft</text>
+        <!-- Grouse Lane -->
+        <rect x="596" y="185" width="204" height="12" fill="#D8D4CC" rx="1"/>
+        <text x="698" y="178" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="10" fill="#6A6A6A" letter-spacing="2">GROUSE LANE</text>
+        <text x="600" y="178" font-family="Raleway, sans-serif" font-weight="300" font-size="8" fill="#8B3A3A" letter-spacing="0.5">EL. 423.1 ft</text>
+        <!-- Building B1 -->
+        <rect x="24" y="68" width="60" height="42" fill="#FFF" stroke="#1A1A1A" stroke-width="1"/>
+        <rect x="36" y="80" width="16" height="30" fill="#E4E0D8"/>
+        <text x="54" y="62" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="9" fill="#1A1A1A" letter-spacing="1">B1</text>
+        <!-- Building B2 -->
+        <rect x="116" y="68" width="60" height="42" fill="#FFF" stroke="#1A1A1A" stroke-width="1"/>
+        <rect x="128" y="80" width="16" height="30" fill="#E4E0D8"/>
+        <text x="146" y="62" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="9" fill="#1A1A1A" letter-spacing="1">B2</text>
+        <!-- Building B3 -->
+        <rect x="638" y="150" width="56" height="35" fill="#FFF" stroke="#6A6A6A" stroke-width="1"/>
+        <text x="666" y="144" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="9" fill="#6A6A6A" letter-spacing="1">B3</text>
+        <!-- Grade dimension -->
+        <line x1="585" y1="110" x2="585" y2="195" stroke="#8B3A3A" stroke-width="1" stroke-dasharray="4,3" marker-start="url(#arr-start)" marker-end="url(#arr-end)" class="grade-line"/>
+        <rect x="592" y="140" width="72" height="26" fill="#FDF4F4" stroke="#E0C0C0" stroke-width="0.75" rx="2"/>
+        <text x="628" y="155" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="500" font-size="13" fill="#8B3A3A">20.8 ft</text>
+        <text x="628" y="163" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="7" fill="#8B3A3A">6.35 m drop</text>
+        <!-- Stairs path -->
+        <polyline points="220,110 238,110 238,120 256,120 256,130 274,130 274,140 292,140 292,150 310,150 310,160 328,160 328,170 346,170 346,180 370,185" fill="none" stroke="#8B3A3A" stroke-width="1.8" opacity="0.6" class="stairs-path"/>
+        <rect x="260" y="125" width="78" height="18" fill="#FDF4F4" stroke="#E0C0C0" stroke-width="0.5" rx="2"/>
+        <text x="299" y="137" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="9" fill="#8B3A3A" letter-spacing="0.5">34 STAIRS</text>
+        <!-- Tree -->
+        <g transform="translate(430, 95)">
+          <line x1="0" y1="30" x2="0" y2="65" stroke="#6A5A40" stroke-width="4"/>
+          <circle cx="0" cy="15" r="28" fill="#4A7A4A" opacity="0.6"/>
+          <circle cx="-10" cy="22" r="20" fill="#3A6A3A" opacity="0.5"/>
+          <circle cx="12" cy="10" r="22" fill="#5A8A5A" opacity="0.5"/>
+        </g>
+        <text x="430" y="175" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="7.5" fill="#4A7A4A" letter-spacing="0.5">CITY-REQUIRED</text>
+        <text x="430" y="183" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="7.5" fill="#4A7A4A" letter-spacing="0.5">RETAINED TREE</text>
+      </svg>
+      <div class="diagram-caption">Cross-section: 1006 Westmount Drive — Surveyed grade from Westmount Drive to Grouse Lane · Source: Architectural drawings A1.2, A3.11, Architrix Design Studio</div>
+    </div>
+
+    <div class="callout gold gs-reveal">
+      <div class="callout-label">SSMUH Was Designed to Reduce Complexity — Not Increase It</div>
+      <p>The Province introduced SSMUH through Bill 44 specifically to simplify and accelerate small-scale housing delivery. The intent was to make four-unit infill builds accessible to homeowners, not just developers. What is being applied at 1006 Westmount Drive in 2025 is full multifamily-level process: Development Permit, form and character review, facade articulation, bird-friendly design requirements, energy modelling, Step Code compliance. This is the complexity SSMUH was designed to replace.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: ON THE RECORD
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="record">
+    <div class="section-label gs-reveal">Verbatim Transcript Record</div>
+    <h2 class="section-heading gs-reveal">What Staff Said. In Their Own Words.</h2>
+    <p class="section-lede gs-reveal">Four separate statements. All on the record. All from senior City staff. None of them defensible. The following are verbatim quotations from recorded transcripts of the December 16, 2025 and February 17, 2026 planning meetings.</p>
+
+    <div class="big-quote gs-reveal">
+      <div class="big-quote-text">"Looking at something very similar to my own property where I'm not permitted access because I'm on a collector. So it'll be exactly the same where we have a structure in the back and there's a 20 foot drop across my lot and the back unit's gonna have to walk down all the stairs. So, I mean, it happens. Yeah, it's the way it is."</div>
+      <div class="big-quote-attr">Stephen Judd &middot; Manager of Engineering, City of Port Moody &middot; February 17, 2026</div>
+      <div class="big-quote-note">The senior official responsible for enforcing the access bylaw compared the accessibility barrier facing elderly residents and children in a mandated housing development to a personal property inconvenience — and concluded it "happens" and "it's the way it is."</div>
+    </div>
+
+    <div class="big-quote gs-reveal">
+      <div class="big-quote-text">"It's not like there is a hardship from the orientation of the lot. It's more of what you're proposing, like the design you have in mind."</div>
+      <div class="big-quote-attr">Michael Olubiyi &middot; Manager of Planning, City of Port Moody &middot; February 17, 2026</div>
+      <div class="big-quote-note">A surveyed 20.8-foot topographic grade differential — documented in architectural drawings on file with the City — was characterized as a design choice rather than a physical condition of the land. Grade is not a design choice. It is a surveyed geological fact.</div>
+    </div>
+
+    <div class="big-quote gs-reveal">
+      <div class="big-quote-text">"I'm just trying to think. I have to look at the wording of the zoning bylaw again, what it says about access."</div>
+      <div class="big-quote-attr">Stephen Judd &middot; Manager of Engineering &middot; February 17, 2026</div>
+      <div class="big-quote-note">The Manager of Engineering — the senior staff member enforcing the access driveway bylaw — was unable to cite the provision he was applying during a meeting called specifically to discuss that provision's application. Minutes earlier, the applicant had cited it from memory, including its grade-based exception.</div>
+    </div>
+
+    <div class="big-quote gs-reveal">
+      <div class="big-quote-text">"Our messaging for all new developments because there are other SSMUH developments in the neighbourhood has been for the maximum number of parking stalls and only the one driveway. You're not the first application who's come in requesting additional driveways."</div>
+      <div class="big-quote-attr">Crystal Wickey &middot; Development Services, City of Port Moody &middot; December 16, 2025</div>
+      <div class="big-quote-note">A direct, on-record admission that the City is applying a blanket uniform policy to all SSMUH applications — contrary to the case-by-case flexibility in the City's own SSMUH Guide (July 4, 2025) and contrary to Bylaw 2937 Section 6.8's grade exception.</div>
+    </div>
+
+    <div class="big-quote gs-reveal" style="border-left-color: var(--rule);">
+      <div class="big-quote-text">"At one point I was told: daylight the ditch, all parking up Westmount, no access off the lane. And now I'm told the exact opposite."</div>
+      <div class="big-quote-attr">Dawar Zada &middot; February 17, 2026</div>
+      <div class="big-quote-note">This statement was not disputed by any staff member present. The instruction history of this file is the polar opposite of the current requirement. No written rationale for the reversal has ever been provided.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: CONTRADICTIONS
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="contradictions">
+    <div class="section-label gs-reveal">Internal Contradictions</div>
+    <h2 class="section-heading gs-reveal">The City's Positions, Placed Side by Side</h2>
+    <p class="section-lede gs-reveal">The City's own documents contradict each other. These are not interpretations. Each pair is from the same source — or two sources that cannot both be correct.</p>
+
+    <!-- Contradiction I -->
+    <h3 style="font-family:var(--sans); font-weight:300; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink3); margin-bottom:1rem;" class="gs-reveal">Contradiction I — The Staff Letter Contradicts Itself</h3>
+    <div class="contra-pair gs-reveal">
+      <div class="contra-side city">
+        <div class="contra-side-label">What the Letter Acknowledges</div>
+        <div class="contra-side-text">"Construction of an access from the laneway is limited [by the retained trees]."</div>
+        <div class="contra-side-src">Crystal Wickey, Development Services · Staff comments letter · October 8, 2025</div>
+      </div>
+      <div class="contra-side reality">
+        <div class="contra-side-label">What the Same Letter Requires</div>
+        <div class="contra-side-text">A single driveway from the lowest classified road — Grouse Lane — is the only permitted access. Front driveway access from Westmount Drive is not supported by staff.</div>
+        <div class="contra-side-src">Crystal Wickey, Development Services · Same letter · October 8, 2025</div>
+      </div>
+    </div>
+
+    <div class="callout red gs-reveal">
+      <div class="callout-label">The Circular Argument — Built into the Official Record</div>
+      <p>The City acknowledges in writing that lane access is limited by trees. The City simultaneously requires lane-only access and instructs the applicant to prove lane access is infeasible before seeking relief. The City required the tree retention that limits the lane access. The limitation the City created is now the condition the applicant must overcome. This is circular — and it appears in the official file.</p>
+    </div>
+
+    <!-- Contradiction II -->
+    <h3 style="font-family:var(--sans); font-weight:300; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink3); margin:3rem 0 1rem;" class="gs-reveal">Contradiction II — Published Guide vs. Actual Practice</h3>
+    <div class="contra-pair gs-reveal">
+      <div class="contra-side city">
+        <div class="contra-side-label">City SSMUH Guide · July 4, 2025</div>
+        <div class="contra-side-text">"Relaxation of the regulations in the City of Port Moody Zoning Bylaw, 2018, No. 2937 may be possible on a case-by-case basis to facilitate meaningful tree retention by way of the Development Permit or Development Variance Permit processes."</div>
+        <div class="contra-side-src">Port Moody Guide to SSMUH · July 4, 2025</div>
+      </div>
+      <div class="contra-side reality">
+        <div class="contra-side-label">Staff — On the Record, December 16, 2025</div>
+        <div class="contra-side-text">"Our messaging for all new developments has been for the maximum number of parking stalls and only the one driveway."</div>
+        <div class="contra-side-src">Crystal Wickey · December 16, 2025 · Planning meeting transcript</div>
+      </div>
+    </div>
+    <div class="contra-connector gs-reveal">One is the City's published policy. The other is what staff are actually doing. These two positions cannot coexist.</div>
+
+    <!-- Contradiction III -->
+    <h3 style="font-family:var(--sans); font-weight:300; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink3); margin:3rem 0 1rem;" class="gs-reveal">Contradiction III — Half a Bylaw Applied, Half Omitted</h3>
+    <div class="contra-pair gs-reveal">
+      <div class="contra-side city">
+        <div class="contra-side-label">The Rule Staff Applied</div>
+        <div class="contra-side-text">"A single driveway access between 3–6m is permitted from the lowest classified road (Grouse Lane)."</div>
+        <div class="contra-side-src">Bylaw 2937, Section 6.8 — cited in every staff communication on this file</div>
+      </div>
+      <div class="contra-side reality">
+        <div class="contra-side-label">The Exception in the Same Section — Not Applied</div>
+        <div class="contra-side-text">"An alternative access can be provided to a local street where lane access is not feasible due to grade changes."</div>
+        <div class="contra-side-src">Bylaw 2937, Section 6.8 — same provision — exception never referenced in any staff communication</div>
+      </div>
+    </div>
+    <div class="callout red gs-reveal">
+      <div class="callout-label">The Legal Problem</div>
+      <p>A bylaw that contains an explicit exception has not been applied as written when the exception is never assessed and never referenced. Staff cited half of Section 6.8 and omitted the other half in every communication. The applicant discovered the exception through his own reading of the bylaw. No staff member raised it in any meeting, letter, or email — despite it being in the same sentence structure as the rule they enforced.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: DOUBLE STANDARD
+════════════════════════════════════════════════ -->
+<div class="key-band gs-reveal">
+  <div class="content-w">
+    <div class="key-band-text"><strong>932 Westmount Drive.</strong> Same block. Less grade. Currently under construction — with dual access from both Westmount Drive and the lane. The Zada application has more grade, more constraints, and no access from the front.</div>
+  </div>
+</div>
+
+<div class="content-w">
+  <div class="section" id="double-standard">
+    <div class="section-label gs-reveal">932 Westmount Drive</div>
+    <h2 class="section-heading gs-reveal">Same Street. Less Grade. Dual Access Approved.</h2>
+
+    <!-- MAP CARD -->
+    <a class="map-card gs-reveal" id="map-trigger" href="https://earth.google.com/web/search/932+Westmount+Drive/@49.27334404,-122.87796801,131.95854035a,200.0608328d,35y,323.94213149h,0t,0r/data=CigiJgokCbe5QrM6o0hAEbuO3vG_okhAGUFoyK3gt17AIXa0QUyGuF7AQgIIATIpCicKJQohMXpVUnQ0T2NyazMtTjc5YmppUTZCNGF2UnBqckpNekNrIAE6AwoBMEICCABKBwi2pOtnEAE?authuser=0" target="_blank" rel="noopener">
+      <div class="map-card-visual">
+        <svg class="map-card-svg" width="360" height="180" viewBox="0 0 360 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Street grid illustration -->
+          <line x1="30" y1="90" x2="330" y2="90" stroke="rgba(248,246,242,0.15)" stroke-width="12"/>
+          <text x="180" y="94" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="8" fill="rgba(248,246,242,0.35)" letter-spacing="3">WESTMOUNT DRIVE</text>
+          <!-- Lane below -->
+          <line x1="30" y1="150" x2="330" y2="150" stroke="rgba(248,246,242,0.08)" stroke-width="6"/>
+          <text x="180" y="153" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="6" fill="rgba(248,246,242,0.2)" letter-spacing="2">GROUSE LANE</text>
+          <!-- Lots -->
+          <rect x="100" y="96" width="40" height="48" fill="rgba(42,90,58,0.3)" stroke="rgba(42,90,58,0.5)" stroke-width="1" rx="2"/>
+          <rect x="220" y="96" width="40" height="48" fill="rgba(139,58,58,0.3)" stroke="rgba(139,58,58,0.5)" stroke-width="1" rx="2"/>
+          <!-- Connecting line -->
+          <line x1="140" y1="120" x2="220" y2="120" stroke="rgba(248,246,242,0.12)" stroke-width="1" stroke-dasharray="4,4"/>
+          <text x="180" y="116" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="7" fill="rgba(248,246,242,0.3)">same block</text>
+          <!-- Pin 932 -->
+          <g class="map-pin" transform="translate(120, 60)">
+            <path d="M0,28 C0,28 -12,12 -12,8 C-12,0 -6,-6 0,-6 C6,-6 12,0 12,8 C12,12 0,28 0,28Z" fill="#2A5A3A"/>
+            <circle cx="0" cy="7" r="3.5" fill="#F8F6F2"/>
+          </g>
+          <text x="120" y="52" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="9" fill="#4A9A6A">932</text>
+          <!-- Pin 1006 -->
+          <g class="map-pin delayed" transform="translate(240, 60)">
+            <path d="M0,28 C0,28 -12,12 -12,8 C-12,0 -6,-6 0,-6 C6,-6 12,0 12,8 C12,12 0,28 0,28Z" fill="#8B3A3A"/>
+            <circle cx="0" cy="7" r="3.5" fill="#F8F6F2"/>
+          </g>
+          <text x="240" y="52" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="9" fill="#C06060">1006</text>
+          <!-- Grade arrows -->
+          <text x="120" y="170" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="7" fill="rgba(248,246,242,0.3)">Less grade</text>
+          <text x="240" y="170" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="7" fill="rgba(248,246,242,0.3)">More grade</text>
+          <text x="120" y="13" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="8" fill="#4A9A6A" letter-spacing="0.5">DUAL ACCESS</text>
+          <text x="240" y="13" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="8" fill="#C06060" letter-spacing="0.5">LANE ONLY</text>
+        </svg>
+      </div>
+      <div class="map-card-bar">
+        <div class="map-card-label">932 &amp; 1006 Westmount Drive — Same block, 80m apart &middot; View in Google Earth 3D</div>
+        <div class="map-card-cta">Open Map <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2h7v7M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </a>
+
+    <div class="property-cards gs-reveal">
+      <div class="prop-card approved">
+        <div class="prop-card-address">932 Westmount</div>
+        <div class="prop-card-status">Dual Access Approved · Under Construction</div>
+        <div class="prop-metric">Grade: <strong>Less than 1006 Westmount</strong></div>
+        <div class="prop-metric">Access: <strong>Dual — Westmount Dr + Grouse Lane</strong></div>
+        <div class="prop-metric">Pre-SSMUH transition: <strong>Yes</strong></div>
+        <div class="prop-metric" style="border:none;">Status: <strong>Under construction</strong></div>
+      </div>
+      <div class="prop-card denied">
+        <div class="prop-card-address">1006 Westmount</div>
+        <div class="prop-card-status">Lane Only · Stalled — No Permit</div>
+        <div class="prop-metric">Grade: <strong>6m / 20.8 ft — highest on street</strong></div>
+        <div class="prop-metric">Access: <strong>Lane only — staff will not support front</strong></div>
+        <div class="prop-metric">Pre-SSMUH transition: <strong>Yes — 5 years active</strong></div>
+        <div class="prop-metric" style="border:none;">Status: <strong>Stalled — BC Hydro queue at risk</strong></div>
+      </div>
+    </div>
+
+    <div class="big-quote gs-reveal">
+      <div class="big-quote-text">"932 Westmount — it's kind of straddling when the provincial mandates came out and we were kind of handcuffed as a city in terms of that particular application."</div>
+      <div class="big-quote-attr">Patrick Byrne &middot; Engineering &middot; December 16, 2025</div>
+      <div class="big-quote-note">Translation: 932 received dual access because the City could not legally refuse it during the provincial transition period. The applicant at 1006 Westmount has also been active for five years — he predates the current guidelines as well. The City's explanation for the different treatment is not a legal distinction. It is a timing convenience.</div>
+    </div>
+
+    <div class="callout gs-reveal" style="border-color:var(--navy); background:#F4F2EE;">
+      <div class="callout-label" style="color:var(--navy);">How 932 Westmount Got Dual Access — What the Owner Told the Applicant Directly</div>
+      <p style="font-style:italic; font-size:1.2rem; color:var(--ink); margin-bottom:1rem;">"The way we got it was going to the City office and crying."</p>
+      <p>If accurate, this means that access decisions on this street have been determined not by consistent application of Bylaw 2937 Section 6.8, but by the personal manner in which individual applicants present themselves to staff. That is not a bylaw. That is a relationship.</p>
+      <p>The Zada family is building four modest, multigenerational units of missing middle housing — the exact housing type the Province mandated. If staff are more accommodating toward applicants who present emotionally, and less accommodating toward applicants building denser, more modest housing for extended families — that is a pattern. We are not using that name today. We are asking the City to use the bylaw.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: NON-DISCLOSURE
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="disclosure">
+    <div class="section-label gs-reveal">Process Failure</div>
+    <h2 class="section-heading gs-reveal">Critical Information Never Proactively Disclosed</h2>
+
+    <div class="callout red gs-reveal">
+      <div class="callout-label">What Was Never Disclosed — and Who Found It</div>
+      <p>The grade-based exception in Bylaw 2937 Section 6.8, the Board of Variance pathway under Local Government Act Section 536, the three-part hardship test, the case-by-case flexibility provisions in the City's own SSMUH Guide, and the Province's Bill 25 consistency obligations were all identified by Dawar Zada through his own research. Staff referenced the Development Variance Permit process only after being asked directly — and when they did, the framing was immediately discouraging: <em>"That's not a variance that staff would support."</em></p>
+    </div>
+
+    <div class="big-quote gs-reveal" style="border-left-color:var(--teal);">
+      <div class="big-quote-text">"I've reviewed the zoning bylaws and the new guidelines. From what I can tell, lane access is encouraged and available, but it's not mandated. And then it even goes on to say that dual access can be achieved where there is site-specific hardships."</div>
+      <div class="big-quote-attr">Dawar Zada &middot; February 17, 2026 — citing Bylaw 2937 Section 6.8's grade exception from memory</div>
+      <div class="big-quote-note">The applicant cited the correct provision. Moments later, the Manager of Engineering said: "I have to look at the wording of the zoning bylaw again." The applicant knew the bylaw better than the enforcement officer. He found the exception himself. It was never disclosed to him.</div>
+    </div>
+
+    <h3 style="font-family:var(--sans); font-weight:300; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink3); margin:2.5rem 0 1.5rem;" class="gs-reveal">Four-Year Timeline of Non-Disclosure</h3>
+    <div class="timeline gs-reveal">
+      <div class="tl-item">
+        <div class="tl-date">March 2021</div>
+        <div class="tl-body">First application: RS-1S bare land strata. <strong>Instruction: daylight the ditch, all parking off Westmount Drive, no lane access.</strong></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2021–2023</div>
+        <div class="tl-body">Application stalls while City develops its own front-and-back zone concept. Never enacted. The applicant waits.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">November 2023</div>
+        <div class="tl-body">Bill 44 receives Royal Assent. SSMUH mandated. Third application iteration in three years.</div>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">October 8, 2025</div>
+        <div class="tl-body"><strong>Staff comments letter.</strong> Lane-only access required. Parking reduced to 4. Grade exception in Section 6.8 not mentioned. Variance pathway not mentioned. Bylaw exception not mentioned.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">November 27, 2025</div>
+        <div class="tl-body">Bill 25 receives Royal Assent. Compliance deadline: <strong>June 30, 2026.</strong></div>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">February 17, 2026</div>
+        <div class="tl-body"><strong>Access meeting.</strong> Stephen Judd: "it happens, it's the way it is." Michael Olubiyi: "it's the design, not the lot." Grade exception still not applied. No written ruling follows.</div>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">February 26, 2026</div>
+        <div class="tl-body"><strong>BC Hydro queue at risk.</strong> Kevin Hong, Voltas Engineering: the BC Hydro interconnection queue may be cancelled if civil CAD drawings are not received within approximately one month.</div>
+      </div>
+      <div class="tl-item key">
+        <div class="tl-date">March 30, 2026 — Today</div>
+        <div class="tl-body"><strong>This meeting.</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: REBUTTALS
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="rebuttals">
+    <div class="section-label gs-reveal">Pre-Emptive Response</div>
+    <h2 class="section-heading gs-reveal">Every Staff Argument — and the Record That Answers It</h2>
+
+    <div class="rebuttal gs-reveal">
+      <div class="rebuttal-claim"><div class="rebuttal-claim-label">Staff Position</div><p>"The hardship is from the design, not the orientation of the lot." (Michael Olubiyi, Feb 17)</p></div>
+      <div class="rebuttal-response"><div class="rebuttal-response-label">The Record</div><p>Architectural drawings A1.2 and A3.11 — on file with the City — show survey elevations of 443.9 ft at Westmount Drive and 423.1 ft at Grouse Lane. The grade is topographic fact. The design responds to it. Reversing the causation does not change the survey data, and it does not change what 34 stairs looks like to a 72-year-old or a parent with a stroller and a bag of groceries.</p></div>
+    </div>
+    <div class="rebuttal gs-reveal">
+      <div class="rebuttal-claim"><div class="rebuttal-claim-label">Staff Position</div><p>"Your lot is comparable to other Westmount properties." (Crystal Wickey, Feb 17)</p></div>
+      <div class="rebuttal-response"><div class="rebuttal-response-label">The Record</div><p>Crystal Wickey acknowledged on the record that 1006 Westmount has a 6-metre differential and comparable properties have approximately 5 metres. She called this comparable. A 20% difference in grade, on the highest-elevation point on the street, dismissed in one sentence with no site-specific analysis, is not a comparability assessment. It is the absence of one.</p></div>
+    </div>
+    <div class="rebuttal gs-reveal">
+      <div class="rebuttal-claim"><div class="rebuttal-claim-label">Staff Position</div><p>"Two driveways erode on-street parking." (Stephen Judd, Feb 17)</p></div>
+      <div class="rebuttal-response"><div class="rebuttal-response-label">The Record</div><p>Buildings B1 and B2 are designed with attached front-facing garages. The driveway apron exists in the design regardless of which road it connects to. The on-street parking impact is identical whether the front driveway is permitted or denied. Denying the front connection does not increase available street parking — it only makes the development functionally inaccessible.</p></div>
+    </div>
+    <div class="rebuttal gs-reveal">
+      <div class="rebuttal-claim"><div class="rebuttal-claim-label">Staff Position</div><p>"We're being consistent across all SSMUH applications." (Crystal Wickey, Dec 16)</p></div>
+      <div class="rebuttal-response"><div class="rebuttal-response-label">The Record</div><p>Consistency with a blanket rule is not compliance with a provision that requires individual assessment. The City's own SSMUH Guide specifies flexibility "on a case-by-case basis" for slope, access, and trees. Bylaw 2937 Section 6.8 contemplates a grade-specific exception applied to individual properties. Uniform application of a rule to all properties, regardless of their topographic characteristics, is not consistent with either document. It is inconsistent with both.</p></div>
+    </div>
+    <div class="rebuttal gs-reveal">
+      <div class="rebuttal-claim"><div class="rebuttal-claim-label">Staff Position</div><p>"The variance process would take more time." (framing throughout staff communications)</p></div>
+      <div class="rebuttal-response"><div class="rebuttal-response-label">The Record</div><p>This framing was used consistently to discourage the applicant from pursuing relief he is entitled to seek. It is not a response to the merits. It is a deterrent. The applicant has been on this file for four years. Time is not the obstacle. The absence of a written ruling on a straightforward bylaw question is the obstacle — and that can be resolved in this meeting.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PART II BANNER
+════════════════════════════════════════════════ -->
+<div class="part-banner gs-reveal" id="part2" style="background:var(--navy); color:var(--white);">
+  <div class="part-banner-num" style="color:var(--teal-light);">II</div>
+  <div class="part-banner-title" style="color:var(--white);">SSMUH in Port Moody: A Systemic Pattern</div>
+  <div class="part-banner-sub" style="color:rgba(248,246,242,0.6);">Port Moody's own housing data shows 3,063 units needed in five years. The housing type the province mandated is being made infeasible by the way staff apply it.</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: HOUSING DEMAND
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="housing-demand">
+    <div class="section-label gs-reveal">The Numbers</div>
+    <h2 class="section-heading gs-reveal">Port Moody's Own Housing Targets</h2>
+
+    <div class="data-grid gs-reveal">
+      <div class="data-cell">
+        <div class="data-cell-num">3,063</div>
+        <div class="data-cell-desc">New dwelling units Port Moody must deliver in the next five years</div>
+        <div class="data-cell-src">Port Moody 2024 Interim Housing Needs Report</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell-num">9,796</div>
+        <div class="data-cell-desc">Units required over the 20-year planning horizon</div>
+        <div class="data-cell-src">Port Moody 2024 Interim Housing Needs Report</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell-num">1,694</div>
+        <div class="data-cell-desc">Net new units required under the Province's Housing Target Order, Oct 2023–Oct 2028</div>
+        <div class="data-cell-src">BC Housing Supply Act Target Order</div>
+      </div>
+    </div>
+
+    <div class="callout gold gs-reveal">
+      <div class="callout-label">Port Moody's Own Staff — On the Record, June 2024</div>
+      <p>Port Moody's planning staff described the SSMUH legislation to Council as a "broad-brush" approach that is "illogical and confusing." They are not wrong to note implementation challenges. But it is not coherent to criticize the Province for applying sweeping policy uniformly — and then apply your own blanket policy uniformly to individual applicants, in direct contradiction of the case-by-case flexibility your own guide promises.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: SENIORS
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="seniors">
+    <div class="section-label gs-reveal">The Population SSMUH Is Designed to House</div>
+    <h2 class="section-heading gs-reveal">Seniors Are the Fastest-Growing Homeless Population in Metro Vancouver</h2>
+
+    <div class="data-grid gs-reveal">
+      <div class="data-cell">
+        <div class="data-cell-num">22%</div>
+        <div class="data-cell-desc">Share of homeless people in Metro Vancouver who are seniors — the largest single demographic group</div>
+        <div class="data-cell-src">2025 Point-in-Time Homeless Count, Greater Vancouver</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell-num">~50%</div>
+        <div class="data-cell-desc">Of homeless seniors report it is their first experience of homelessness — newly displaced, not chronically unhoused</div>
+        <div class="data-cell-src">2025 Greater Vancouver Homeless Count</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell-num">&#8531;</div>
+        <div class="data-cell-desc">Of BC seniors live on less than $27,000 per year — well below the regional cost-of-living threshold</div>
+        <div class="data-cell-src">BC Seniors Advocate 2024 Report</div>
+      </div>
+    </div>
+
+    <div class="callout red gs-reveal">
+      <div class="callout-label">The Direct Connection</div>
+      <p>A staff position that makes intergenerational SSMUH developments physically inaccessible — by requiring elderly residents to climb 34 stairs from a lane to reach their home — is not a neutral enforcement of bylaw language. It is a design constraint that functionally excludes the population these units are intended to serve. If the outcome of "consistent" policy is housing that aging residents cannot navigate, the policy is producing the wrong result.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION: PROVINCIAL LAW
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="province">
+    <div class="section-label gs-reveal">Bill 44 and Bill 25 — What the Province Requires</div>
+    <h2 class="section-heading gs-reveal">Port Moody Cannot Use Its Own Guidelines as a Shield Against Provincial Obligations</h2>
+    <p class="section-lede gs-reveal">The Province did not pass Bill 25 in November 2025 because SSMUH implementation was going well. It passed specifically because municipalities were creating conditions — through parking requirements, access restrictions, and blanket application of site standards — that deterred or made infeasible the housing they were required to permit.</p>
+
+    <div class="table-wrap gs-reveal">
+    <table class="ev-table">
+      <thead><tr><th>Provision</th><th>What It Requires</th><th>Status at 1006 Westmount</th></tr></thead>
+      <tbody>
+        <tr><td>Bill 44 (2023)</td><td>Local governments must permit 3–4 unit SSMUH on eligible lots in single-family zones</td><td class="td-good">Complied with — the application is permissible</td></tr>
+        <tr><td>Bill 25 (2025)</td><td>Removes barriers to SSMUH; prohibits requirements that make SSMUH financially or practically infeasible; compliance deadline June 30, 2026</td><td class="td-bad">Lane-only access requiring 34 stairs is a practical barrier</td></tr>
+        <tr><td>Provincial Policy Manual</td><td>Municipalities must consider this Manual. Overly restrictive parking and access requirements specifically identified as barriers</td><td class="td-bad">Blanket single-driveway policy applied without site-specific analysis</td></tr>
+        <tr><td>Bylaw 2937 s.6.8</td><td>Alternative access from a local street is permitted where grade makes lane access infeasible</td><td class="td-bad">Exception cited but not applied. No written rationale provided</td></tr>
+        <tr><td>Port Moody SSMUH Guide</td><td>Flexibility on access, slope, and tree retention "may be possible on a case-by-case basis"</td><td class="td-bad">No case-by-case assessment. Blanket position applied per staff's own admission</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout red gs-reveal">
+      <div class="callout-label">Bill 25 — What the Province Explicitly Targets</div>
+      <p>Bill 25 amended the Local Government Act to give the Province explicit authority to regulate off-street parking and access requirements that deter SSMUH viability. The UBCM noted in October 2025: "The Province notes that it will monitor site standards and off-street parking requirements for impacts on viability of SSMUH." A policy that makes a four-unit family development with elderly residents practically unlivable is precisely the kind of barrier Bill 25 was designed to address.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHILLING EFFECT BAND -->
+<div class="key-band gs-reveal" id="chilling">
+  <div class="content-w">
+    <div class="key-band-text">At least <strong>3 SSMUH applications stalled on this block alone.</strong> One neighbour across the street has already given up entirely. <strong>This is how housing doesn't get built — not by denial, but by exhaustion.</strong></div>
+  </div>
+</div>
+
+<div class="content-w">
+  <div class="section">
+    <div class="section-label gs-reveal">The Broader Pattern</div>
+    <h2 class="section-heading gs-reveal">When You Make It Impossible, Nobody Builds</h2>
+    <p class="section-lede gs-reveal">This is the mechanism by which the housing does not get built. It does not require a policy that explicitly denies permits. It requires only that the process be difficult enough, expensive enough, and uncertain enough that families who are not developers — who do not have the capital reserves to absorb four years and $250,000 without a permit — give up.</p>
+
+    <div class="callout red gs-reveal">
+      <div class="callout-label">The Compound Burden on This Application — Documented</div>
+      <p>Lane-only access requirement. Isolated sidewalk slab not required of comparable builds. Parking reduced from 9 to 4 with no transit proximity justification. Utility undergrounding at applicant cost. Tree retention required while simultaneously used to justify lane access limitations. Four-year timeline with contradictory instructions. No written ruling on Section 6.8 grade exception. No proactive disclosure of variance pathway. BC Hydro queue now at risk due to unresolved access decision. Each item, individually, may be defensible. Collectively, on a file where the City has admittedly applied blanket policy uniformly to a property with site-specific conditions warranting individual assessment, they constitute a pattern.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     DEMANDS
+════════════════════════════════════════════════ -->
+<div class="content-w">
+  <div class="section" id="demands">
+    <div class="section-label gs-reveal">Formal Requirements</div>
+    <h2 class="section-heading gs-reveal">Five Written Responses Required</h2>
+    <p class="section-lede gs-reveal">Five written responses. Not requests — requirements. Each has a legal basis. None are new questions.</p>
+
+    <ol class="demand-list">
+      <li class="demand-item gs-reveal">
+        <div class="demand-num-cell">1</div>
+        <div class="demand-content">
+          <div class="demand-title">Written ruling on Bylaw 2937 Section 6.8 grade exception — with rationale</div>
+          <div class="demand-text">Does the Section 6.8 grade-based exception — "an alternative access can be provided to a local street where lane access is not feasible due to grade changes" — apply to 1006 Westmount Drive? If no, the written ruling must explain why a surveyed 20.8-foot grade differential does not constitute a grade constraint under this provision.</div>
+          <div class="demand-basis">Legal basis: Bylaw 2937, Section 6.8 · LGA Section 536</div>
+        </div>
+      </li>
+      <li class="demand-item gs-reveal">
+        <div class="demand-num-cell">2</div>
+        <div class="demand-content">
+          <div class="demand-title">Rush processing — MDP000108 to the front of the queue, immediately</div>
+          <div class="demand-text">Five years. Four applications. Over $250,000 spent. A BC Hydro interconnection queue warned of cancellation in writing on February 26, 2026. A family with three children under six living in a deteriorating rancher — today. There is no administrative justification for this application to sit in a standard queue.</div>
+          <div class="demand-basis">Basis: Duration of file · $250,000+ financial exposure · BC Hydro deadline · Family living conditions</div>
+        </div>
+      </li>
+      <li class="demand-item gs-reveal">
+        <div class="demand-num-cell">3</div>
+        <div class="demand-content">
+          <div class="demand-title">New project manager or mandatory senior sign-off on all written decisions</div>
+          <div class="demand-text">The record of this file includes contradictory instructions over four years, a senior engineering manager unable to cite the bylaw he was enforcing, a blanket policy applied where individual assessment was required, and critical information never proactively disclosed. Senior accountability on all future written decisions is not an unusual ask.</div>
+          <div class="demand-basis">Basis: Documented process record, MDP000108</div>
+        </div>
+      </li>
+      <li class="demand-item gs-reveal">
+        <div class="demand-num-cell">4</div>
+        <div class="demand-content">
+          <div class="demand-title">Written explanation of the 932 Westmount decision and its basis</div>
+          <div class="demand-text">If the City declines to apply the Section 6.8 grade exception to this property, we require a written explanation of how 932 Westmount Drive — same block, less grade — received dual access, and why the same determination does not apply here. A family building modest, multigenerational missing middle housing deserves the same consideration as a neighbour who knew how to navigate staff relationships.</div>
+          <div class="demand-basis">Basis: Equal treatment · Bylaw 2937 s.6.8 · Documented account from 932 Westmount owner</div>
+        </div>
+      </li>
+      <li class="demand-item gs-reveal">
+        <div class="demand-num-cell">5</div>
+        <div class="demand-content">
+          <div class="demand-title">Coordinated frontage works program — no isolated sidewalk slabs</div>
+          <div class="demand-text">There are at least three SSMUH applications on this block. The City of Coquitlam's Frontage Works Program provides a proven model: shared cost, coordinated construction, connected results. The City's own engineer confirmed on record that the required slab "doesn't connect to anything." We request a coordinated approach before any individual sidewalk requirement proceeds.</div>
+          <div class="demand-basis">Basis: coquitlam.ca/362/Frontage-Works-Program · Patrick Byrne, transcript Dec 16, 2025</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     ESCALATION
+════════════════════════════════════════════════ -->
+<div class="full-bleed navy" id="escalation" style="padding:6rem 0;">
+  <div class="content-w">
+    <div class="section-label gs-reveal" style="color:rgba(248,246,242,0.35);">If These Requirements Are Not Met</div>
+    <h2 class="section-heading gs-reveal" style="color:var(--white); margin-bottom:2rem;">The Path Forward Is Already Mapped</h2>
+    <p style="font-family:var(--sans); font-weight:200; font-size:1.05rem; color:rgba(248,246,242,0.65); line-height:1.8; margin-bottom:2.5rem; max-width:700px;" class="gs-reveal">This meeting is the last step inside the City's process. If no written responses are received within 10 business days, the following escalation paths will be activated simultaneously.</p>
+
+    <div style="font-family:var(--sans); font-weight:300; font-size:0.88rem; color:rgba(248,246,242,0.6); line-height:1.7; padding:1.5rem 2rem; border:1px solid rgba(248,246,242,0.1); margin-bottom:2.5rem; background:rgba(248,246,242,0.03);" class="gs-reveal">The applicant has worked within the City's process for <strong style="color:var(--white);">five years</strong>. He has not gone to the media. He has not filed complaints. He has attended every meeting, responded to every letter, and spent over $250,000 trying to do this the right way. This meeting is a reflection of that commitment. It should be met accordingly.</div>
+
+    <div class="esc-card gs-reveal">
+      <div class="esc-card-title">1. Minister of Housing and Municipal Affairs — Province of British Columbia</div>
+      <div class="esc-card-text">Christine Boyle, Minister of Housing and Municipal Affairs. Bill 25, passed November 27, 2025, gives the Province explicit authority to monitor and address local government implementation of SSMUH that creates barriers to housing viability. A blanket single-driveway policy applied uniformly to all SSMUH applications, a grade-based exception cited but never assessed, and a family unable to build mandated housing after four years and $250,000 constitute precisely the barrier pattern Bill 25 was enacted to address. The Minister's office will receive this document in full.</div>
+    </div>
+    <div class="esc-card gs-reveal">
+      <div class="esc-card-title">2. Board of Variance — City of Port Moody</div>
+      <div class="esc-card-text">Local Government Act Section 536. All three elements of the hardship test are met: (a) unique topographic conditions — highest elevation point on the street, city-required retained tree blocking side access, surveyed 20.8 ft grade differential; (b) undue hardship — 34-stair climb for elderly residents and young children; (c) not inappropriate development — four-unit SSMUH, every unit owner-occupied, no speculative component.</div>
+    </div>
+    <div class="esc-card gs-reveal">
+      <div class="esc-card-title">3. Public Record — Media and Community Disclosure</div>
+      <div class="esc-card-text">This document, the verbatim meeting transcripts, the staff letter of October 8, 2025, and the full application history of MDP000108 will be provided to local media and made available publicly. The public has a legitimate interest in how SSMUH is being implemented in Port Moody, given the City's stated housing targets, the Province's June 30, 2026 deadline, and the senior homelessness data documented in this submission.</div>
+    </div>
+
+    <p style="font-family:var(--serif); font-weight:300; font-style:italic; font-size:1.15rem; color:rgba(248,246,242,0.5); margin-top:3rem; text-align:center;" class="gs-reveal">The applicant would still prefer resolution here.</p>
+  </div>
+</div>
+
+<!-- CLOSING SUMMARY -->
+<div class="content-w" style="padding-top:4rem; padding-bottom:4rem;">
+  <div class="callout gs-reveal" style="border-color:var(--rule); background:var(--cream);">
+    <div class="callout-label" style="color:var(--ink3);">Summary</div>
+    <p style="font-family:var(--sans); font-weight:300; font-size:0.95rem; line-height:1.85;">A family has spent five years and over $250,000 trying to build a home for elderly parents and young children on a property the Province mandated be available for exactly this type of housing. Staff applied half of the relevant bylaw provision and omitted the half that would have helped. Comparable properties received accommodation; this one did not. The applicant discovered every available remedy himself. The housing has not been built. Port Moody has a compliance deadline of June 30, 2026. The housing minister is watching. The five written responses requested in this document are the minimum required to continue working through the City's process rather than around it.</p>
+  </div>
+</div>
+
+<!-- WHAT THIS IS NOT -->
+<div class="content-w" style="padding-bottom:4rem;">
+  <div class="callout red gs-reveal">
+    <div class="callout-label">What This Is Not</div>
+    <p>This is not an attack on the individuals involved. This is a formal record of a process that failed a family trying to build their home, presented to the officials with the authority to correct it. The applicant would still prefer to resolve this here. He is simply no longer pretending that resolution is not also available elsewhere — and that those pathways will not be used if this meeting does not produce results.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="doc-footer">
+  <div class="footer-text">
+    File MDP000108 &middot; 1006 Westmount Drive, Port Moody, BC &middot; Applicant: Dawar Zada, PREC<br>
+    Presented March 30, 2026 to Mayor Meghan Lahti, City Manager Anna Mathewson, GM Community Development Suzanne Smith<br>
+    Prepared with reference to: Bylaw 2937 &middot; LGA Section 536 &middot; Bill 44 (2023) &middot; Bill 25 (2025) &middot; Port Moody SSMUH Guide (July 4, 2025)<br>
+    Provincial Policy Manual for SSMUH &middot; 2025 Greater Vancouver Point-in-Time Homeless Count &middot; Port Moody 2024 Interim Housing Needs Report<br>
+    Verbatim transcript sources: Recorded meetings &middot; December 16, 2025 &amp; February 17, 2026<br><br>
+    Prepared by Sheri Zada &middot; This document is a formal submission. It will be retained in full.
+  </div>
+</footer>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── Progress Bar ──
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', function() {
+    const d = document.documentElement;
+    const pct = (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
+  // ── Side Nav Visibility ──
+  const sidenav = document.getElementById('sidenav');
+  const hero = document.getElementById('hero');
+  const mobileBtn = document.getElementById('mobile-nav-btn');
+  const deadlineRibbon = document.getElementById('deadline-ribbon');
+
+  ScrollTrigger.create({
+    trigger: hero,
+    start: 'bottom top',
+    onEnterBack: function() {
+      sidenav.classList.remove('visible');
+      mobileBtn.classList.remove('visible');
+      deadlineRibbon.classList.remove('visible');
+    },
+    onLeave: function() {
+      sidenav.classList.add('visible');
+      mobileBtn.classList.add('visible');
+      deadlineRibbon.classList.add('visible');
+    }
+  });
+
+  // ── Active Nav Link ──
+  var navLinks = document.querySelectorAll('.nav-link');
+  var navSections = [];
+  navLinks.forEach(function(link) {
+    var id = link.getAttribute('href').substring(1);
+    var el = document.getElementById(id);
+    if (el) navSections.push({ el: el, link: link });
+  });
+
+  ScrollTrigger.create({
+    start: 0,
+    end: 'max',
+    onUpdate: function() {
+      var scrollY = window.scrollY + window.innerHeight * 0.3;
+      var active = null;
+      navSections.forEach(function(s) {
+        if (s.el.offsetTop <= scrollY) active = s;
+      });
+      navLinks.forEach(function(l) { l.classList.remove('active'); });
+      if (active) active.link.classList.add('active');
+    }
+  });
+
+  // ── Mobile Nav ──
+  var mobileNav = document.getElementById('mobile-nav');
+  mobileBtn.addEventListener('click', function() {
+    mobileNav.classList.toggle('open');
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      mobileNav.classList.remove('open');
+    });
+  });
+
+  // ── Smooth Scroll ──
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── GSAP Reveal Animations ──
+  gsap.utils.toArray('.gs-reveal').forEach(function(el) {
+    gsap.fromTo(el,
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1, y: 0, duration: 0.6,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
+
+  // ── Stat Counter Animations ──
+  document.querySelectorAll('.counter').forEach(function(el) {
+    var target = parseInt(el.getAttribute('data-target'));
+    var format = el.getAttribute('data-format');
+    var hold = el.getAttribute('data-hold');
+
+    ScrollTrigger.create({
+      trigger: el.closest('.stat-screen'),
+      start: 'top 60%',
+      once: true,
+      onEnter: function() {
+        var obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: target === 0 ? 0.01 : (target > 1000 ? 2 : 1.2),
+          ease: target > 1000 ? 'power2.out' : 'power1.out',
+          onUpdate: function() {
+            var v = Math.round(obj.val);
+            if (format === 'comma') {
+              el.textContent = v.toLocaleString();
+            } else {
+              el.textContent = v;
+            }
+          }
+        });
+      }
+    });
+
+    // Pin stat screens briefly
+    ScrollTrigger.create({
+      trigger: el.closest('.stat-screen'),
+      start: 'top top',
+      end: hold ? '+=300' : '+=180',
+      pin: true,
+      pinSpacing: true
+    });
+  });
+
+  // ── Grade Diagram Animation ──
+  var gradeEl = document.getElementById('grade-svg');
+  if (gradeEl) {
+    var gradeLine = gradeEl.querySelector('.grade-line');
+    var stairsPath = gradeEl.querySelector('.stairs-path');
+
+    if (gradeLine) {
+      gsap.fromTo(gradeLine,
+        { opacity: 0 },
+        {
+          opacity: 1, duration: 1,
+          scrollTrigger: {
+            trigger: gradeEl,
+            start: 'top 75%'
+          }
+        }
+      );
+    }
+    if (stairsPath) {
+      var len = stairsPath.getTotalLength();
+      gsap.set(stairsPath, { strokeDasharray: len, strokeDashoffset: len });
+      gsap.to(stairsPath, {
+        strokeDashoffset: 0, duration: 1.5,
+        ease: 'power1.inOut',
+        scrollTrigger: {
+          trigger: gradeEl,
+          start: 'top 65%'
+        }
+      });
+    }
+  }
+
+})();
+</script>
+</body>
+</html>
