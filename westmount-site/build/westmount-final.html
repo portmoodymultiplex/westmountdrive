@@ -196,6 +196,53 @@ body {
 }
 
 /* ═══════════════════════════════════════
+   HERO IMAGE
+═══════════════════════════════════════ */
+.hero-image-section {
+  background: var(--navy);
+  padding: 0;
+  position: relative;
+}
+.hero-image-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.hero-image {
+  width: 100%;
+  display: block;
+}
+.hero-image-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.25rem 2rem;
+  background: var(--navy);
+  font-family: var(--sans);
+  font-weight: 200;
+  font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+  letter-spacing: 0.06em;
+  color: rgba(248,246,242,0.5);
+  text-align: center;
+}
+.hero-image-caption .caption-divider {
+  display: block;
+  width: 1px;
+  height: 1.2rem;
+  background: rgba(248,246,242,0.15);
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .hero-image-caption {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+  }
+  .hero-image-caption .caption-divider { display: none; }
+}
+
+/* ═══════════════════════════════════════
    STAKES SPLIT
 ═══════════════════════════════════════ */
 #stakes {
@@ -746,18 +793,18 @@ body {
   box-shadow: 0 4px 20px rgba(10,22,40,0.12);
 }
 .map-card-visual {
-  height: 220px; background: var(--navy);
+  background: var(--navy);
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
 }
-.map-card-visual::before {
-  content: ''; position: absolute; inset: 0;
-  background:
-    radial-gradient(circle at 42% 50%, rgba(26,107,90,0.25) 0%, transparent 50%),
-    radial-gradient(circle at 58% 50%, rgba(139,58,58,0.2) 0%, transparent 50%),
-    linear-gradient(135deg, #0A1628 0%, #0F1F38 100%);
+.map-card-visual img {
+  width: 100%; display: block;
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
-.map-card-svg { position: relative; z-index: 1; }
+.map-card:hover .map-card-visual img {
+  transform: scale(1.015);
+  filter: brightness(1.05);
+}
 .map-card-bar {
   background: var(--cream); padding: 1rem 1.5rem;
   display: flex; align-items: center; justify-content: space-between;
@@ -865,6 +912,163 @@ body {
 }
 
 /* ═══════════════════════════════════════
+   LETTERS COMPARISON
+═══════════════════════════════════════ */
+.letters-section {
+  padding: 6rem 0;
+  background: var(--white);
+}
+.letters-intro { text-align: center; margin-bottom: 3rem; }
+.section-label {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.65rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 0.75rem;
+}
+.letters-heading {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--ink); line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+.letters-subtext {
+  font-family: var(--serif); font-size: 1.05rem;
+  color: var(--ink2); line-height: 1.75;
+  max-width: 700px; margin: 0 auto;
+}
+
+/* Document cards */
+.letters-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; margin-bottom: 2.5rem;
+}
+.letter-card {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  padding: 2.5rem 2rem 2rem;
+  border-radius: 4px;
+  text-decoration: none; color: var(--ink);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.letter-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+.letter-2021 {
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+}
+.letter-2025 {
+  background: var(--amber-bg);
+  border: 1px solid #D4C89A;
+}
+.letter-card-year {
+  font-family: var(--sans); font-weight: 100;
+  font-size: 3.5rem; letter-spacing: 0.05em;
+  color: var(--ink4); line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.letter-2021 .letter-card-year { color: var(--green); }
+.letter-2025 .letter-card-year { color: var(--amber); }
+.letter-card-icon {
+  color: var(--ink4); margin-bottom: 1rem;
+}
+.letter-2021 .letter-card-icon { color: var(--green); }
+.letter-2025 .letter-card-icon { color: var(--amber); }
+.letter-card-title {
+  font-family: var(--sans); font-weight: 500;
+  font-size: 0.85rem; letter-spacing: 0.05em;
+  text-transform: uppercase; margin-bottom: 0.35rem;
+}
+.letter-card-type {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1rem; color: var(--ink3);
+  margin-bottom: 1rem;
+}
+.letter-card-meta {
+  font-family: var(--sans); font-weight: 200;
+  font-size: 0.72rem; color: var(--ink4);
+  line-height: 1.7; letter-spacing: 0.02em;
+  margin-bottom: 1.25rem;
+}
+.letter-card-cta {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-top: auto;
+}
+@media (max-width: 650px) {
+  .letters-cards { grid-template-columns: 1fr; gap: 1.25rem; }
+}
+
+/* Context callout */
+.letters-context {
+  text-align: center; padding: 1.5rem 2rem;
+  background: var(--cream); border-radius: 4px;
+  font-family: var(--serif); font-size: 0.95rem;
+  color: var(--ink3); line-height: 1.75;
+  margin-bottom: 3rem;
+  max-width: 750px; margin-left: auto; margin-right: auto;
+}
+
+/* Contradiction rows */
+.letters-contradictions {
+  max-width: 800px; margin: 0 auto 2.5rem;
+}
+.contradiction-row {
+  display: flex; gap: 1.25rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.contradiction-row:first-child { border-top: 1px solid var(--rule); }
+.contradiction-num {
+  flex-shrink: 0; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--navy); color: var(--white);
+  font-family: var(--sans); font-weight: 500;
+  font-size: 0.8rem; border-radius: 50%;
+  margin-top: 0.15rem;
+}
+.contradiction-body { flex: 1; }
+.contradiction-title {
+  font-family: var(--sans); font-weight: 600;
+  font-size: 0.9rem; color: var(--ink);
+  margin-bottom: 0.75rem; letter-spacing: 0.01em;
+}
+.contradiction-detail {
+  font-family: var(--serif); font-size: 0.95rem;
+  color: var(--ink2); line-height: 1.65;
+  margin-bottom: 0.6rem;
+}
+.contradiction-detail:last-child { margin-bottom: 0; }
+.c-tag {
+  display: inline-block;
+  font-family: var(--sans); font-weight: 600;
+  font-size: 0.6rem; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.15rem 0.5rem;
+  border-radius: 3px; margin-right: 0.4rem;
+  vertical-align: middle; position: relative; top: -1px;
+}
+.c-tag-2021 { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.c-tag-2025 { background: var(--amber-bg); color: var(--amber); border: 1px solid #D4C89A; }
+
+@media (max-width: 600px) {
+  .contradiction-row { flex-direction: column; gap: 0.5rem; }
+  .contradiction-num { width: 28px; height: 28px; font-size: 0.7rem; }
+}
+
+/* Bottom line */
+.letters-bottom-line {
+  text-align: center;
+  font-family: var(--serif); font-size: 1.15rem;
+  color: var(--ink); line-height: 1.6;
+  max-width: 600px; margin: 0 auto;
+  padding-top: 0.5rem;
+}
+
+/* ═══════════════════════════════════════
    PRINT STYLES
 ═══════════════════════════════════════ */
 @media print {
@@ -904,6 +1108,7 @@ body {
 <nav id="sidenav">
   <a href="#hero" class="nav-link">Cover</a>
   <a href="#stakes" class="nav-link">The Stakes</a>
+  <a href="#letters" class="nav-link">The Letters</a>
   <a href="#history" class="nav-link">Project History</a>
   <a href="#site" class="nav-link">The Site</a>
   <a href="#record" class="nav-link">On the Record</a>
@@ -925,6 +1130,7 @@ body {
 <div id="mobile-nav">
   <a href="#hero">Cover</a>
   <a href="#stakes">The Stakes</a>
+  <a href="#letters">The Letters</a>
   <a href="#history">Project History</a>
   <a href="#site">The Site</a>
   <a href="#record">On the Record</a>
@@ -952,6 +1158,23 @@ body {
 </section>
 
 <!-- ═══════════════════════════════════════════════
+     HERO IMAGE — CURRENT vs PROPOSED
+════════════════════════════════════════════════ -->
+<div class="hero-image-section">
+  <div class="hero-image-wrap">
+    <img src="images/current-vs-proposed.png"
+         alt="1006 Westmount Drive — Current deteriorating rancher alongside proposed 4-unit SSMUH development"
+         class="hero-image gs-reveal">
+  </div>
+  <div class="hero-image-caption gs-reveal">
+    <span>The home three children under six live in today</span>
+    <span class="caption-divider"></span>
+    <span>The home this family has been trying to build for five years</span>
+  </div>
+</div>
+
+<!-- ===== 02-stakes ===== -->
+<!-- ═══════════════════════════════════════════════
      THE STAKES
 ════════════════════════════════════════════════ -->
 <section id="stakes">
@@ -969,34 +1192,6 @@ body {
     <div class="stakes-item" style="border-bottom:none; margin-top:1rem; color: rgba(248,246,242,0.5); font-style:italic;">The applicant would still prefer resolution here.</div>
   </div>
 </section>
-
-<!-- ===== 02-stakes ===== -->
-<!-- ═══════════════════════════════════════════════
-     STAT SCREENS
-════════════════════════════════════════════════ -->
-<div class="stat-screen" id="stat-years">
-  <div class="stat-number counter" data-target="5">0</div>
-  <div class="stat-unit">Years</div>
-  <div class="stat-context">The same family. The same property. The same goal. Five years in the City's process.</div>
-</div>
-
-<div class="stat-screen" id="stat-apps">
-  <div class="stat-number counter" data-target="4">0</div>
-  <div class="stat-unit">Applications</div>
-  <div class="stat-context">Each time, the rules changed. Each time, the family started over.</div>
-</div>
-
-<div class="stat-screen" id="stat-cost">
-  <div class="stat-number"><span class="counter-prefix">$</span><span class="counter" data-target="250000" data-format="comma">0</span></div>
-  <div class="stat-unit">Spent</div>
-  <div class="stat-context">Architects, engineers, consultants, application fees. Four years of professional services. No permit.</div>
-</div>
-
-<div class="stat-screen" id="stat-permits">
-  <div class="stat-number counter" data-target="0" data-hold="true">0</div>
-  <div class="stat-unit">Permits Issued</div>
-  <div class="stat-context">Five years. Four applications. $250,000. This number.</div>
-</div>
 
 <!-- ===== 03-stats ===== -->
 <!-- ═══════════════════════════════════════════════
@@ -1036,6 +1231,159 @@ body {
   <div class="part-banner-sub">A documented record of process failure — four years of contradictory instructions, blanket policy applied where individual assessment is required, and critical information never proactively disclosed.</div>
 </div>
 
+
+<!-- ===== 04b-letters ===== -->
+<!-- ═══════════════════════════════════════════════
+     OFFICIAL LETTERS — SIDE BY SIDE
+════════════════════════════════════════════════ -->
+<section id="letters" class="letters-section">
+  <div class="content-w">
+
+    <div class="letters-intro gs-reveal">
+      <div class="section-label">The Official Record</div>
+      <h2 class="letters-heading">Two Letters. Same Property. Same Four Dwellings.</h2>
+      <p class="letters-subtext">
+        In 2021 the City reviewed an RS-1S bare-land strata subdivision for four units.
+        In 2025 they reviewed an SSMUH application — a different regulatory pathway,
+        but the same lot, the same family, and the same goal: four modest homes.
+        <strong>The instructions the City gave are fundamentally contradictory.</strong>
+      </p>
+    </div>
+
+    <!-- ── Document Cards ── -->
+    <div class="letters-cards gs-reveal">
+
+      <a href="docs/2021-RS1S-comments.pdf" target="_blank" class="letter-card letter-2021">
+        <div class="letter-card-year">2021</div>
+        <div class="letter-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <div class="letter-card-title">Staff Comments Letter</div>
+        <div class="letter-card-type">RS-1S Bare Land Strata</div>
+        <div class="letter-card-meta">
+          File REZ00004 &middot; March 10, 2021<br>
+          From: Andrei Pop, Development Planner
+        </div>
+        <div class="letter-card-cta">View full document &rarr;</div>
+      </a>
+
+      <a href="docs/2025-SSMUH-comments.pdf" target="_blank" class="letter-card letter-2025">
+        <div class="letter-card-year">2025</div>
+        <div class="letter-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <div class="letter-card-title">Staff Comments Letter</div>
+        <div class="letter-card-type">SSMUH (Small-Scale Multi-Unit Housing)</div>
+        <div class="letter-card-meta">
+          File MDP000108 &middot; October 8, 2025<br>
+          To: Khang Nguyen / Architrix Architecture
+        </div>
+        <div class="letter-card-cta">View full document &rarr;</div>
+      </a>
+
+    </div>
+
+    <!-- ── Fair Context ── -->
+    <div class="letters-context gs-reveal">
+      <em>These are different application types with different regulatory frameworks. That is acknowledged.
+      But the underlying question has never changed: can this family build four homes on this lot?
+      The City's own answers — on access, servicing, and site treatment — now contradict each other.</em>
+    </div>
+
+    <!-- ── Contradiction Bullets ── -->
+    <div class="letters-contradictions gs-reveal">
+
+      <div class="contradiction-row">
+        <div class="contradiction-num">1</div>
+        <div class="contradiction-body">
+          <div class="contradiction-title">Vehicle Access — Reversed</div>
+          <div class="contradiction-detail">
+            <span class="c-tag c-tag-2021">2021</span>
+            Driveway access from Westmount Drive was discussed and considered feasible.
+            Front-to-back unit configuration with parking off the front street.
+          </div>
+          <div class="contradiction-detail">
+            <span class="c-tag c-tag-2025">2025</span>
+            Vehicle access <strong>only</strong> from Grouse Lane. Front driveways must be removed entirely.
+            The orientation the City previously accepted is now prohibited.
+          </div>
+        </div>
+      </div>
+
+      <div class="contradiction-row">
+        <div class="contradiction-num">2</div>
+        <div class="contradiction-body">
+          <div class="contradiction-title">The Ditch — Daylight vs. Culvert</div>
+          <div class="contradiction-detail">
+            <span class="c-tag c-tag-2021">2021</span>
+            Ditch daylighting required. The applicant was told the open watercourse must be maintained
+            and enhanced as a condition of development.
+          </div>
+          <div class="contradiction-detail">
+            <span class="c-tag c-tag-2025">2025</span>
+            No mention of daylighting. Engineering requirements focus on pipe inspection, CCTV sanitary,
+            and fire flow analysis — implying the ditch can be culverted or is treated as standard drainage infrastructure.
+          </div>
+        </div>
+      </div>
+
+      <div class="contradiction-row">
+        <div class="contradiction-num">3</div>
+        <div class="contradiction-body">
+          <div class="contradiction-title">Parking — 9 Stalls vs. Maximum 4</div>
+          <div class="contradiction-detail">
+            <span class="c-tag c-tag-2021">2021</span>
+            Parking per Zoning Bylaw Table 6.3.1 — standard residential calculation.
+            For four units this would yield approximately 9 stalls.
+          </div>
+          <div class="contradiction-detail">
+            <span class="c-tag c-tag-2025">2025</span>
+            Maximum 4 parking stalls — reduced from the 9 the applicant proposed.
+            The City actively limited parking below what the applicant offered.
+          </div>
+        </div>
+      </div>
+
+      <div class="contradiction-row">
+        <div class="contradiction-num">4</div>
+        <div class="contradiction-body">
+          <div class="contradiction-title">Process Complexity — Escalation, Not Simplification</div>
+          <div class="contradiction-detail">
+            <span class="c-tag c-tag-2021">2021</span>
+            Standard rezoning conditions: CAC of $6,000, standard DCCs,
+            straightforward comment letter — 3 pages.
+          </div>
+          <div class="contradiction-detail">
+            <span class="c-tag c-tag-2025">2025</span>
+            23 planning comments on form and character alone. Full servicing agreement.
+            Water pipe age inspection. Fire flow analysis.
+            The SSMUH pathway — designed by the Province to be <em>simpler</em> — produced
+            a comment letter three times longer and vastly more onerous than the rezoning it replaced.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="letters-bottom-line gs-reveal">
+      <strong>The constant:</strong> one family, one lot, four dwellings, five years.
+      The variable: what the City tells them is required.
+    </div>
+
+  </div>
+</section>
 
 <!-- ===== 05-history ===== -->
 <!-- ═══════════════════════════════════════════════
@@ -1333,38 +1681,10 @@ body {
 
     <!-- MAP CARD -->
     <a class="map-card gs-reveal" id="map-trigger" href="https://earth.google.com/web/search/932+Westmount+Drive/@49.27334404,-122.87796801,131.95854035a,200.0608328d,35y,323.94213149h,0t,0r/data=CigiJgokCbe5QrM6o0hAEbuO3vG_okhAGUFoyK3gt17AIXa0QUyGuF7AQgIIATIpCicKJQohMXpVUnQ0T2NyazMtTjc5YmppUTZCNGF2UnBqckpNekNrIAE6AwoBMEICCABKBwi2pOtnEAE?authuser=0" target="_blank" rel="noopener">
-      <div class="map-card-visual">
-        <svg class="map-card-svg" width="360" height="180" viewBox="0 0 360 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Street grid illustration -->
-          <line x1="30" y1="90" x2="330" y2="90" stroke="rgba(248,246,242,0.15)" stroke-width="12"/>
-          <text x="180" y="94" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="8" fill="rgba(248,246,242,0.35)" letter-spacing="3">WESTMOUNT DRIVE</text>
-          <!-- Lane below -->
-          <line x1="30" y1="150" x2="330" y2="150" stroke="rgba(248,246,242,0.08)" stroke-width="6"/>
-          <text x="180" y="153" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="6" fill="rgba(248,246,242,0.2)" letter-spacing="2">GROUSE LANE</text>
-          <!-- Lots -->
-          <rect x="100" y="96" width="40" height="48" fill="rgba(42,90,58,0.3)" stroke="rgba(42,90,58,0.5)" stroke-width="1" rx="2"/>
-          <rect x="220" y="96" width="40" height="48" fill="rgba(139,58,58,0.3)" stroke="rgba(139,58,58,0.5)" stroke-width="1" rx="2"/>
-          <!-- Connecting line -->
-          <line x1="140" y1="120" x2="220" y2="120" stroke="rgba(248,246,242,0.12)" stroke-width="1" stroke-dasharray="4,4"/>
-          <text x="180" y="116" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="7" fill="rgba(248,246,242,0.3)">same block</text>
-          <!-- Pin 932 -->
-          <g class="map-pin" transform="translate(120, 60)">
-            <path d="M0,28 C0,28 -12,12 -12,8 C-12,0 -6,-6 0,-6 C6,-6 12,0 12,8 C12,12 0,28 0,28Z" fill="#2A5A3A"/>
-            <circle cx="0" cy="7" r="3.5" fill="#F8F6F2"/>
-          </g>
-          <text x="120" y="52" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="9" fill="#4A9A6A">932</text>
-          <!-- Pin 1006 -->
-          <g class="map-pin delayed" transform="translate(240, 60)">
-            <path d="M0,28 C0,28 -12,12 -12,8 C-12,0 -6,-6 0,-6 C6,-6 12,0 12,8 C12,12 0,28 0,28Z" fill="#8B3A3A"/>
-            <circle cx="0" cy="7" r="3.5" fill="#F8F6F2"/>
-          </g>
-          <text x="240" y="52" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="9" fill="#C06060">1006</text>
-          <!-- Grade arrows -->
-          <text x="120" y="170" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="7" fill="rgba(248,246,242,0.3)">Less grade</text>
-          <text x="240" y="170" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="7" fill="rgba(248,246,242,0.3)">More grade</text>
-          <text x="120" y="13" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="8" fill="#4A9A6A" letter-spacing="0.5">DUAL ACCESS</text>
-          <text x="240" y="13" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="8" fill="#C06060" letter-spacing="0.5">LANE ONLY</text>
-        </svg>
+      <div class="map-card-visual" style="height:auto; background:none; padding:0;">
+        <img src="images/aerial-map.png"
+             alt="Google Earth aerial view showing 1006 Westmount Drive and 932 Westmount Drive on the same block — pins marking both properties"
+             style="width:100%; display:block;">
       </div>
       <div class="map-card-bar">
         <div class="map-card-label">932 &amp; 1006 Westmount Drive — Same block, 80m apart &middot; View in Google Earth 3D</div>

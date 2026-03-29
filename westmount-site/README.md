@@ -18,6 +18,7 @@ westmount-site/
 │   ├── 02-stakes.html      ← "If resolved / If not resolved" split
 │   ├── 03-stats.html       ← 5 years / 4 apps / $250K / 0 permits
 │   ├── 04-part1-banner.html
+│   ├── 04b-letters.html    ← Side-by-side staff comment letters + contradictions
 │   ├── 05-history.html     ← Timeline + comparison table
 │   ├── 06-ditch-band.html  ← Full-bleed ditch paradox callout
 │   ├── 07-site.html        ← Grade stats, SVG diagram, SSMUH callout
@@ -34,6 +35,9 @@ westmount-site/
 │   ├── 18-demands.html     ← 5 formal requirements
 │   ├── 19-escalation.html  ← 3 escalation paths
 │   └── 20-closing-footer.html ← Summary + footer
+├── docs/                   ← PDF source documents
+│   ├── 2021-RS1S-comments.pdf
+│   └── 2025-SSMUH-comments.pdf
 ├── images/                 ← Drop photos here (see below)
 │   └── (empty — add your photos)
 └── build/

@@ -186,6 +186,53 @@ body {
 }
 
 /* ═══════════════════════════════════════
+   HERO IMAGE
+═══════════════════════════════════════ */
+.hero-image-section {
+  background: var(--navy);
+  padding: 0;
+  position: relative;
+}
+.hero-image-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.hero-image {
+  width: 100%;
+  display: block;
+}
+.hero-image-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.25rem 2rem;
+  background: var(--navy);
+  font-family: var(--sans);
+  font-weight: 200;
+  font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+  letter-spacing: 0.06em;
+  color: rgba(248,246,242,0.5);
+  text-align: center;
+}
+.hero-image-caption .caption-divider {
+  display: block;
+  width: 1px;
+  height: 1.2rem;
+  background: rgba(248,246,242,0.15);
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .hero-image-caption {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+  }
+  .hero-image-caption .caption-divider { display: none; }
+}
+
+/* ═══════════════════════════════════════
    STAKES SPLIT
 ═══════════════════════════════════════ */
 #stakes {
@@ -736,18 +783,18 @@ body {
   box-shadow: 0 4px 20px rgba(10,22,40,0.12);
 }
 .map-card-visual {
-  height: 220px; background: var(--navy);
+  background: var(--navy);
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
 }
-.map-card-visual::before {
-  content: ''; position: absolute; inset: 0;
-  background:
-    radial-gradient(circle at 42% 50%, rgba(26,107,90,0.25) 0%, transparent 50%),
-    radial-gradient(circle at 58% 50%, rgba(139,58,58,0.2) 0%, transparent 50%),
-    linear-gradient(135deg, #0A1628 0%, #0F1F38 100%);
+.map-card-visual img {
+  width: 100%; display: block;
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
-.map-card-svg { position: relative; z-index: 1; }
+.map-card:hover .map-card-visual img {
+  transform: scale(1.015);
+  filter: brightness(1.05);
+}
 .map-card-bar {
   background: var(--cream); padding: 1rem 1.5rem;
   display: flex; align-items: center; justify-content: space-between;
@@ -852,6 +899,163 @@ body {
 .gs-reveal {
   opacity: 0; transform: translateY(24px);
   will-change: opacity, transform;
+}
+
+/* ═══════════════════════════════════════
+   LETTERS COMPARISON
+═══════════════════════════════════════ */
+.letters-section {
+  padding: 6rem 0;
+  background: var(--white);
+}
+.letters-intro { text-align: center; margin-bottom: 3rem; }
+.section-label {
+  font-family: var(--sans); font-weight: 300;
+  font-size: 0.65rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 0.75rem;
+}
+.letters-heading {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--ink); line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+.letters-subtext {
+  font-family: var(--serif); font-size: 1.05rem;
+  color: var(--ink2); line-height: 1.75;
+  max-width: 700px; margin: 0 auto;
+}
+
+/* Document cards */
+.letters-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; margin-bottom: 2.5rem;
+}
+.letter-card {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  padding: 2.5rem 2rem 2rem;
+  border-radius: 4px;
+  text-decoration: none; color: var(--ink);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.letter-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+.letter-2021 {
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+}
+.letter-2025 {
+  background: var(--amber-bg);
+  border: 1px solid #D4C89A;
+}
+.letter-card-year {
+  font-family: var(--sans); font-weight: 100;
+  font-size: 3.5rem; letter-spacing: 0.05em;
+  color: var(--ink4); line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.letter-2021 .letter-card-year { color: var(--green); }
+.letter-2025 .letter-card-year { color: var(--amber); }
+.letter-card-icon {
+  color: var(--ink4); margin-bottom: 1rem;
+}
+.letter-2021 .letter-card-icon { color: var(--green); }
+.letter-2025 .letter-card-icon { color: var(--amber); }
+.letter-card-title {
+  font-family: var(--sans); font-weight: 500;
+  font-size: 0.85rem; letter-spacing: 0.05em;
+  text-transform: uppercase; margin-bottom: 0.35rem;
+}
+.letter-card-type {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1rem; color: var(--ink3);
+  margin-bottom: 1rem;
+}
+.letter-card-meta {
+  font-family: var(--sans); font-weight: 200;
+  font-size: 0.72rem; color: var(--ink4);
+  line-height: 1.7; letter-spacing: 0.02em;
+  margin-bottom: 1.25rem;
+}
+.letter-card-cta {
+  font-family: var(--sans); font-weight: 400;
+  font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-top: auto;
+}
+@media (max-width: 650px) {
+  .letters-cards { grid-template-columns: 1fr; gap: 1.25rem; }
+}
+
+/* Context callout */
+.letters-context {
+  text-align: center; padding: 1.5rem 2rem;
+  background: var(--cream); border-radius: 4px;
+  font-family: var(--serif); font-size: 0.95rem;
+  color: var(--ink3); line-height: 1.75;
+  margin-bottom: 3rem;
+  max-width: 750px; margin-left: auto; margin-right: auto;
+}
+
+/* Contradiction rows */
+.letters-contradictions {
+  max-width: 800px; margin: 0 auto 2.5rem;
+}
+.contradiction-row {
+  display: flex; gap: 1.25rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.contradiction-row:first-child { border-top: 1px solid var(--rule); }
+.contradiction-num {
+  flex-shrink: 0; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--navy); color: var(--white);
+  font-family: var(--sans); font-weight: 500;
+  font-size: 0.8rem; border-radius: 50%;
+  margin-top: 0.15rem;
+}
+.contradiction-body { flex: 1; }
+.contradiction-title {
+  font-family: var(--sans); font-weight: 600;
+  font-size: 0.9rem; color: var(--ink);
+  margin-bottom: 0.75rem; letter-spacing: 0.01em;
+}
+.contradiction-detail {
+  font-family: var(--serif); font-size: 0.95rem;
+  color: var(--ink2); line-height: 1.65;
+  margin-bottom: 0.6rem;
+}
+.contradiction-detail:last-child { margin-bottom: 0; }
+.c-tag {
+  display: inline-block;
+  font-family: var(--sans); font-weight: 600;
+  font-size: 0.6rem; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.15rem 0.5rem;
+  border-radius: 3px; margin-right: 0.4rem;
+  vertical-align: middle; position: relative; top: -1px;
+}
+.c-tag-2021 { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.c-tag-2025 { background: var(--amber-bg); color: var(--amber); border: 1px solid #D4C89A; }
+
+@media (max-width: 600px) {
+  .contradiction-row { flex-direction: column; gap: 0.5rem; }
+  .contradiction-num { width: 28px; height: 28px; font-size: 0.7rem; }
+}
+
+/* Bottom line */
+.letters-bottom-line {
+  text-align: center;
+  font-family: var(--serif); font-size: 1.15rem;
+  color: var(--ink); line-height: 1.6;
+  max-width: 600px; margin: 0 auto;
+  padding-top: 0.5rem;
 }
 
 /* ═══════════════════════════════════════
