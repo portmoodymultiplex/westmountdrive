@@ -22,47 +22,6 @@
   </div>
 </section>
 
-<!-- YouTube API + autoplay 30s–50s loop -->
-<script>
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-var heroPlayer;
-function onYouTubeIframeAPIReady() {
-  heroPlayer = new YT.Player('hero-video-player', {
-    videoId: '4veMsoBOGS4',
-    playerVars: {
-      autoplay: 1,
-      mute: 1,
-      controls: 0,
-      showinfo: 0,
-      rel: 0,
-      loop: 0,
-      modestbranding: 1,
-      iv_load_policy: 3,
-      disablekb: 1,
-      fs: 0,
-      start: 30,
-      end: 50,
-      playsinline: 1
-    },
-    events: {
-      'onReady': function(e) {
-        e.target.mute();
-        e.target.playVideo();
-      },
-      'onStateChange': function(e) {
-        if (e.data === YT.PlayerState.ENDED) {
-          heroPlayer.seekTo(30);
-          heroPlayer.playVideo();
-        }
-      }
-    }
-  });
-}
-</script>
 
 <!-- ═══════════════════════════════════════════════
      HERO IMAGE — CURRENT vs PROPOSED
