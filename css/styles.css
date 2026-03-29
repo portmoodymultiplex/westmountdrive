@@ -131,49 +131,98 @@ body {
 }
 
 /* ═══════════════════════════════════════
-   HERO
+   HERO — VIDEO BACKGROUND
 ═══════════════════════════════════════ */
-#hero {
+#hero.hero-video-section {
   min-height: 100vh; display: flex;
   flex-direction: column; justify-content: center;
   align-items: center; text-align: center;
-  background: var(--white); position: relative;
-  padding: 4rem 2rem;
+  position: relative; overflow: hidden;
+  background: #000;
 }
+
+/* Video container — fills hero, cropped to cover */
+.hero-video-bg {
+  position: absolute; inset: 0;
+  z-index: 0; overflow: hidden;
+  pointer-events: none;
+}
+.hero-video-bg iframe,
+.hero-video-bg div {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 120vw; height: 120vh;
+  min-width: 120%; min-height: 120%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Dark overlay for text legibility */
+.hero-video-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10,22,40,0.65) 0%,
+    rgba(10,22,40,0.50) 40%,
+    rgba(10,22,40,0.70) 100%
+  );
+  z-index: 1;
+}
+
+/* Content sits above video + overlay */
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 4rem 2rem;
+  display: flex; flex-direction: column;
+  align-items: center;
+}
+
 .hero-address {
   font-family: var(--sans); font-weight: 100;
   font-size: clamp(3rem, 8vw, 5.5rem);
-  letter-spacing: 0.04em; color: var(--ink);
+  letter-spacing: 0.06em; color: #FFFFFF;
   opacity: 0; animation: fadeUp 1.2s ease 0.3s forwards;
   line-height: 1.1;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.4);
 }
+
+/* Thin decorative rule between address and subtitle */
+.hero-rule {
+  width: 60px; height: 1px;
+  background: rgba(248,246,242,0.3);
+  margin: 2rem 0;
+  opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+}
+
 .hero-subtitle {
   font-family: var(--serif); font-weight: 300;
   font-style: italic;
-  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-  color: var(--ink3); margin-top: 1.5rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  color: rgba(248,246,242,0.85); margin-top: 0;
   opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
-  max-width: 700px; line-height: 1.5;
+  max-width: 700px; line-height: 1.55;
+  text-shadow: 0 1px 20px rgba(0,0,0,0.3);
 }
 .hero-meta {
   font-family: var(--sans); font-weight: 200;
   font-size: clamp(0.6rem, 1vw, 0.72rem);
   letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--ink4); margin-top: 3rem;
+  color: rgba(248,246,242,0.45); margin-top: 3rem;
   opacity: 0; animation: fadeUp 0.8s ease 1.4s forwards;
-  line-height: 2;
+  line-height: 2.2;
 }
 .hero-scroll {
   position: absolute; bottom: 3rem;
   font-family: var(--sans); font-weight: 200;
   font-size: 0.6rem; letter-spacing: 0.25em;
-  text-transform: uppercase; color: var(--ink4);
+  text-transform: uppercase; color: rgba(248,246,242,0.35);
   opacity: 0; animation: fadeUp 0.6s ease 2s forwards;
+  z-index: 2;
 }
 .hero-scroll::after {
   content: ''; display: block;
   width: 1px; height: 30px;
-  background: var(--rule); margin: 0.75rem auto 0;
+  background: rgba(248,246,242,0.2); margin: 0.75rem auto 0;
   animation: pulse 2s ease infinite;
 }
 @keyframes fadeUp {
