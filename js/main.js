@@ -163,4 +163,45 @@
     }
   }
 
+  // ── YouTube Hero Video Background ──
+  var playerDiv = document.getElementById('hero-video-player');
+  if (playerDiv) {
+    var ytTag = document.createElement('script');
+    ytTag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(ytTag);
+
+    window.onYouTubeIframeAPIReady = function() {
+      var heroPlayer = new YT.Player('hero-video-player', {
+        videoId: '4veMsoBOGS4',
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          controls: 0,
+          showinfo: 0,
+          rel: 0,
+          loop: 0,
+          modestbranding: 1,
+          iv_load_policy: 3,
+          disablekb: 1,
+          fs: 0,
+          start: 30,
+          end: 50,
+          playsinline: 1
+        },
+        events: {
+          'onReady': function(e) {
+            e.target.mute();
+            e.target.playVideo();
+          },
+          'onStateChange': function(e) {
+            if (e.data === YT.PlayerState.ENDED) {
+              heroPlayer.seekTo(30);
+              heroPlayer.playVideo();
+            }
+          }
+        }
+      });
+    };
+  }
+
 })();
