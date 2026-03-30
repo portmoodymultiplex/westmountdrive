@@ -26,60 +26,20 @@
       </div>
     </div>
 
-    <!-- GRADE SVG DIAGRAM -->
+   <!-- PROJECT PLANS -->
     <div class="diagram-container gs-reveal">
-      <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg" id="grade-svg">
-        <defs>
-          <marker id="arr-end" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L7 4L1 7" fill="none" stroke="#8B3A3A" stroke-width="1.5" stroke-linejoin="round"/></marker>
-          <marker id="arr-start" viewBox="0 0 8 8" refX="1" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M7 1L1 4L7 7" fill="none" stroke="#8B3A3A" stroke-width="1.5" stroke-linejoin="round"/></marker>
-          <pattern id="hatch" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <line x1="0" y1="0" x2="0" y2="8" stroke="#C8C4BC" stroke-width="0.8"/>
-          </pattern>
-        </defs>
-        <rect width="800" height="280" fill="#F0EDE6"/>
-        <!-- Ground -->
-        <polygon points="0,110 220,110 580,195 800,195 800,280 0,280" fill="#E4E0D8"/>
-        <polygon points="0,110 220,110 580,195 800,195 800,280 0,280" fill="url(#hatch)" opacity="0.4"/>
-        <polyline points="0,110 220,110 580,195 800,195" fill="none" stroke="#B0A898" stroke-width="1.5"/>
-        <!-- Westmount Drive -->
-        <rect x="0" y="100" width="220" height="12" fill="#D8D4CC" rx="1"/>
-        <text x="110" y="93" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="10" fill="#6A6A6A" letter-spacing="2">WESTMOUNT DRIVE</text>
-        <text x="14" y="93" font-family="Raleway, sans-serif" font-weight="300" font-size="8" fill="#8B3A3A" letter-spacing="0.5">EL. 443.9 ft</text>
-        <!-- Grouse Lane -->
-        <rect x="596" y="185" width="204" height="12" fill="#D8D4CC" rx="1"/>
-        <text x="698" y="178" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="10" fill="#6A6A6A" letter-spacing="2">GROUSE LANE</text>
-        <text x="600" y="178" font-family="Raleway, sans-serif" font-weight="300" font-size="8" fill="#8B3A3A" letter-spacing="0.5">EL. 423.1 ft</text>
-        <!-- Building B1 -->
-        <rect x="24" y="68" width="60" height="42" fill="#FFF" stroke="#1A1A1A" stroke-width="1"/>
-        <rect x="36" y="80" width="16" height="30" fill="#E4E0D8"/>
-        <text x="54" y="62" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="9" fill="#1A1A1A" letter-spacing="1">B1</text>
-        <!-- Building B2 -->
-        <rect x="116" y="68" width="60" height="42" fill="#FFF" stroke="#1A1A1A" stroke-width="1"/>
-        <rect x="128" y="80" width="16" height="30" fill="#E4E0D8"/>
-        <text x="146" y="62" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="9" fill="#1A1A1A" letter-spacing="1">B2</text>
-        <!-- Building B3 -->
-        <rect x="638" y="150" width="56" height="35" fill="#FFF" stroke="#6A6A6A" stroke-width="1"/>
-        <text x="666" y="144" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="300" font-size="9" fill="#6A6A6A" letter-spacing="1">B3</text>
-        <!-- Grade dimension -->
-        <line x1="585" y1="110" x2="585" y2="195" stroke="#8B3A3A" stroke-width="1" stroke-dasharray="4,3" marker-start="url(#arr-start)" marker-end="url(#arr-end)" class="grade-line"/>
-        <rect x="592" y="140" width="72" height="26" fill="#FDF4F4" stroke="#E0C0C0" stroke-width="0.75" rx="2"/>
-        <text x="628" y="155" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="500" font-size="13" fill="#8B3A3A">20.8 ft</text>
-        <text x="628" y="163" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="7" fill="#8B3A3A">6.35 m drop</text>
-        <!-- Stairs path -->
-        <polyline points="220,110 238,110 238,120 256,120 256,130 274,130 274,140 292,140 292,150 310,150 310,160 328,160 328,170 346,170 346,180 370,185" fill="none" stroke="#8B3A3A" stroke-width="1.8" opacity="0.6" class="stairs-path"/>
-        <rect x="260" y="125" width="78" height="18" fill="#FDF4F4" stroke="#E0C0C0" stroke-width="0.5" rx="2"/>
-        <text x="299" y="137" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="400" font-size="9" fill="#8B3A3A" letter-spacing="0.5">34 STAIRS</text>
-        <!-- Tree -->
-        <g transform="translate(430, 95)">
-          <line x1="0" y1="30" x2="0" y2="65" stroke="#6A5A40" stroke-width="4"/>
-          <circle cx="0" cy="15" r="28" fill="#4A7A4A" opacity="0.6"/>
-          <circle cx="-10" cy="22" r="20" fill="#3A6A3A" opacity="0.5"/>
-          <circle cx="12" cy="10" r="22" fill="#5A8A5A" opacity="0.5"/>
-        </g>
-        <text x="430" y="175" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="7.5" fill="#4A7A4A" letter-spacing="0.5">CITY-REQUIRED</text>
-        <text x="430" y="183" text-anchor="middle" font-family="Raleway, sans-serif" font-weight="200" font-size="7.5" fill="#4A7A4A" letter-spacing="0.5">RETAINED TREE</text>
-      </svg>
-      <div class="diagram-caption">Cross-section: 1006 Westmount Drive — Surveyed grade from Westmount Drive to Grouse Lane · Source: Architectural drawings A1.2, A3.11, Architrix Design Studio</div>
+      <a href="https://drive.google.com/file/d/11uWbHu8zYh1XLAR-A5Ma0SEoeBhhl9Q2/view?usp=sharing" target="_blank" style="display:block; text-decoration:none;">
+        <div style="border-radius:10px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.12); border:1px solid var(--rule); transition:transform 0.3s, box-shadow 0.3s; cursor:pointer;">
+          <img src="images/westmount project.jpeg" alt="Architectural site plan for 1006 Westmount Drive — 4-unit SSMUH proposal" style="width:100%; display:block;">
+          <div style="padding:0.8rem 1.2rem; background:var(--navy); color:var(--white); display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="font-family:var(--serif); font-size:0.95rem;">1006 Westmount Drive — Full Project Plans</div>
+              <div style="font-family:var(--sans); font-size:0.6rem; opacity:0.5; letter-spacing:0.12em; text-transform:uppercase; margin-top:0.2rem;">Click to view complete architectural drawings</div>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5; flex-shrink:0;"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </div>
+        </div>
+      </a>
     </div>
 
     <div class="callout gold gs-reveal">
