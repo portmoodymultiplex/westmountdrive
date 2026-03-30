@@ -10,7 +10,111 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<!--
+  PASSWORD GATE — paste this at the very TOP of index.html, right after <body>
+  (before any other content, before the section loader, before nav)
+-->
 
+<!-- PASSWORD OVERLAY -->
+<div id="password-gate" style="
+  position:fixed; top:0; left:0; width:100vw; height:100vh;
+  background:var(--navy, #1B2A4A); z-index:99999;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Raleway', sans-serif;
+">
+  <div style="
+    text-align:center; max-width:420px; padding:2.5rem;
+    background:rgba(248,246,242,0.04); border:1px solid rgba(248,246,242,0.08);
+    border-radius:12px;
+  ">
+    <div style="
+      font-family:'Cormorant Garamond', serif; font-size:1.6rem; font-weight:300;
+      color:rgba(248,246,242,0.9); margin-bottom:0.25rem;
+    ">1006 Westmount Drive</div>
+    <div style="
+      width:40px; height:1px; background:var(--teal, #2A9D8F);
+      margin:0.75rem auto;
+    "></div>
+    <div style="
+      font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(248,246,242,0.35); margin-bottom:2rem;
+    ">Private Document — Authorized Access Only</div>
+
+    <input type="password" id="gate-input" placeholder="Enter password" autocomplete="off" style="
+      width:100%; max-width:260px; padding:0.75rem 1rem;
+      font-family:'Raleway', sans-serif; font-size:0.95rem;
+      background:rgba(248,246,242,0.06); border:1px solid rgba(248,246,242,0.15);
+      border-radius:6px; color:rgba(248,246,242,0.9);
+      text-align:center; outline:none;
+      transition: border-color 0.3s;
+    " onfocus="this.style.borderColor='rgba(42,157,143,0.5)'" onblur="this.style.borderColor='rgba(248,246,242,0.15)'">
+
+    <div id="gate-error" style="
+      font-size:0.75rem; color:#C0504D; margin-top:0.75rem;
+      opacity:0; transition:opacity 0.3s;
+    ">Incorrect password.</div>
+
+    <button id="gate-btn" style="
+      margin-top:1.25rem; padding:0.6rem 2.5rem;
+      font-family:'Raleway', sans-serif; font-size:0.75rem;
+      letter-spacing:0.15em; text-transform:uppercase;
+      background:var(--teal, #2A9D8F); color:white; border:none;
+      border-radius:4px; cursor:pointer;
+      transition: opacity 0.3s;
+    " onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Enter</button>
+
+    <div style="
+      font-size:0.6rem; color:rgba(248,246,242,0.2);
+      margin-top:2rem; line-height:1.6;
+    ">
+      This document is a private formal submission.<br>
+      Distribution is restricted to authorized recipients only.
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Simple password check — 'ssmuh'
+  const PASS_HASH = '5a0a284d'; // simple hash of 'ssmuh'
+  function simpleHash(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) {
+      h = ((h << 5) - h) + str.charCodeAt(i);
+      h |= 0;
+    }
+    return (h >>> 0).toString(16);
+  }
+
+  // Check if already authenticated this session
+  if (sessionStorage.getItem('wm_auth') === '1') {
+    document.getElementById('password-gate').style.display = 'none';
+  }
+
+  function tryPassword() {
+    const input = document.getElementById('gate-input').value.trim().toLowerCase();
+    if (input === 'ssmuh') {
+      sessionStorage.setItem('wm_auth', '1');
+      const gate = document.getElementById('password-gate');
+      gate.style.opacity = '0';
+      gate.style.transition = 'opacity 0.5s';
+      setTimeout(() => { gate.style.display = 'none'; }, 500);
+    } else {
+      document.getElementById('gate-error').style.opacity = '1';
+      document.getElementById('gate-input').value = '';
+      setTimeout(() => {
+        document.getElementById('gate-error').style.opacity = '0';
+      }, 2000);
+    }
+  }
+
+  document.getElementById('gate-btn').addEventListener('click', tryPassword);
+  document.getElementById('gate-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') tryPassword();
+  });
+})();
+</script>
+<!-- END PASSWORD GATE -->
 <div id="s-nav"></div>
 <div id="s-hero"></div>
 <div id="s-who"></div>
