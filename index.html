@@ -1030,9 +1030,70 @@ body{background:var(--page-bg);color:var(--navy);font-family:var(--serif);font-s
   .exhibit-header{flex-direction:column;gap:.75rem}
   .exhibit-badge{font-size:2.5rem}
 }
+  /* ══════════════════════════════════
+   NAVIGATION
+══════════════════════════════════ */
+#site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:9000;
+  background:rgba(250,250,248,.96);
+  border-bottom:1px solid rgba(15,27,53,.08);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transform:translateY(-100%);
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+#site-nav.nav-visible{
+  transform:translateY(0);
+  box-shadow:0 2px 20px rgba(15,27,53,.06);
+}
+.nav-inner{
+  max-width:1100px;margin:0 auto;
+  padding:0 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:52px;
+}
+.nav-brand{
+  font-family:var(--serif);font-size:.95rem;
+  color:var(--navy);white-space:nowrap;
+  text-decoration:none;flex-shrink:0;
+}
+.nav-links{
+  display:flex;align-items:center;gap:.25rem;
+  overflow-x:auto;scrollbar-width:none;
+}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-link{
+  font-family:var(--sans);font-size:.6rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(15,27,53,.5);text-decoration:none;
+  padding:.4rem .65rem;border-radius:3px;
+  white-space:nowrap;transition:color .2s,background .2s;
+}
+.nav-link:hover{color:var(--navy);background:rgba(15,27,53,.05)}
+.nav-link.nav-active{color:var(--navy);font-weight:600}
+@media(max-width:768px){
+  .nav-brand{display:none}
+  .nav-inner{padding:0 1rem}
+  .nav-link{font-size:.55rem;padding:.35rem .5rem}
+}
 </style>
 </head>
 <body>
+  <nav id="site-nav">
+  <div class="nav-inner">
+    <a href="#cold-open" class="nav-brand">1006 Westmount Drive</a>
+    <div class="nav-links">
+      <a href="#who" class="nav-link">Applicant</a>
+      <a href="#letters" class="nav-link">Exhibit A</a>
+      <a href="#valour" class="nav-link">Exhibit B</a>
+      <a href="#double" class="nav-link">Exhibit C</a>
+      <a href="#record" class="nav-link">Exhibit D</a>
+      <a href="#promise" class="nav-link">Pattern</a>
+      <a href="#legal" class="nav-link">Provincial</a>
+      <a href="#demands" class="nav-link">Requests</a>
+      <a href="#closing" class="nav-link">Resolution</a>
+    </div>
+  </div>
+</nav>
 
 <div id="bar"></div>
 
@@ -1789,6 +1850,30 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-slow').for
     if(e.key === 'Enter') attempt();
     document.getElementById('pw-err').textContent = '';
   });
+})();
+  // Nav: show after title, highlight active section
+(function(){
+  var nav = document.getElementById('site-nav');
+  var links = document.querySelectorAll('.nav-link');
+  var sections = Array.from(links).map(function(l){
+    return document.querySelector(l.getAttribute('href'));
+  }).filter(Boolean);
+  function onScroll(){
+    var scrollY = window.scrollY||window.pageYOffset;
+    if(scrollY > window.innerHeight * 0.8){
+      nav.classList.add('nav-visible');
+    } else {
+      nav.classList.remove('nav-visible');
+    }
+    var current='';
+    sections.forEach(function(s){
+      if(s && scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    links.forEach(function(l){
+      l.classList.toggle('nav-active', l.getAttribute('href')==='#'+current);
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
 })();
 </script>
 
