@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1006 Westmount Drive</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+:root{
+  --black:#F8F5F0;
+  --off-black:#F0EBE3;
+  --dark:#E8E2D9;
+  --card-bg:#FFFFFF;
+  --white:#1A1A2E;
+  --navy:#0F1B35;
+  --page-bg:#FAFAF8;
+  --off-white:rgba(15,27,53,0.72);
+  --dim:rgba(15,27,53,0.45);
+  --red:#8B1A1A;
+  --red-light:#B02020;
+  --red-dim:rgba(139,26,26,0.08);
+  --red-border:rgba(139,26,26,0.18);
+  --green:#0A5C38;
+  --green-light:#15834F;
+  --green-dim:rgba(10,92,56,0.08);
+  --green-border:rgba(10,92,56,0.2);
+  --gold:#7A5A0A;
+  --gold-dim:rgba(122,90,10,0.07);
+  --teal:#0A5C50;
+  --rule:rgba(15,27,53,0.1);
+  --rule-light:rgba(15,27,53,0.18);
+  --sans:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;
+  --serif:'Times New Roman',Times,Georgia,serif;
+}
+body{background:var(--page-bg);color:var(--navy);font-family:var(--serif);font-size:20px;line-height:1.8;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── PROGRESS ── */
+#bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--navy),var(--gold));width:0%;z-index:9999;transition:width .1s linear}
+
+/* ── REVEALS ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .9s ease,transform .9s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .9s ease,transform .9s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .9s ease,transform .9s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-slow{opacity:0;transition:opacity 1.4s ease}
+.reveal-slow.visible{opacity:1}
+
+/* ── CONTAINERS ── */
+.w{max-width:920px;margin:0 auto;padding:0 2.5rem}
+.w-wide{max-width:1100px;margin:0 auto;padding:0 2.5rem}
+@media(max-width:600px){.w,.w-wide{padding:0 1.5rem}}
+
+/* ══════════════════════════════════
+   SECTION 1 — TITLE PAGE
+══════════════════════════════════ */
+#cold-open{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;
+  background:var(--navy);position:relative;overflow:hidden;
+}
+.cold-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 30%,rgba(122,90,10,0.12) 0%,transparent 65%);
+}
+.cold-inner{
+  position:relative;z-index:1;padding:4rem 3rem;max-width:800px;width:100%;
+}
+.cold-eyebrow{
+  font-family:var(--sans);font-weight:400;font-size:.72rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(248,245,240,.45);margin-bottom:3rem;
+}
+.cold-address{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2.8rem,8vw,5.5rem);
+  line-height:1.05;letter-spacing:-.01em;
+  color:#F8F5F0;margin-bottom:1.5rem;
+}
+.cold-rule{
+  width:60px;height:2px;background:var(--gold);
+  margin:0 auto 1.5rem;
+}
+.cold-subtitle{
+  font-family:var(--serif);font-weight:400;font-style:italic;
+  font-size:clamp(1rem,2.2vw,1.35rem);
+  color:rgba(248,245,240,.6);line-height:1.6;margin-bottom:3.5rem;
+}
+.cold-stats{
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;gap:0;border-top:1px solid rgba(248,245,240,.12);
+  border-bottom:1px solid rgba(248,245,240,.12);
+  padding:2rem 0;margin-bottom:2.5rem;
+}
+.cold-stat{padding:0 2.5rem;text-align:center}
+.cold-stat-div{
+  width:1px;height:40px;
+  background:rgba(248,245,240,.15);flex-shrink:0;
+}
+.cold-stat-n{
+  font-family:var(--sans);font-weight:300;
+  font-size:clamp(1.6rem,4vw,2.4rem);
+  color:#F8F5F0;line-height:1;margin-bottom:.3rem;
+}
+.cold-stat-l{
+  font-family:var(--sans);font-weight:400;font-size:.65rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(248,245,240,.4);line-height:1.4;
+}
+.cold-prepared{
+  font-family:var(--sans);font-size:.7rem;font-weight:400;
+  letter-spacing:.12em;color:rgba(248,245,240,.3);
+  text-transform:uppercase;
+}
+.cold-scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-size:1.2rem;color:rgba(248,245,240,.2);animation:bounceDown 2s infinite;
+}
+@keyframes bounceDown{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.cold-scroll::after{
+  content:'';display:block;width:1px;height:40px;
+  background:rgba(15,27,53,.1);margin:.75rem auto 0;
+  animation:pulse 2s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:.2}50%{opacity:.7}}
+
+/* ══════════════════════════════════
+   SECTION 2 — WHO THEY ARE
+══════════════════════════════════ */
+#who{padding:8rem 0;background:var(--off-black)}
+.who-label{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(15,27,53,.3);margin-bottom:1.25rem;
+}
+.who-heading{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(2rem,5vw,3.2rem);line-height:1.2;
+  color:var(--white);margin-bottom:2rem;
+}
+.who-body{
+  font-family:var(--serif);font-size:1.1rem;
+  color:rgba(15,27,53,.7);line-height:1.85;
+  max-width:700px;
+}
+.who-body p+p{margin-top:1.25rem}
+.who-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--rule-light);
+  border:1px solid var(--rule-light);
+  margin-top:4rem;
+}
+@media(max-width:700px){.who-stats{grid-template-columns:1fr 1fr}}
+.who-stat{
+  background:var(--card-bg);padding:2rem 1.5rem;text-align:center;
+}
+.who-stat-n{
+  font-family:var(--sans);font-weight:100;
+  font-size:clamp(2rem,4vw,2.8rem);
+  color:var(--white);line-height:1;margin-bottom:.5rem;
+}
+.who-stat-l{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(15,27,53,.3);line-height:1.5;
+}
+
+/* ══════════════════════════════════
+   SECTION 3 — THE PROMISE
+══════════════════════════════════ */
+#promise{padding:8rem 0;background:var(--black)}
+.promise-kicker{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:var(--green-light);margin-bottom:1.25rem;
+}
+.promise-heading{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.25;
+  color:var(--white);margin-bottom:1.5rem;
+}
+.promise-body{
+  font-family:var(--serif);font-size:1.05rem;
+  color:rgba(15,27,53,.65);line-height:1.85;
+  max-width:680px;margin-bottom:3rem;
+}
+.promise-body p+p{margin-top:1.1rem}
+.promise-box{
+  border:1px solid var(--green-border);
+  background:var(--green-dim);
+  padding:2rem 2.5rem;max-width:680px;
+}
+.promise-box-label{
+  font-family:var(--sans);font-weight:400;font-size:.6rem;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--green-light);margin-bottom:.75rem;
+}
+.promise-box p{
+  font-family:var(--serif);font-style:italic;
+  font-size:1.1rem;color:rgba(15,27,53,.8);line-height:1.75;
+}
+
+/* ══════════════════════════════════
+   SECTION 4 — THE SHOCK
+══════════════════════════════════ */
+#shock{padding:8rem 0;background:var(--off-black)}
+.shock-split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-light);margin:3rem 0}
+@media(max-width:700px){.shock-split{grid-template-columns:1fr}}
+.shock-col{
+  padding:3rem 2.5rem;background:var(--card-bg);
+}
+.shock-col.good{border-top:3px solid var(--green)}
+.shock-col.bad{border-top:3px solid var(--red)}
+.shock-year{
+  font-family:var(--sans);font-weight:100;
+  font-size:3.5rem;line-height:1;margin-bottom:.5rem;
+}
+.shock-col.good .shock-year{color:var(--green-light)}
+.shock-col.bad .shock-year{color:var(--red-light)}
+.shock-type{
+  font-family:var(--sans);font-weight:300;font-size:.68rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(15,27,53,.3);margin-bottom:2rem;
+}
+.shock-item{
+  font-family:var(--serif);font-size:.98rem;
+  color:rgba(15,27,53,.7);line-height:1.7;
+  padding:.65rem 0;border-bottom:1px solid var(--rule);
+}
+.shock-item:last-child{border-bottom:none}
+.shock-item strong{color:var(--white)}
+.shock-item.green-item{color:rgba(100,220,150,.8)}
+.shock-item.red-item{color:rgba(220,100,100,.8)}
+.shock-big{
+  display:flex;align-items:baseline;gap:.5rem;margin-top:1.5rem;
+}
+.shock-n{
+  font-family:var(--sans);font-weight:100;
+  font-size:4rem;line-height:1;
+}
+.shock-col.good .shock-n{color:var(--green-light)}
+.shock-col.bad .shock-n{color:var(--red-light)}
+.shock-nl{
+  font-family:var(--sans);font-weight:300;font-size:.7rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(15,27,53,.35);
+}
+
+/* ══════════════════════════════════
+   DIVIDER BAND
+══════════════════════════════════ */
+.band{
+  padding:4rem 0;
+  background:var(--card-bg);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+.band-text{
+  font-family:var(--sans);font-weight:200;
+  font-size:clamp(1rem,2vw,1.3rem);
+  line-height:1.65;letter-spacing:-.005em;
+  color:rgba(15,27,53,.6);max-width:800px;
+}
+.band-text strong{color:var(--white);font-weight:500}
+.band.red-band{background:rgba(192,57,43,0.06);border-color:rgba(192,57,43,0.2)}
+.band.gold-band{background:var(--gold-dim);border-color:rgba(201,168,76,0.2)}
+
+/* ══════════════════════════════════
+   EXHIBIT SECTIONS
+══════════════════════════════════ */
+.exhibit-header{
+  display:flex;align-items:baseline;gap:1.5rem;
+  margin-bottom:2.5rem;
+}
+.exhibit-badge{
+  font-family:var(--sans);font-weight:100;
+  font-size:4rem;line-height:1;
+  color:rgba(15,27,53,.08);flex-shrink:0;
+}
+.exhibit-titles{}
+.exhibit-kicker{
+  font-family:var(--sans);font-weight:300;font-size:.6rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(201,168,76,.7);margin-bottom:.4rem;
+}
+.exhibit-heading{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.5rem,3.5vw,2.2rem);line-height:1.2;color:var(--white);
+}
+.exhibit-sub{
+  font-family:var(--serif);font-size:1.05rem;
+  color:rgba(15,27,53,.5);line-height:1.75;margin-bottom:2.5rem;
+  max-width:680px;
+}
+
+/* PDF Cards */
+.pdf-pair{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0}
+@media(max-width:600px){.pdf-pair{grid-template-columns:1fr}}
+.pdf-card{
+  display:flex;flex-direction:column;
+  padding:2rem;text-decoration:none;color:var(--white);
+  border:1px solid;border-radius:2px;
+  transition:transform .3s,box-shadow .3s;
+}
+.pdf-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.pdf-card.green{border-color:var(--green-border);background:var(--green-dim)}
+.pdf-card.amber{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.07)}
+.pdf-year{
+  font-family:var(--sans);font-weight:100;font-size:3rem;
+  line-height:1;margin-bottom:.5rem;
+}
+.pdf-card.green .pdf-year{color:var(--green-light)}
+.pdf-card.amber .pdf-year{color:var(--gold)}
+.pdf-name{
+  font-family:var(--sans);font-weight:400;font-size:.8rem;
+  letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem;
+}
+.pdf-type{font-family:var(--serif);font-style:italic;font-size:.95rem;color:rgba(15,27,53,.5);margin-bottom:1rem}
+.pdf-stat{
+  font-family:var(--sans);font-weight:300;font-size:.8rem;
+  margin-top:auto;padding-top:1rem;border-top:1px solid var(--rule);
+}
+.pdf-card.green .pdf-stat{color:var(--green-light)}
+.pdf-card.amber .pdf-stat{color:var(--gold)}
+.pdf-cta{
+  font-family:var(--sans);font-weight:400;font-size:.62rem;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--teal);margin-top:.75rem;
+}
+
+/* Contradiction rows */
+.contra-rows{margin:2rem 0}
+.contra-row{
+  display:grid;grid-template-columns:2.5rem 1fr 1fr;gap:1.25rem;
+  padding:1.5rem 0;border-bottom:1px solid var(--rule);
+  align-items:start;
+}
+.contra-row:first-child{border-top:1px solid var(--rule)}
+@media(max-width:650px){.contra-row{grid-template-columns:2rem 1fr;} .contra-b{grid-column:2;}.contra-2025{grid-column:2}}
+.contra-num{
+  width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(15,27,53,.15);border-radius:50%;
+  font-family:var(--sans);font-weight:300;font-size:.75rem;
+  color:rgba(15,27,53,.4);flex-shrink:0;margin-top:.15rem;
+}
+.contra-side{padding:.1rem 0}
+.contra-year-tag{
+  font-family:var(--sans);font-weight:600;font-size:.55rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.15rem .45rem;border-radius:2px;
+  display:inline-block;margin-bottom:.4rem;
+}
+.y21{background:var(--green-dim);color:var(--green-light);border:1px solid var(--green-border)}
+.y25{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.25)}
+.contra-title{
+  font-family:var(--sans);font-weight:500;font-size:.8rem;
+  color:var(--white);margin-bottom:.5rem;letter-spacing:.01em;
+}
+.contra-text{
+  font-family:var(--serif);font-size:.95rem;
+  color:rgba(15,27,53,.65);line-height:1.65;
+}
+
+/* ══════════════════════════════════
+   COMPARISON CARDS
+══════════════════════════════════ */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-light);margin:2rem 0}
+@media(max-width:650px){.comp-grid{grid-template-columns:1fr}}
+.comp-card{padding:2.5rem;background:var(--card-bg)}
+.comp-card.them{border-top:3px solid var(--green)}
+.comp-card.us{border-top:3px solid var(--red)}
+.comp-addr{
+  font-family:var(--sans);font-weight:200;
+  font-size:1.4rem;margin-bottom:.2rem;
+}
+.comp-card.them .comp-addr{color:var(--green-light)}
+.comp-card.us .comp-addr{color:var(--red-light)}
+.comp-date{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(15,27,53,.3);margin-bottom:1.5rem;
+}
+.comp-row{
+  font-family:var(--serif);font-size:.92rem;
+  color:rgba(15,27,53,.65);line-height:1.65;
+  padding:.65rem 0;border-bottom:1px solid var(--rule);
+  padding-left:1rem;border-left:2px solid;
+}
+.comp-row:last-child{border-bottom:none}
+.comp-card.them .comp-row{border-left-color:var(--green)}
+.comp-card.us .comp-row{border-left-color:var(--red)}
+.comp-link{
+  display:inline-block;margin-top:1.25rem;
+  font-family:var(--sans);font-size:.62rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal);text-decoration:none;
+}
+
+/* ══════════════════════════════════
+   QUOTES
+══════════════════════════════════ */
+.quote-block{
+  margin:2.5rem 0;padding:2rem 2.5rem;
+  border-left:3px solid var(--red);
+  background:rgba(192,57,43,0.06);
+}
+.quote-block.neutral{border-left-color:rgba(15,27,53,.18);background:#F5F1E8}
+.quote-text{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(1.05rem,2.2vw,1.3rem);
+  color:var(--white);line-height:1.65;margin-bottom:.85rem;
+}
+.quote-attr{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(15,27,53,.35);
+}
+.quote-note{
+  font-family:var(--sans);font-weight:300;font-size:.82rem;
+  color:rgba(15,27,53,.45);line-height:1.7;
+  margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rule);
+}
+/* ══════════════════════════════════
+   QUOTE ROWS — side-by-side layout
+══════════════════════════════════ */
+.quote-row{
+  display:grid;grid-template-columns:55% 45%;
+  margin:1.5rem 0;border:1px solid var(--rule-light);
+  border-radius:6px;overflow:hidden;
+}
+.qr-left{
+  padding:1.5rem 1.8rem;
+  background:rgba(139,26,26,0.04);
+  border-right:1px solid var(--rule);
+  border-left:4px solid var(--red);
+}
+.qr-left.qr-neutral{
+  background:#F5F1EB;
+  border-left-color:rgba(15,27,53,.22);
+}
+.qr-quote{
+  font-family:var(--serif);font-style:italic;
+  font-size:1rem;color:var(--navy);
+  line-height:1.65;margin-bottom:.65rem;
+}
+.qr-attr{
+  font-family:var(--sans);font-weight:400;font-size:.59rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(15,27,53,.42);
+}
+.qr-right{
+  padding:1.5rem 1.7rem;background:#FAFAF8;
+}
+.qr-label{
+  font-family:var(--sans);font-weight:700;font-size:.57rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.45rem;
+}
+.qr-note{
+  font-family:var(--sans);font-weight:400;font-size:.8rem;
+  color:rgba(15,27,53,.62);line-height:1.7;
+}
+@media(max-width:700px){
+  .quote-row{grid-template-columns:1fr}
+  .qr-left{border-right:none;border-bottom:1px solid var(--rule)}
+}
+
+/* Precedent callout */
+.precedent-callout{
+  margin:2rem 0 0;padding:1.75rem 2rem;
+  background:rgba(122,90,10,0.06);
+  border-left:4px solid var(--gold);
+  border-radius:0 6px 6px 0;
+}
+.precedent-callout-label{
+  font-family:var(--sans);font-weight:700;font-size:.6rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.65rem;
+}
+.precedent-callout p{
+  font-family:var(--sans);font-size:.9rem;
+  color:rgba(15,27,53,.72);line-height:1.75;
+  margin-bottom:.6rem;
+}
+.precedent-callout p:last-child{margin-bottom:0}
+
+
+/* Big pull quote */
+.pull-quote{
+  padding:5rem 0;text-align:center;
+  background:var(--black);
+}
+.pull-quote-text{
+  font-family:var(--serif);font-weight:300;font-style:italic;
+  font-size:clamp(1.4rem,3.5vw,2.2rem);
+  color:var(--white);line-height:1.5;
+  max-width:800px;margin:0 auto;
+}
+.pull-quote-attr{
+  font-family:var(--sans);font-weight:300;font-size:.65rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(15,27,53,.25);margin-top:2rem;
+}
+
+/* ══════════════════════════════════
+   LEGAL TABLE
+══════════════════════════════════ */
+.law-table{width:100%;border-collapse:collapse;margin:2rem 0;font-size:.95rem}
+.law-table th{
+  font-family:var(--sans);font-weight:400;font-size:.58rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  padding:.85rem 1.1rem;text-align:left;
+  background:rgba(15,27,53,.05);color:rgba(15,27,53,.4);
+  border-bottom:1px solid var(--rule-light);
+}
+.law-table td{
+  font-family:var(--serif);font-size:.95rem;
+  color:rgba(15,27,53,.65);line-height:1.6;
+  padding:.9rem 1.1rem;border-bottom:1px solid var(--rule);
+  vertical-align:top;
+}
+.law-table td:first-child{
+  font-family:var(--sans);font-weight:400;font-size:.82rem;
+  color:var(--white);
+}
+.td-ok{color:var(--green-light)!important;font-weight:500}
+.td-fail{color:var(--red-light)!important;font-weight:500}
+
+/* ══════════════════════════════════
+   COUNTDOWN / URGENCY
+══════════════════════════════════ */
+#deadline{
+  padding:8rem 0;
+  background:linear-gradient(180deg,var(--off-black) 0%,#0A0005 100%);
+  text-align:center;
+}
+.deadline-date{
+  font-family:var(--sans);font-weight:100;
+  font-size:clamp(3rem,10vw,7rem);
+  letter-spacing:-.02em;color:var(--white);line-height:1;
+  margin-bottom:.5rem;
+}
+.deadline-label{
+  font-family:var(--sans);font-weight:300;font-size:.68rem;
+  letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(15,27,53,.3);margin-bottom:3rem;
+}
+.deadline-body{
+  font-family:var(--serif);font-size:1.1rem;
+  color:rgba(15,27,53,.6);max-width:640px;
+  margin:0 auto;line-height:1.8;
+}
+
+/* ══════════════════════════════════
+   TWO PATHS
+══════════════════════════════════ */
+#paths{padding:8rem 0;background:var(--black)}
+.paths-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-light);margin:3rem 0}
+@media(max-width:700px){.paths-grid{grid-template-columns:1fr}}
+.path{padding:3rem 2.5rem;background:var(--card-bg)}
+.path.resolve{border-top:3px solid var(--green)}
+.path.escalate{border-top:3px solid var(--red)}
+.path-label{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.25em;text-transform:uppercase;margin-bottom:1.5rem;
+}
+.path.resolve .path-label{color:var(--green-light)}
+.path.escalate .path-label{color:var(--red-light)}
+.path-heading{
+  font-family:var(--sans);font-weight:200;
+  font-size:clamp(1.2rem,2.5vw,1.7rem);
+  line-height:1.3;margin-bottom:1.5rem;
+}
+.path.resolve .path-heading{color:var(--green-light)}
+.path.escalate .path-heading{color:var(--red-light)}
+.path-item{
+  font-family:var(--serif);font-size:.98rem;
+  color:rgba(15,27,53,.6);line-height:1.7;
+  padding:.6rem 0;border-bottom:1px solid var(--rule);
+}
+.path-item:last-child{border-bottom:none}
+
+/* ══════════════════════════════════
+   DEMANDS
+══════════════════════════════════ */
+#demands{padding:8rem 0;background:var(--off-black)}
+.demand-item{
+  display:grid;grid-template-columns:5rem 1fr;
+  margin-bottom:1px;
+}
+.demand-n{
+  display:flex;align-items:center;justify-content:center;
+  background:var(--teal);
+  font-family:var(--sans);font-weight:200;font-size:2rem;
+  color:var(--white);min-height:120px;
+}
+.demand-body{
+  background:var(--card-bg);padding:2rem 2.5rem;
+  border-bottom:1px solid var(--rule);
+}
+.demand-title{
+  font-family:var(--sans);font-weight:500;
+  font-size:1rem;color:var(--white);margin-bottom:.5rem;
+}
+.demand-text{
+  font-family:var(--serif);font-size:.98rem;
+  color:rgba(15,27,53,.6);line-height:1.75;
+}
+.demand-basis{
+  font-family:var(--sans);font-weight:300;font-size:.6rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(15,27,53,.25);margin-top:.6rem;
+}
+
+/* ══════════════════════════════════
+   CLOSING — THE MAN
+══════════════════════════════════ */
+#closing{
+  padding:8rem 0;
+  background:linear-gradient(180deg,#F0EBE3 0%,#FAFAF8 100%);
+}
+.closing-heading{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  color:var(--white);margin-bottom:2rem;line-height:1.25;
+}
+.closing-body{
+  font-family:var(--serif);font-size:1.15rem;
+  color:rgba(15,27,53,.85);line-height:1.95;
+  max-width:720px;
+}
+.closing-body p+p{margin-top:1.25rem}
+.closing-stat-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;margin:3rem 0;
+}
+@media(max-width:650px){.closing-stat-row{grid-template-columns:1fr}}
+.closing-stat{
+  padding:1.75rem;background:rgba(15,27,53,.03);
+  border:1px solid var(--rule);text-align:center;
+}
+.closing-stat-n{
+  font-family:var(--sans);font-weight:100;
+  font-size:2.5rem;color:var(--teal);line-height:1;margin-bottom:.4rem;
+}
+.closing-stat-l{
+  font-family:var(--sans);font-weight:300;font-size:.65rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(15,27,53,.3);line-height:1.5;
+}
+.closing-link{
+  display:inline-block;margin-top:2rem;
+  font-family:var(--sans);font-weight:300;font-size:.78rem;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--teal);text-decoration:none;
+  border-bottom:1px solid rgba(26,154,138,.3);padding-bottom:.15rem;
+  transition:border-color .3s;
+}
+.closing-link:hover{border-color:var(--teal)}
+/* ── PETITION INLINE ── */
+.petition-inline{
+  margin-top:2rem;padding:1.75rem 2rem;
+  background:rgba(10,92,80,.06);
+  border:1px solid rgba(10,92,80,.18);
+  border-radius:2px;
+}
+.petition-inline-label{
+  font-family:var(--sans);font-weight:600;font-size:.65rem;
+  letter-spacing:.25em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:.75rem;
+}
+.petition-inline p{
+  font-family:var(--serif);font-size:1rem;
+  color:rgba(15,27,53,.78);line-height:1.85;
+  margin-bottom:.85rem;
+}
+.petition-inline-link{
+  font-family:var(--sans);font-weight:600;font-size:.75rem;
+  letter-spacing:.1em;color:var(--teal);text-decoration:none;
+  border-bottom:1px solid rgba(10,92,80,.3);padding-bottom:.1rem;
+  transition:border-color .25s;
+}
+.petition-inline-link:hover{border-color:var(--teal)}
+
+/* ── MT. ROYAL BLOCK ── */
+.mt-royal-block{
+  margin-top:3rem;padding-top:3rem;
+  border-top:1px solid rgba(15,27,53,.08);
+}
+.mt-royal-label{
+  font-family:var(--sans);font-weight:300;font-size:.6rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--red-light);margin-bottom:1rem;
+}
+.mt-royal-heading{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.15rem,2.5vw,1.7rem);
+  color:var(--white);line-height:1.3;margin-bottom:1.5rem;
+}
+.mt-royal-body{
+  font-family:var(--serif);font-size:1.05rem;
+  color:rgba(15,27,53,.8);line-height:1.9;
+}
+.mt-royal-body+.mt-royal-body{margin-top:1rem}
+.mt-royal-map-wrap{margin:2.5rem 0 1.5rem}
+.mt-royal-map{
+  width:100%;display:block;border-radius:4px;
+  border:1px solid rgba(15,27,53,.1);
+  box-shadow:0 8px 40px rgba(0,0,0,.5);
+}
+.mt-royal-map-caption{
+  margin-top:1.25rem;display:flex;flex-direction:column;gap:.75rem;
+}
+.mt-royal-pin-row{
+  font-family:var(--sans);font-size:.75rem;font-weight:300;
+  color:rgba(15,27,53,.62);line-height:1.6;
+  display:flex;align-items:flex-start;gap:.65rem;
+}
+.mt-royal-pin-row strong{color:rgba(15,27,53,.88)}
+.pin-dot{
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:.35rem;
+}
+.pin-dot.gold{background:#F0C040}
+.pin-dot.red{background:var(--red-light)}
+.pin-dot.green{background:var(--green-light)}
+.mt-royal-callout{
+  margin-top:1.75rem;padding:1.5rem 2rem;
+  background:rgba(192,57,43,.08);
+  border-left:2px solid rgba(192,57,43,.3);
+  font-family:var(--serif);font-size:1rem;
+  color:rgba(15,27,53,.72);line-height:1.85;
+}
+
+/* ── MORE PEOPLE BLOCK ── */
+.more-people-block{
+  margin-top:3rem;padding:2.5rem 3rem;
+  background:rgba(15,27,53,.02);
+  border:1px solid rgba(15,27,53,.07);
+  border-radius:2px;
+}
+.more-people-label{
+  font-family:var(--sans);font-weight:300;font-size:.6rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(15,27,53,.3);margin-bottom:1rem;
+}
+.more-people-text{
+  font-family:var(--serif);font-size:1rem;
+  color:rgba(15,27,53,.62);line-height:1.9;
+}
+.more-people-text+.more-people-text{margin-top:.9rem}
+/* ── INCIDENT BLOCK ── */
+.incident-block{
+  background:rgba(192,57,43,.05);
+  border-left:2px solid rgba(192,57,43,.3);
+  padding:2.5rem;margin:2.5rem 0;
+}
+.incident-narrative{
+  font-family:var(--serif);font-size:1.08rem;
+  color:rgba(15,27,53,.82);line-height:1.95;
+}
+.incident-narrative p+p{margin-top:1.15rem}
+.incident-callout{
+  margin-top:2.5rem;padding:2rem 2.5rem;
+  background:rgba(192,57,43,.08);
+  border:1px solid rgba(192,57,43,.2);
+  border-radius:2px;
+}
+.incident-callout-label{
+  font-family:var(--sans);font-weight:300;font-size:.6rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--red-light);margin-bottom:.85rem;
+}
+.incident-callout p{
+  font-family:var(--serif);font-size:1rem;
+  color:rgba(15,27,53,.75);line-height:1.85;
+}
+
+/* ── DUAL ACCESS BLOCK ── */
+.dual-access-block{
+  margin-top:4rem;padding:3rem;
+  background:linear-gradient(135deg,rgba(26,154,138,.06) 0%,rgba(201,168,76,.04) 100%);
+  border:1px solid rgba(26,154,138,.2);
+  border-radius:2px;
+}
+.dual-access-label{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:1.25rem;
+}
+.dual-access-heading{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.4rem,3vw,2.2rem);
+  color:var(--white);line-height:1.2;margin-bottom:1.75rem;
+}
+.dual-access-body{
+  font-family:var(--serif);font-size:1.05rem;
+  color:rgba(15,27,53,.82);line-height:1.9;
+}
+.dual-access-body p+p{margin-top:1.1rem}
+.dual-access-docs{margin-top:2rem}
+.dual-access-doc{
+  display:flex;align-items:flex-start;gap:1.25rem;
+  padding:1.25rem 1.5rem;
+  background:rgba(15,27,53,.04);
+  border:1px solid rgba(15,27,53,.1);
+  border-radius:2px;text-decoration:none;
+  transition:border-color .25s;
+}
+.dual-access-doc:hover{border-color:var(--teal)}
+.dual-access-doc-icon{
+  font-family:var(--sans);font-weight:600;font-size:.65rem;
+  letter-spacing:.08em;color:var(--teal);
+  border:1px solid rgba(26,154,138,.4);
+  padding:.3rem .5rem;border-radius:2px;white-space:nowrap;flex-shrink:0;
+}
+.dual-access-doc-title{
+  font-family:var(--sans);font-weight:400;font-size:.82rem;
+  color:var(--white);margin-bottom:.3rem;
+}
+.dual-access-doc-sub{
+  font-family:var(--sans);font-weight:300;font-size:.68rem;
+  letter-spacing:.03em;color:rgba(15,27,53,.4);line-height:1.5;
+}
+
+/* ── INFEASIBILITY BLOCK ── */
+.infeasibility-block{
+  margin-top:4rem;padding:3rem;
+  background:rgba(192,57,43,.06);
+  border:1px solid rgba(192,57,43,.18);
+  border-radius:2px;
+}
+.infeasibility-label{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--red-light);margin-bottom:1.25rem;
+}
+.infeasibility-heading{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.2rem,2.8vw,1.75rem);
+  color:var(--white);line-height:1.3;margin-bottom:1.75rem;
+}
+.infeasibility-body{
+  font-family:var(--serif);font-size:1.05rem;
+  color:rgba(15,27,53,.78);line-height:1.9;
+}
+.infeasibility-body p+p{margin-top:1.1rem}
+
+/* ── EXHIBIT CONTEXT BLOCK ── */
+.exhibit-context{
+  background:rgba(15,27,53,.03);
+  border-left:2px solid rgba(201,168,76,.25);
+  padding:1.75rem 2rem;margin:2.5rem 0;
+  font-family:var(--serif);font-size:1.05rem;
+  color:rgba(15,27,53,.72);line-height:1.85;
+}
+.exhibit-context p+p{margin-top:1.1rem}
+/* ── PDF PROCESSOR LABEL ── */
+.pdf-processor{
+  font-family:var(--sans);font-size:.6rem;font-weight:300;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(15,27,53,.3);margin-top:.5rem;margin-bottom:.15rem;
+}
+
+/* ── RAMP GALLERY (closing section) ── */
+.ramp-section-label{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:var(--teal);margin:4rem 0 1rem;
+}
+.ramp-heading{
+  font-family:var(--serif);font-weight:300;font-size:clamp(1.1rem,2.5vw,1.6rem);
+  color:var(--white);margin-bottom:.6rem;line-height:1.3;
+}
+.ramp-sub{
+  font-family:var(--serif);font-style:italic;font-size:.95rem;
+  color:rgba(15,27,53,.5);margin-bottom:2rem;line-height:1.6;
+}
+.ramp-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+  margin-bottom:.75rem;
+}
+@media(max-width:650px){.ramp-grid{grid-template-columns:1fr}}
+.ramp-img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;
+  border-radius:4px;display:block;
+  filter:brightness(.9) contrast(1.05);
+  border:1px solid rgba(15,27,53,.08);
+}
+.ramp-caption-text{
+  font-family:var(--sans);font-size:.62rem;font-weight:300;
+  letter-spacing:.08em;color:rgba(15,27,53,.35);
+  text-align:center;line-height:1.65;margin-bottom:3.5rem;
+}
+/* ── OUTREACH GRID (closing section) ── */
+.outreach-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+  margin:2.5rem 0 1rem;
+}
+@media(max-width:700px){.outreach-grid{grid-template-columns:1fr}}
+.outreach-card{border-radius:6px;overflow:hidden;border:1px solid rgba(15,27,53,.08)}
+.outreach-card img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;filter:brightness(.88)}
+.outreach-card-caption{
+  padding:.85rem 1rem;background:rgba(15,27,53,.03);
+  font-family:var(--sans);font-size:.6rem;font-weight:300;
+  letter-spacing:.07em;color:rgba(15,27,53,.45);line-height:1.55;
+}
+.outreach-card-label{
+  font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:.3rem;
+}
+
+
+/* ══════════════════════════════════
+   FINAL STATEMENT
+══════════════════════════════════ */
+#final{
+  padding:8rem 0;background:#F0EBE3;text-align:center;
+}
+.final-statement{
+  font-family:var(--serif);font-weight:300;font-style:italic;
+  font-size:clamp(1.2rem,3vw,1.9rem);
+  color:rgba(15,27,53,.7);max-width:750px;
+  margin:0 auto;line-height:1.7;
+}
+.final-rule{
+  width:60px;height:1px;background:rgba(15,27,53,.1);
+  margin:3rem auto;
+}
+.final-footer{
+  font-family:var(--sans);font-weight:200;font-size:.6rem;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(15,27,53,.2);line-height:2.5;
+}
+
+/* ══════════════════════════════════
+   SECTION SPACING
+══════════════════════════════════ */
+.section-pad{padding:8rem 0}
+.section-label{
+  font-family:var(--sans);font-weight:300;font-size:.62rem;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(15,27,53,.3);margin-bottom:1.25rem;
+}
+.section-heading{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.6rem,3.5vw,2.4rem);
+  color:var(--white);line-height:1.25;margin-bottom:1.5rem;
+}
+.section-lede{
+  font-family:var(--serif);font-size:1.05rem;
+  color:rgba(15,27,53,.55);line-height:1.85;
+  max-width:680px;margin-bottom:2.5rem;
+}
+
+/* ══════════════════════════════════
+   MAP
+══════════════════════════════════ */
+.map-wrap{
+  border:1px solid var(--rule-light);margin:2rem 0;
+  overflow:hidden;text-decoration:none;display:block;
+  transition:border-color .3s;
+}
+.map-wrap:hover{border-color:rgba(26,154,138,.4)}
+.map-wrap img{width:100%;display:block}
+.map-bar{
+  padding:.85rem 1.5rem;background:rgba(15,27,53,.03);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.map-bar-label{
+  font-family:var(--sans);font-weight:300;font-size:.68rem;
+  letter-spacing:.06em;color:rgba(15,27,53,.4);
+}
+.map-bar-cta{
+  font-family:var(--sans);font-weight:400;font-size:.6rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--teal);
+}
+
+/* ══════════════════════════════════
+   STREET FAILURES
+══════════════════════════════════ */
+.failure-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--rule);margin:2.5rem 0;
+}
+@media(max-width:700px){.failure-grid{grid-template-columns:1fr}}
+.failure-card{
+  background:var(--card-bg);padding:1.75rem;
+}
+.failure-status{
+  font-family:var(--sans);font-weight:400;font-size:.58rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--red-light);margin-bottom:.5rem;
+}
+.failure-who{
+  font-family:var(--sans);font-weight:500;font-size:.9rem;
+  color:var(--white);margin-bottom:.5rem;
+}
+.failure-detail{
+  font-family:var(--serif);font-size:.9rem;
+  color:rgba(15,27,53,.5);line-height:1.6;
+}
+
+/* Responsive tweaks */
+@media(max-width:700px){
+  .exhibit-header{flex-direction:column;gap:.75rem}
+  .exhibit-badge{font-size:2.5rem}
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<section id="cold-open">
+  <div class="cold-bg"></div>
+  <div class="cold-inner">
+    <div class="cold-eyebrow">File MDP000108 &nbsp;&middot;&nbsp; Port Moody, BC &nbsp;&middot;&nbsp; March 30, 2026</div>
+    <div class="cold-address">1006 Westmount Drive</div>
+    <div class="cold-rule"></div>
+    <div class="cold-subtitle">A Formal Record of Inconsistency<br>Submitted to Senior City Management</div>
+    <div class="cold-prepared">Presented by: Dawar Zada, PREC &nbsp;&middot;&nbsp; Prepared by: Sheri Zada</div>
+    <div class="cold-scroll-hint">↓</div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="w">
+    <div class="who-label reveal">The Applicant</div>
+    <h2 class="who-heading reveal">Dawar Zada is not a developer.<br>He is your neighbour.</h2>
+    <div class="who-body reveal">
+      <p>Thirty years in Port Moody. Licensed realtor. Father of three children under six. Caretaker to an aging father. He purchased 1006 Westmount Drive in 2021 for $2,125,000 — not as an investment, but as a place to put down roots. He moved his family in. He expected to wait one year for a permit.</p>
+      <p>He is still waiting. His children are growing up in a home that is falling apart around them. His father is aging. His BC Hydro interconnection queue position is at risk. And the Province's own compliance deadline for the housing law he applied under is ninety-one days away.</p>
+      <p>He has not gone to the media. He has not filed complaints. He has attended every meeting, responded to every letter, spent over $250,000 doing everything the City asked — and then everything the City added, and then everything the City changed its mind about. That patience is documented. So is what it produced.</p>
+    </div>
+    <div class="who-stats reveal">
+      <div class="who-stat">
+        <div class="who-stat-n">$2.125<span style="font-size:1.5rem">M</span></div>
+        <div class="who-stat-l">Purchase Price<br>2021</div>
+      </div>
+      <div class="who-stat">
+        <div class="who-stat-n">$250<span style="font-size:1.5rem">K+</span></div>
+        <div class="who-stat-l">Spent on<br>Consultants &amp; Fees</div>
+      </div>
+      <div class="who-stat">
+        <div class="who-stat-n">3</div>
+        <div class="who-stat-l">Applications<br>Submitted</div>
+      </div>
+      <div class="who-stat">
+        <div class="who-stat-n">0</div>
+        <div class="who-stat-l">Permits<br>Issued</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="letters" class="section-pad" style="background:#F0EBE3">
+  <div class="w">
+    <div class="exhibit-header">
+      <div class="exhibit-badge">A</div>
+      <div class="exhibit-titles">
+        <div class="exhibit-kicker">Exhibit A</div>
+        <h2 class="exhibit-heading">Two Letters. Same Property.<br>Same Four Homes. Same Family.</h2>
+      </div>
+    </div>
+    <p class="exhibit-sub reveal">Read them side by side. The constant is the family and the goal. The variable is what the City decided to require.</p>
+
+    <div class="exhibit-context reveal">
+      <p>The 2021 letter is a response to a bare land strata subdivision — historically one of the most complex, costly, and time-consuming application types in BC. It requires Council approval, surveying, legal lot creation, infrastructure agreements, and coordination across departments. It is, by any measure, a hard thing to apply for. That application proposed <strong>4 dwellings totalling approximately 11,000 sq ft.</strong></p>
+      <p>By 2025, the Province had recognized that cities were making development so unnecessarily difficult that they legislated SSMUH as the simplified, streamlined alternative — a process explicitly designed to be <em>easier</em>. Faster approvals. Fewer barriers. A clear path to the four-unit housing the Province was mandating.</p>
+      <p>What follows is Dawar's first SSMUH staff comments letter. This application proposes <strong>3 dwellings totalling approximately 9,000 sq ft</strong> — smaller in scope than the 2021 subdivision in every measurable way. Compared to that earlier letter, the SSMUH response is not simpler. It is not faster. It is not clearer. It is longer, more demanding, more adversarial, and offers less of a path forward. If staff wish to argue the applications were dramatically different in nature, they should note the new one is actually the smaller ask. That is the absurdity this document exists to show.</p>
+    </div>
+
+    <div class="pdf-pair reveal">
+      <a href="documents/First Comments Letter - RS-1S Bare Land (2).pdf" target="_blank" class="pdf-card green">
+        <div class="pdf-year">2021</div>
+        <div class="pdf-name">Staff Comments Letter</div>
+        <div class="pdf-type">RS-1S Bare Land Strata Subdivision</div>
+        <div class="pdf-stat">3 items required before Council</div>
+        <div class="pdf-processor">Processed by: Andrei Pop, Development Planner (TACT)</div>
+        <div class="pdf-cta">Read letter by Andrei Pop &rarr;</div>
+      </a>
+      <a href="documents/Staff Comments Letter - SSMUH - October 8 2025 (2).pdf" target="_blank" class="pdf-card amber">
+        <div class="pdf-year">2025</div>
+        <div class="pdf-name">Staff Comments Letter</div>
+        <div class="pdf-type">SSMUH Minor Development Permit</div>
+        <div class="pdf-stat">23 planning + 22 engineering requirements</div>
+        <div class="pdf-processor">Processed by: Crystal Wickey, Planner</div>
+        <div class="pdf-cta">Read letter by Crystal Wickey &rarr;</div>
+      </a>
+    </div>
+
+    <div class="contra-rows reveal">
+      <div class="contra-row">
+        <div class="contra-num">1</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">Vehicle Access</div>
+          <div class="contra-text">Driveway from Westmount permitted. Max 6m wide. A second driveway to the lane discussed as an option.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text"><strong style="color:var(--white)">Both front driveways eliminated.</strong> All access from Grouse Lane only — 20.8 feet below street grade.</div>
+        </div>
+      </div>
+      <div class="contra-row">
+        <div class="contra-num">2</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">The Ditch</div>
+          <div class="contra-text">Staff were <em>"supportive of the variance given the rationale provided."</em> Active collaboration.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text">Ditch reinstated. Culvert at developer's expense. CCTV of a 64-year-old sewer pipe required.</div>
+        </div>
+      </div>
+      <div class="contra-row">
+        <div class="contra-num">3</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">Parking</div>
+          <div class="contra-text">~9 stalls per bylaw calculation. Standard.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text">Maximum 4. The City <strong style="color:var(--white)">actively reduced parking below what the applicant offered.</strong></div>
+        </div>
+      </div>
+      <div class="contra-row">
+        <div class="contra-num">4</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">Complexity</div>
+          <div class="contra-text">Three items. $6,000 CAC. That was it.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text">23 planning comments. 22 engineering drawings. Fire plan. Geotechnical report. Knotweed plan. Bird collision strategy.</div>
+        </div>
+      </div>
+      <div class="contra-row">
+        <div class="contra-num">5</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">Tone</div>
+          <div class="contra-text"><em>"We look forward to your revised submission."</em> Collaborative. Professional. Constructive.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text">"Unsightly walls." Massing critique. No path forward offered. The applicant went from a partner to an obstacle.</div>
+        </div>
+      </div>
+
+    <div class="infeasibility-block reveal">
+      <div class="infeasibility-label">What These Requirements Actually Mean</div>
+      <h3 class="infeasibility-heading">45 requirements did not just slow this project down.<br>They made it effectively impossible for the people who would actually want to live here.</h3>
+      <div class="infeasibility-body">
+        <p>Glenayre is not a neighbourhood of developers. It is a neighbourhood of young families who grew up here and are trying to stay, and seniors who have lived here for decades and are trying to age in place. These are not people with development teams, investor capital, or the capacity to absorb years of iterative revisions, geotechnical reports, knotweed management plans, and bird collision strategies on top of an already complex application.</p>
+        <p>The 45 requirements in the October 8 letter — submitted in response to what the Province explicitly designed as a simplified housing pathway — represent a cost and timeline burden that would deter most private homeowners from proceeding. A family with three young children does not have the resources to fund another round of redesigns, another set of consultant reports, another year of carrying costs on a $2.125M property with no income. That is not a hypothetical. It is this family's reality right now.</p>
+        <p>When SSMUH applications become indistinguishable from full subdivision applications in terms of complexity and cost — when the "easy" route requires more than the hard one — the policy has failed in its implementation. The Province created SSMUH because municipalities were doing exactly this: making development so burdensome that real residents could not access it. Port Moody is doing it again, in real time, on this file.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="valour" class="section-pad" style="background:#FAFAF8">
+  <div class="w">
+    <div class="exhibit-header">
+      <div class="exhibit-badge">B</div>
+      <div class="exhibit-titles">
+        <div class="exhibit-kicker">Exhibit B</div>
+        <h2 class="exhibit-heading">Same City. Same Month.<br>Same Application Type.<br>Different Treatment.</h2>
+      </div>
+    </div>
+    <p class="exhibit-sub reveal">File MDP00102. 348 Valour Drive. One block away — Westmount turns onto Valour. The same SSMUH Minor Development Permit. The same zoning framework. Twenty days before the October 8 letter at 1006 Westmount.</p>
+
+    <div class="exhibit-context reveal">
+      <p>Westmount Drive turns onto Valour. These are not distant comparisons pulled from across the city — they are one block apart, in the same neighbourhood, under the same zoning framework, governed by the same Provincial legislation. Two identical SSMUH Minor Development Permit applications. Twenty days apart. One city.</p>
+      <p>Dawar Zada knows this file personally. He connected his friend and neighbour Gurb to <strong style="color:var(--white)">Lightwell Homes</strong> — a Vancouver-based developer specializing in exactly this kind of missing middle housing — and helped bring the Valour application forward. That collaboration moved efficiently through the City's process — a smooth, workable experience that is now a core part of Gurb's retirement plan. The difference between what Gurb experienced and what Dawar has experienced is not explained by location, zoning, or complexity. It is explained by how two files were handled by two different staff members.</p>
+      <p>Inconsistency in staff decisions — even well-intentioned inconsistency — has real consequences. It is not a minor administrative matter. For the person on the wrong side of it, it can mean years of delay, hundreds of thousands of dollars, and a life put on hold.</p>
+    </div>
+
+    <div class="comp-grid reveal">
+      <div class="comp-card them">
+        <div class="comp-addr">348 Valour Drive &mdash; Gurb</div>
+        <div class="comp-date">September 18, 2025</div>
+        <div class="comp-row"><strong>Access:</strong> Central driveway from street. All four units. Clean approval.</div>
+        <div class="comp-row"><strong>Fire:</strong> "The Port Moody Fire Rescue Department has no issues with this application."</div>
+        <div class="comp-row"><strong>Engineering:</strong> 2 comments.</div>
+        <div class="comp-row"><strong>Tone:</strong> "Staff appreciate the applicant for the strategic placement of windows."</div>
+        <div class="comp-row" style="color:rgba(100,220,150,.6);font-size:.85rem">Outcome: Approved. Now part of Gurb's retirement plan.</div>
+        <div class="comp-row" style="color:rgba(100,220,150,.4);font-size:.8rem">Planner: [name to be confirmed — upload Valour PDF to add]</div>
+        <a href="documents/348 Valour Dr_MDP00102_First Comments Letter_September 18, 2025 (1).pdf" target="_blank" class="comp-link">View full letter &rarr;</a>
+      </div>
+      <div class="comp-card us">
+        <div class="comp-addr">1006 Westmount &mdash; Dawar</div>
+        <div class="comp-date">October 8, 2025</div>
+        <div class="comp-row"><strong>Access:</strong> Both front driveways removed. Lane only. 20.8 ft grade drop. 34 stairs.</div>
+        <div class="comp-row"><strong>Fire:</strong> Fire plan required. Flow analysis. Potential new hydrant at developer's cost.</div>
+        <div class="comp-row"><strong>Engineering:</strong> 23 planning + 22 engineering drawings.</div>
+        <div class="comp-row"><strong>Tone:</strong> "Unsightly walls." Massing critique. No collaborative language.</div>
+        <a href="documents/Staff Comments Letter - SSMUH - October 8 2025 (2).pdf" target="_blank" class="comp-link">View full letter — processed by Crystal Wickey, Planner &rarr;</a>
+      </div>
+    </div>
+
+    <div class="pull-quote reveal" style="padding:3rem 0">
+      <div class="pull-quote-text">"Same City. Same application type. Same month. Dawar introduced Gurb to the developer whose project is now part of Gurb's retirement plan. Gurb got 2 comments. Dawar got 45. Inconsistency in how staff apply the rules is not a minor issue — it can change the course of someone's life."</div>
+    </div>
+  </div>
+</section>
+
+<section id="double" class="section-pad" style="background:#F0EBE3">
+  <div class="w">
+    <div class="exhibit-header">
+      <div class="exhibit-badge">C</div>
+      <div class="exhibit-titles">
+        <div class="exhibit-kicker">Exhibit C</div>
+        <h2 class="exhibit-heading">Our Neighbours Got Dual Access.<br>The Bylaw Entitles Us to the Same.</h2>
+      </div>
+    </div>
+
+    <a class="map-wrap reveal" href="https://earth.google.com/web/search/932+Westmount+Drive" target="_blank" rel="noopener">
+      <img src="images/aerial-map.jpg" alt="Aerial map showing 932 and 1006 Westmount Drive">
+      <div class="map-bar">
+        <div class="map-bar-label">932 &amp; 1006 Westmount — same block, 80 metres apart</div>
+        <div class="map-bar-cta">Open in Google Earth &rarr;</div>
+      </div>
+    </a>
+
+    <div class="exhibit-context reveal">
+      <p>The owners at 932 Westmount are not strangers. They are neighbours. They are friends. They went through their own difficult, frustrating process dealing with the City — and they got through it. When Dawar asked them directly about how dual access was approved on their property, they told him straight up: they persuaded their way into it.</p>
+      <p>That is not how a bylaw is supposed to work. Bylaw 2937 Section 6.8 provides a grade exception for exactly this situation. It is not a discretionary favour to be negotiated. It is a written provision that exists precisely because elevation differentials like the ones on this street make lane-only access unreasonable. If one neighbour had to persuade their way into something the bylaw already entitled them to — and another neighbour is being denied that same entitlement without a written reason — then the problem is not the bylaw. The problem is how the bylaw is being applied, and to whom.</p>
+    </div>
+
+    <div class="comp-grid reveal">
+      <div class="comp-card them">
+        <div class="comp-addr">932 Westmount</div>
+        <div class="comp-date">Dual Access &middot; Under Construction</div>
+        <div class="comp-row">Grade: <strong style="color:var(--white)">Less than 1006 Westmount</strong></div>
+        <div class="comp-row">Access: <strong style="color:var(--white)">Dual — Westmount Dr + Grouse Lane</strong></div>
+        <div class="comp-row">Status: <strong style="color:var(--white)">Under construction</strong></div>
+      </div>
+      <div class="comp-card us">
+        <div class="comp-addr">1006 Westmount</div>
+        <div class="comp-date">Lane Only &middot; No Permit</div>
+        <div class="comp-row">Grade: <strong style="color:var(--white)">6m / 20.8 ft elevation drop — greatest on the street</strong></div>
+        <div class="comp-row">Access: <strong style="color:var(--white)">Lane only — staff refuse front access</strong></div>
+        <div class="comp-row">Status: <strong style="color:var(--white)">Stalled — BC Hydro queue at risk</strong></div>
+      </div>
+    </div>
+
+    <div class="quote-row reveal" style="margin-top:2rem">
+      <div class="qr-left qr-neutral">
+        <div class="qr-quote">"932 Westmount — it's kind of straddling when the provincial mandates came out and we were kind of handcuffed as a city in terms of that particular application."</div>
+        <div class="qr-attr">Patrick Byrne &middot; Engineering &middot; December 16, 2025</div>
+      </div>
+      <div class="qr-right">
+        <div class="qr-label">What This Means</div>
+        <div class="qr-note">This was the only response given — by anyone in the room — when Dawar directly raised the inconsistency between 932 and 1006 Westmount at the December 16 meeting. No other staff member acknowledged it, challenged it, or offered anything further. When Dawar then raised that his own application had originally been submitted as a subdivision — the same application type as 932, on the same street — and had since been converted to SSMUH, staff's only response was that they would have to look into it. That answer was never followed up on. The meeting moved on. Dawar had come prepared with the bylaw, the survey, the precedent, and the comparison. He was met with a quote about being handcuffed and a commitment to look into it that went nowhere. That is the record.</div>
+      </div>
+    </div>
+    <div class="precedent-callout reveal">
+      <div class="precedent-callout-label">A Precedent Has Already Been Set</div>
+      <p>The City approved dual access at 932 Westmount. That decision is not a historical footnote — it is an active precedent on this exact block, under this exact bylaw, in this exact neighbourhood. When Patrick Byrne described the City as "handcuffed" by the provincial mandate, he was acknowledging that dual access was the right and necessary outcome there.</p>
+      <p>The City cannot simultaneously claim that 932 was a forced exception while refusing the same outcome at a property with greater elevation, greater constraints, and four years more file history. A precedent has been set. The only question is whether the City will apply it consistently — or selectively.</p>
+    </div>
+  </div>
+</section>
+
+<section id="record" class="section-pad" style="background:#FAFAF8">
+  <div class="w">
+    <div class="exhibit-header">
+      <div class="exhibit-badge">D</div>
+      <div class="exhibit-titles">
+        <div class="exhibit-kicker">Exhibit D &middot; Verbatim Transcripts</div>
+        <h2 class="exhibit-heading">In Their Own Words.</h2>
+      </div>
+    </div>
+    <p class="exhibit-sub reveal">From recorded meetings. December 16, 2025 and February 17, 2026. These are not summaries. These are quotes.</p>
+
+    <div class="exhibit-context reveal">
+      <p>After hearing from neighbours and friends about the complexity and inconsistency they had experienced dealing with Port Moody planning staff, Dawar made a decision: he would record every meeting. In British Columbia, it is completely legal for any party to a conversation to record it without notifying the other participants — under the Criminal Code of Canada, s. 184(2)(a), one-party consent applies. Every recorded meeting was disclosed when it became relevant. Nothing here was obtained improperly.</p>
+      <p>What the recordings and transcripts document is a consistent pattern: rules applied differently depending on the file and the staff member, substantive questions deferred to "another meeting" or "we'll have to look into it," and Dawar consistently needing to escalate — to ask for senior-level explanations and approvals — when the person across the table agreed that something seemed unfair but still concluded no. The answer was always no. Not for legal reasons that were explained. Just no.</p>
+      <p>It is also important to note what Dawar <em>conceded</em>. He agreed to nearly every item in the October 8 letter. The engineering drawings. The fire plan. The geotechnical report. The knotweed plan. The bird collision strategy. Item by item, he worked through the list. <strong style="color:var(--white)">The one thing he has refused to accept — the only thing he is still fighting for — is dual access.</strong> Not because he is being difficult. Because the bylaw entitles him to it, his neighbours have it, and every piece of evidence and law on this file supports it. That is the totality of the dispute at this point.</p>
+    </div>
+
+    <div class="quote-row reveal">
+      <div class="qr-left">
+        <div class="qr-quote">"Our messaging for all new developments because there are other SSMUH developments in the neighbourhood has been for the maximum number of parking stalls and only the one driveway. You're not the first application who's come in requesting additional driveways."</div>
+        <div class="qr-attr">Crystal Wickey &middot; Development Services &middot; December 16, 2025</div>
+      </div>
+      <div class="qr-right">
+        <div class="qr-label">What This Means</div>
+        <div class="qr-note">A direct, on-record admission of blanket uniform policy — applied to all SSMUH applications regardless of site conditions. This is contrary to the City's own SSMUH Guide, which promises case-by-case flexibility, and contrary to Bylaw 2937 Section 6.8's grade exception. This statement alone is the foundation of a Bill 25 complaint to the Province.</div>
+      </div>
+    </div>
+
+    <div class="quote-row reveal">
+      <div class="qr-left">
+        <div class="qr-quote">"I'm just trying to think. I have to look at the wording of the zoning bylaw again, what it says about access."</div>
+        <div class="qr-attr">Stephen Judd &middot; Manager of Engineering &middot; February 17, 2026</div>
+      </div>
+      <div class="qr-right">
+        <div class="qr-label">What This Means</div>
+        <div class="qr-note">This meeting was called specifically to resolve the access question. The City's Manager of Engineering could not cite the provision behind his own department's requirement. The applicant knew the bylaw. His senior engineer did not. It then took over a month for staff to follow up — not with reconsideration, but with a retroactive justification for the same position.</div>
+      </div>
+    </div>
+
+    <div class="quote-row reveal">
+      <div class="qr-left">
+        <div class="qr-quote">"It's not like there is a hardship from the orientation of the lot. It's more of what you're proposing, like the design you have in mind."</div>
+        <div class="qr-attr">Michael Olubiyi &middot; Manager of Planning &middot; February 17, 2026</div>
+      </div>
+      <div class="qr-right">
+        <div class="qr-label">What This Means</div>
+        <div class="qr-note">A surveyed 20.8-foot grade differential — documented in architectural drawings on file with the City — was characterized as a design choice. Grade is not a design choice. It is a surveyed geological fact. Bylaw 2937 Section 6.8 exists precisely because grade is a physical condition that creates hardship independent of design.</div>
+      </div>
+    </div>
+
+    <div class="quote-row reveal">
+      <div class="qr-left">
+        <div class="qr-quote">"Looking at something very similar to my own property where I'm not permitted access because I'm on a collector. So it'll be exactly the same where we have a structure in the back and there's a 20 foot drop across my lot and the back unit's gonna have to walk down all the stairs. So, I mean, it happens. Yeah, it's the way it is."</div>
+        <div class="qr-attr">Stephen Judd &middot; Manager of Engineering &middot; February 17, 2026</div>
+      </div>
+      <div class="qr-right">
+        <div class="qr-label">What This Means</div>
+        <div class="qr-note">The senior engineering official compared a significant accessibility barrier — in a building housing elderly parents and young children — to a personal inconvenience on his own transit-adjacent property. These are not equivalent contexts. Planners are required to assess the unique needs of each site. This is the opposite of that.</div>
+      </div>
+    </div>
+
+    <div class="quote-row reveal">
+      <div class="qr-left qr-neutral">
+        <div class="qr-quote">"At one point I was told: daylight the ditch, all parking up Westmount, no access off the lane. And now I'm told the exact opposite."</div>
+        <div class="qr-attr">Dawar Zada &middot; February 17, 2026</div>
+      </div>
+      <div class="qr-right">
+        <div class="qr-label">What This Means</div>
+        <div class="qr-note">This statement was not disputed by any staff member present. The City's instruction history on this file is a direct reversal of the current requirement. No written rationale for the reversal has ever been provided.</div>
+      </div>
+    </div>
+
+    <div class="dual-access-block reveal">
+      <div class="dual-access-label">The Only Remaining Question</div>
+      <h3 class="dual-access-heading">Dual Access.<br>This Is All That Is Left.</h3>
+      <div class="dual-access-body">
+        <p>Dawar Zada has accepted the engineering requirements. He has accepted the fire plan. He has worked through the geotechnical, the knotweed, the bird collision strategy, the redesigns. He has done it cooperatively and without complaint. What he has not accepted — and will not accept — is lane-only access at a property with a 20.8-foot elevation drop, on a street where every single home accesses from the front and six have dual access, where the bylaw provides a written exception for exactly this situation, and where the neighbour 80 metres away on the same street — with less elevation differential — has already been approved for dual access.</p>
+        <p>This is not a design preference. It is a safety, accessibility, and legal matter. The Province's own Bill 25 amendments restrict municipalities from imposing conditions that make SSMUH practically infeasible. A requirement forcing elderly residents and children to navigate 34 stairs from the lane to their front door is precisely the barrier Bill 25 targeted. The compliance deadline is June 30, 2026.</p>
+        <div class="dual-access-docs">
+          <a href="documents/1006 Westmount - SITEPLAN SECTION.pdf" target="_blank" class="dual-access-doc">
+            <div class="dual-access-doc-icon">PDF</div>
+            <div class="dual-access-doc-text">
+              <div class="dual-access-doc-title">Architectural Site Plan — Section Drawing</div>
+              <div class="dual-access-doc-sub">Surveyed grade section showing the 20.8 ft / 6m elevation differential and access geometry &middot; Prepared by Architrix Design Studio</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="mt-royal-block">
+          <div class="mt-royal-label">We Already Know What Lane-Only Does</div>
+          <div class="mt-royal-heading">211 Mt. Royal Drive is one street over.<br>It is not a hypothetical.</div>
+          <p class="mt-royal-body">Staff directed the multiplex at 211 Mt. Royal Drive to lane-only access — the same restriction they are pushing at 1006 Westmount. The result is documented and visible. Eleven vehicles between two homes. Most parked on the street and spilling into the neighbouring lane. A blind corner created where none existed before. Two accidents have already occurred. It is the single biggest complaint from the surrounding neighbourhood.</p>
+          <p class="mt-royal-body">Dawar raised this directly with staff at the February 17 meeting — not as an opinion, but as a documented real-world outcome of the City's own policy. Stephen Judd, Manager of Engineering, called it <em>"a terrible example."</em> Two accidents on a residential street caused by a planning decision is not a terrible example. It is a consequence. And it is the consequence staff are proposing to repeat — on a lot with an even greater elevation drop, housing elderly residents and children, on a street that already has no room for additional on-street vehicles.</p>
+
+          <div class="mt-royal-map-wrap reveal">
+            <img src="images/three-property-map.jpg" alt="Annotated aerial map showing 1006 Westmount Dr, 211 Mt. Royal Drive, and 932 Westmount Dr" class="mt-royal-map">
+            <div class="mt-royal-map-caption">
+              <div class="mt-royal-pin-row"><span class="pin-dot gold"></span><strong>1006 Westmount Dr.</strong> — Staff proposing to add more on-street parking to an already congested street, rather than allowing residents to use their own driveways.</div>
+              <div class="mt-royal-pin-row"><span class="pin-dot red"></span><strong>211 Mt. Royal Drive</strong> — Staff required all parking off the lane. Occupants park on the street instead. Blind corner created. Two accidents. When raised with staff, Stephen Judd called it a "terrible example." Two accidents is not a terrible example. It is a consequence of bad planning.</div>
+              <div class="mt-royal-pin-row"><span class="pin-dot green"></span><strong>932 Westmount Dr.</strong> — Permitted to have dual access.</div>
+            </div>
+          </div>
+
+          <div class="mt-royal-callout">
+            <strong style="color:var(--navy)">Staff's response when shown this evidence:</strong> They called it a "terrible example" and insisted the same lane-only restriction apply at 1006 Westmount — demanding parking be reduced further still, engineering the exact same outcome on a lot with a more extreme elevation drop.
+          </div>
+
+          <div class="petition-inline reveal">
+            <div class="petition-inline-text">
+              <div class="petition-inline-label">Neighbourhood Response</div>
+              <p>Residents on both Westmount Drive and Grouse Lane have watched what lane-only access produced on Mt. Royal. They know exactly what it means. They are not opposed to this development — they are opposed to a planning decision that they have already seen cause accidents one street over. The neighbourhood petition was unambiguous. Several residents have indicated they are prepared to file formal complaints if this restriction is applied here.</p>
+              <a href="https://westmountpetition.netlify.app/" target="_blank" class="petition-inline-link">View the neighbourhood petition &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" style="background:#E8E2D9">
+  <div class="w">
+    <div class="section-label reveal" style="color:var(--red-light)">On the Record</div>
+    <h2 class="section-heading reveal">The In-Person Meeting.<br>The Answer Was Already Prepared.</h2>
+    <p class="section-lede reveal">After receiving no response for over a month following the February 17 meeting, Dawar went to City Hall in person. What happened is documented.</p>
+
+    <div class="incident-block reveal">
+      <div class="incident-narrative">
+        <p>Dawar had been waiting for more than a month for a written response to the dual access question — the single outstanding issue on an application that had already been active for four years. No response had come. He went to City Hall in person to get one.</p>
+        <p>When he arrived, Crystal Wickey was at her desk. She had her legs up. She looked up and asked him — abruptly — why he couldn't just wait for an email.</p>
+        <p>He explained that he had been waiting for over a month. She already had the response prepared. The answer was no. The same no that had never been committed to writing during the meeting, never been explained with reference to a specific bylaw provision, and never been accompanied by any indication of what options he had if he disagreed.</p>
+        <p>After Dawar walked her through the evidence — the bylaw, the precedent at 932, the elevation survey, the Valour comparison — the answer remained no. When he asked directly: <em>"What are my next steps if I don't agree with this decision?"</em></p>
+        <p>Her response: <strong style="color:var(--white)">"Seek a variance."</strong></p>
+        <p>That was it. No explanation of the variance process. No reference to the Board of Variance. No mention that this option existed in any prior correspondence, any letter, or any meeting. In four years of file history, the option of seeking a variance through Council had never been communicated to the applicant in writing. It was disclosed in passing, in a one-word answer, after being directly asked for next steps.</p>
+        <p>This is not a minor procedural detail. Homeowners navigating SSMUH applications are not development lawyers. They rely on City staff to explain the process and the options available to them. Withholding pathways — even passively, through omission — creates an uneven playing field that disadvantages the applicants who can least afford to find out what they didn't know.</p>
+        <p>Dawar recorded the encounter. Given the pattern of undocumented reversals, shifting requirements, and verbal commitments that later disappeared from the file, he had no other choice. The recording is part of the evidentiary record.</p>
+      </div>
+    </div>
+
+    <div class="incident-callout reveal">
+      <div class="incident-callout-label">What Was Withheld</div>
+      <p>In four years of active file correspondence — letters, emails, and recorded meetings — the applicant was never informed in writing that a variance through Council was an available pathway. It was disclosed verbally, in a single word, only when he asked directly what to do if he disagreed. Staff are expected to explain all available options. That did not happen here.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" style="background:#F0EBE3">
+  <div class="w">
+    <div class="section-label reveal">The Pattern</div>
+    <h2 class="section-heading reveal">This Is Not One Family's Bad Luck.</h2>
+    <p class="section-lede reveal">A documented record of development failure on a single block — and it is driving builders out of Port Moody entirely.</p>
+
+    <div class="failure-grid reveal">
+      <div class="failure-card">
+        <div class="failure-status">Stalled &mdash; 4 Years</div>
+        <div class="failure-who">Westmount Drive &mdash; Dawar</div>
+        <div class="failure-detail">$250,000+. Zero permits. Three children living in a deteriorating home.</div>
+      </div>
+      <div class="failure-card">
+        <div class="failure-status">Bankrupt &amp; Sold</div>
+        <div class="failure-who">Westmount Drive &mdash; Vacant Lot</div>
+        <div class="failure-detail">Bought for $1.5M in 2016. Owner lost $600,000+ dealing with the City. Sold for the same price six years later. The lot is still vacant. The new owners are fighting the same access issue — and had no idea they could argue it.</div>
+      </div>
+      <div class="failure-card">
+        <div class="failure-status">$150,000 Lost &mdash; Gave Up</div>
+        <div class="failure-who">Westmount Street</div>
+        <div class="failure-detail">Spent $150,000 attempting to subdivide. Gave up.</div>
+      </div>
+      <div class="failure-card">
+        <div class="failure-status">Nearly a Decade</div>
+        <div class="failure-who">Kevin &mdash; Westmount Drive</div>
+        <div class="failure-detail">Tried for nearly ten years to get approval for a small addition.</div>
+      </div>
+      <div class="failure-card">
+        <div class="failure-status">Second Attempt</div>
+        <div class="failure-who">Oscar &mdash; Westmount Drive</div>
+        <div class="failure-detail">Second applicant on this property. The first couldn't get through.</div>
+      </div>
+      <div class="failure-card">
+        <div class="failure-status">Never Told He Could Say No</div>
+        <div class="failure-who">New Builder &mdash; Westmount Drive</div>
+        <div class="failure-detail">Accepted lane-only access. Was never told about the grade exception, or that 932 — 80m away — received dual access months earlier.</div>
+      </div>
+    </div>
+
+    <div class="band-text reveal" style="text-align:center;padding:2rem 0;max-width:700px;margin:0 auto">
+      Developers are now choosing to build in municipalities where the process works. <strong>This is a direct consequence — and it goes against everything the Province is trying to achieve.</strong>
+    </div>
+
+    <div class="more-people-block reveal">
+      <div class="more-people-label">A Note on Scope</div>
+      <p class="more-people-text">The accounts documented above represent the people in Dawar's immediate surrounding area — neighbours he knows personally, whose stories he encountered directly while door-knocking over 1,000 homes across the Glenayre neighbourhood and compiling what he found. He was not conducting a formal survey. He was not seeking out complaints. These are the stories that surfaced on their own, in a single neighbourhood, from people willing to share them.</p>
+      <p class="more-people-text">There has been no effort to search city-wide. The accounts documented here are not an exhaustive record — they are a fraction of what a broader outreach effort would find. They are simply what one person discovered by showing up and asking.</p>
+    </div>
+  </div>
+</section>
+
+<section id="promise" class="section-pad">
+  <div class="w">
+    <div class="promise-kicker reveal">The Provincial Mandate</div>
+    <h2 class="promise-heading reveal">The Province created a pathway.<br>Port Moody was required to open it.</h2>
+    <div class="promise-body reveal">
+      <p>Bill 44 passed in 2023. Small-Scale Multi-Unit Housing. The Province removed public hearings. Removed the need for Council votes. Created a staff-led, streamlined process specifically designed to make four-unit housing accessible to homeowners — not just developers — in single-family neighbourhoods across BC.</p>
+      <p>Dawar had been fighting a subdivision application for years. When SSMUH passed, he saw what it was designed to be: a shorter path. He submitted his application with optimism. He thought: <em>this is finally it.</em></p>
+    </div>
+    <div class="promise-box reveal">
+      <div class="promise-box-label">Provincial Policy Manual — What the Law Requires</div>
+      <p>"A local government cannot impose regulations in its Zoning Bylaw, or through any other development application approval tools, in such a way that unreasonably prohibits or restricts the use or density."</p>
+    </div>
+  </div>
+</section>
+
+<section id="legal" class="section-pad" style="background:#F0EBE3">
+  <div class="w">
+    <div class="section-label reveal">The Law</div>
+    <h2 class="section-heading reveal">Port Moody Has a Compliance Problem.<br>The Province Is Already Watching.</h2>
+    <p class="section-lede reveal">Bill 25 passed in November 2025 because municipalities were creating conditions — through parking requirements, access restrictions, and blanket policy — that made SSMUH infeasible. The compliance deadline is June 30, 2026.</p>
+
+    <div class="reveal" style="overflow-x:auto">
+    <table class="law-table">
+      <thead>
+        <tr>
+          <th>Provision</th>
+          <th>What It Requires</th>
+          <th>Status at 1006 Westmount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bill 44 (2023)</td>
+          <td>Municipalities must permit 3-4 unit SSMUH on eligible lots</td>
+          <td class="td-ok">Technically complied — application is permissible</td>
+        </tr>
+        <tr>
+          <td>Bill 25 (2025)</td>
+          <td>Prohibits requirements that make SSMUH financially or practically infeasible</td>
+          <td class="td-fail">Lane-only access requiring 34 stairs is a practical barrier. Compliance deadline: June 30, 2026</td>
+        </tr>
+        <tr>
+          <td>Bylaw 2937 s.6.8</td>
+          <td>Alternative street access permitted where grade makes lane access infeasible</td>
+          <td class="td-fail">Exception cited but never applied. No written rationale provided. Applied at 932 Westmount — not at 1006</td>
+        </tr>
+        <tr>
+          <td>SSMUH Guide (July 2025)</td>
+          <td>Flexibility on access "may be possible on a case-by-case basis"</td>
+          <td class="td-fail">No case-by-case assessment. Blanket policy confirmed on record by assigned planner</td>
+        </tr>
+        <tr>
+          <td>Provincial Policy Manual</td>
+          <td>Cannot impose regulations that unreasonably restrict density</td>
+          <td class="td-fail">Cited in Port Moody's own June 2024 staff report. Applied to the letter at 348 Valour. Not applied here</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="quote-block reveal" style="border-left-color:var(--gold);background:var(--gold-dim);margin-top:2.5rem">
+      <div class="quote-text" style="font-style:normal;font-size:1.05rem">Port Moody has <strong>technically complied</strong> with Bill 44. But operationally, it is undermining it. The Province did not pass Bill 25 because SSMUH implementation was going well. It passed specifically to address what is being done at 1006 Westmount Drive.</div>
+    </div>
+  </div>
+</section>
+
+<section id="deadline">
+  <div class="w">
+    <div class="deadline-date reveal">June 30, 2026</div>
+    <div class="deadline-label reveal">Bill 25 Municipal Compliance Deadline</div>
+    <div class="deadline-body reveal">
+      The Province has explicit authority under Bill 25 to monitor and act on municipal SSMUH implementation that creates barriers. A blanket single-driveway policy applied without site analysis, a grade exception cited but never applied, and a family unable to build mandated housing after four years — this is precisely the pattern the Province enacted Bill 25 to address. This document, if forwarded to the Minister of Housing, constitutes a complete record.
+    </div>
+  </div>
+</section>
+
+<section id="paths">
+  <div class="w">
+    <div class="section-label reveal">What Happens Next</div>
+    <h2 class="section-heading reveal">There Are Two Paths.<br>Both Are Available Right Now.</h2>
+    <p class="section-lede reveal">The applicant would still prefer resolution here. But he is no longer pretending the other path does not exist — or that it will not be used.</p>
+
+    <div class="paths-grid reveal">
+      <div class="path resolve">
+        <div class="path-label">Path One</div>
+        <div class="path-heading">Resolution.<br>Today.</div>
+        <div class="path-item">Dual access approved — written decision</div>
+        <div class="path-item">Priority processing when revised plans are submitted</div>
+        <div class="path-item">File reassigned to senior management</div>
+        <div class="path-item">The applicant builds his home. His family moves in. Port Moody gets its housing.</div>
+        <div class="path-item" style="color:rgba(100,220,150,.7)">This is what the applicant wants. It is also the path of least institutional risk for the City.</div>
+      </div>
+      <div class="path escalate">
+        <div class="path-label">Path Two</div>
+        <div class="path-heading">Escalation.<br>Already in Motion.</div>
+        <div class="path-item">Formal complaint to Minister Christine Boyle — complete evidentiary record attached</div>
+        <div class="path-item">Coordinated legal challenge — the applicant works with ~80% of Port Moody SSMUH applicants. Their losses are documented.</div>
+        <div class="path-item">Board of Variance — all three hardship elements are met</div>
+        <div class="path-item">Full public disclosure — transcripts, letters, this complete evidentiary record — to local and provincial media</div>
+        <div class="path-item" style="color:rgba(220,100,100,.7)">This website is currently password-protected and privately secured. The applicant has absolutely no intention of reaching out to local media at this time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demands">
+  <div class="w">
+    <div class="section-label reveal">A Path Forward</div>
+    <h2 class="section-heading reveal">Three Reasonable Steps<br>the City Can Take Now.</h2>
+    <p class="section-lede reveal">Dawar is not looking for a fight. He is looking for a resolution. Given everything documented above, none of what follows should be difficult to agree to — and all of it can happen at the City level, without variance proceedings, without escalation to the Province, and without lawyers.</p>
+
+    <div class="reveal">
+      <div class="demand-item">
+        <div class="demand-n">1</div>
+        <div class="demand-body">
+          <div class="demand-title">A fresh set of senior eyes on the dual access question</div>
+          <div class="demand-text">The dual access question has been documented, argued, and presented to the same staff who have already concluded no — without providing a written bylaw rationale, without addressing the 932 Westmount precedent, and without applying the grade exception in Bylaw 2937 Section 6.8 that exists precisely for this situation. We don't think it's unreasonable to ask that senior management review this question fresh, with all of the above evidence in front of them. This should be resolvable at the City level. A variance proceeding is a lengthy and costly process — we have already spent over $250,000 navigating this application and we do not believe a formal variance is necessary when the bylaw already provides the answer. A senior-level review and written decision is all that's needed.</div>
+          <div class="demand-basis">Bylaw 2937 s.6.8 grade exception &middot; 932 Westmount precedent &middot; Bill 25 &middot; 20.8 ft surveyed elevation differential</div>
+        </div>
+      </div>
+      <div class="demand-item">
+        <div class="demand-n">2</div>
+        <div class="demand-body">
+          <div class="demand-title">Priority processing when revised plans are submitted</div>
+          <div class="demand-text">This file has been active for four years. Three applications have been submitted. Over $250,000 has been spent. A BC Hydro interconnection queue position is at risk, and a family with three young children is living in a deteriorating home. We are not asking to skip any legitimate process — we are asking that, as a reasonable courtesy given the circumstances, revised plans not go to the back of a standard queue behind applications that began last month. That is not an unreasonable ask. It is the minimum acknowledgement that this file's history deserves.</div>
+          <div class="demand-basis">4-year active file &middot; $250,000+ spent &middot; BC Hydro queue exposure &middot; Family circumstances</div>
+        </div>
+      </div>
+      <div class="demand-item">
+        <div class="demand-n">3</div>
+        <div class="demand-body">
+          <div class="demand-title">A different point of contact going forward</div>
+          <div class="demand-text">This is not a personal attack. But the record of this file includes information withheld in person and in writing, a variance pathway never disclosed until Dawar asked directly what to do if he disagreed, requirements that reversed without written explanation, and an in-person interaction that did not reflect the standard of service this applicant — or any applicant — should expect. The relationship on this file has broken down through no fault of the applicant. Senior management involvement going forward isn't a punitive request. It is simply the appropriate response to a file with this much history and this much at stake.</div>
+          <div class="demand-basis">Documented conduct record &middot; Non-disclosure of variance pathway &middot; Instruction reversals without written rationale</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="closing">
+  <div class="w">
+    <div class="section-label reveal" style="color:var(--teal)">Who Dawar Zada Is</div>
+    <h2 class="closing-heading reveal">This was never about profit.<br>It was always about the neighbourhood<br>he has been trying to protect.</h2>
+
+    <div class="closing-body reveal">
+      <p>While fighting a four-year stalled application — one that would have broken most people — Dawar Zada spent that same time helping everyone around him avoid the same fate. He held free community seminars, bringing in builders, housing advisors, and SSMUH experts so residents could hear from people who had actually done it. He personally invited City planning staff to attend every one. He sat one-on-one with neighbours. At kitchen tables. On front stoops. Walking seniors through what SSMUH could look like on a property they had owned for forty years.</p>
+      <p>For most of them, it was not a development project. It was a retirement plan. A way to downsize into something safer and more manageable while staying in the community they knew — and generating the rental income that finally made the numbers work. Some of those seniors are now in a position to retire because of conversations Dawar started. He helped them see that it was possible. He helped them understand their options. He was doing the work the City was not.</p>
+      <p>He knows his neighbours need this. And he knows the City is standing in the way of it. When staff are inconsistent — approving dual access on one street, denying it eighty metres away, citing exceptions that were never applied, withholding information about faster pathways — the consequences are not administrative. They are financial. They are life-altering. People are not just frustrated. They are furious. And when you are not consistent as a team regarding the rules, you can literally bankrupt someone. That has already happened on this street.</p>
+      <p>Dawar's goal is to change that. Not through conflict — through education, transparency, and showing the City what a working SSMUH process actually looks like. He has the network to do it. He has the relationships. He would genuinely rather use them to help than to escalate.</p>
+    </div>
+
+    <!-- Ramp section -->
+    <div class="reveal">
+      <div class="ramp-section-label">The Neighbourhood Reality</div>
+      <div class="ramp-heading">Seniors are going to extreme lengths<br>just to stay in their homes.</div>
+      <div class="ramp-sub">These photos were taken within a short walk of 1006 Westmount Drive.<br>They are not unusual. They are the neighbourhood.</div>
+    </div>
+    <div class="ramp-grid reveal">
+      <img class="ramp-img" src="images/ramp photo1.jpeg" alt="Senior&#39;s home with wooden accessibility ramp">
+      <img class="ramp-img" src="images/ramp photo2.jpeg" alt="Home with accessibility ramp and wheelchair parking sign">
+      <img class="ramp-img" src="images/ramp photo3.jpeg" alt="Long inclined accessibility ramp modification on neighbourhood rancher">
+    </div>
+    <div class="ramp-caption-text reveal">
+      Homes near 1006 Westmount Drive, Port Moody &mdash; seniors retrofitting aging ranchers with accessibility ramps rather than leave a community with no suitable downsizing options.<br>
+      SSMUH was designed to solve exactly this. The City is choosing not to let it.
+    </div>
+
+    <!-- Who these applicants really are -->
+    <div class="closing-body reveal">
+      <p>These applications are rarely about speculative investment or outside developers chasing margin. They are Kevin, who has spent nearly a decade trying to get approval so his daughter can move home from Australia. Manuela, building for herself, her children, and her grandchildren. Oscar, trying to downsize on a property his family has owned for years. Wendy and Shane, creating a forever home. Real residents, real lives, real consequences when the process fails them.</p>
+      <p>The City sometimes forgets that it is looking at people, not files. Dawar has not forgotten. He is trying to make sure no one else on this street has to go through what he has been through — and that the City eventually becomes the kind of place where that is not necessary.</p>
+    </div>
+
+    <!-- Outreach images -->
+    <div class="outreach-grid reveal">
+      <div class="outreach-card">
+        <a href="https://www.portmoodymultiplex.ca/" target="_blank">
+          <img src="images/website.jpeg" alt="PortMoodyMultiplex.ca community resource">
+        </a>
+        <div class="outreach-card-caption">
+          <div class="outreach-card-label">Community Resource</div>
+          PortMoodyMultiplex.ca &mdash; free feasibility tools, maps, and guides built because the City wasn&#39;t publicizing these options.
+        </div>
+      </div>
+      <div class="outreach-card">
+        <img src="images/event.jpeg" alt="Your Home, Your Future — community info session at Glenayre Centre">
+        <div class="outreach-card-caption">
+          <div class="outreach-card-label">Public Seminar</div>
+          &ldquo;Your Home, Your Future&rdquo; &mdash; free info session at the Glenayre Centre, open to all residents.
+        </div>
+      </div>
+      <div class="outreach-card">
+        <img src="images/cityinvite.jpeg" alt="Email inviting City of Port Moody staff to community session">
+        <div class="outreach-card-caption">
+          <div class="outreach-card-label">City Invitation</div>
+          Direct email to City planning staff &mdash; invited to attend, engage, and hear from residents directly.
+        </div>
+      </div>
+    </div>
+
+    <div class="closing-stat-row reveal">
+      <div class="closing-stat">
+        <div class="closing-stat-n">~1,000</div>
+        <div class="closing-stat-l">Homeowners personally reached in Glenayre</div>
+      </div>
+      <div class="closing-stat">
+        <div class="closing-stat-n">~80%</div>
+        <div class="closing-stat-l">of Port Moody SSMUH applicants he now advises</div>
+      </div>
+      <div class="closing-stat">
+        <div class="closing-stat-n">0</div>
+        <div class="closing-stat-l">Media calls made.<br>So far.</div>
+      </div>
+    </div>
+
+    <a href="https://www.portmoodymultiplex.ca/" target="_blank" class="closing-link reveal">Visit PortMoodyMultiplex.ca &rarr;</a>
+  </div>
+</section>
+
+<section id="final">
+  <div class="w">
+    <div class="final-statement reveal">
+      "This is not an attack on the individuals involved. This is a formal record of a process that failed a family trying to build their home — presented to the officials with the authority to correct it. The applicant would still prefer to resolve this here."
+    </div>
+    <div class="final-rule"></div>
+    <div class="final-footer reveal">
+      File MDP000108 &middot; 1006 Westmount Drive, Port Moody, BC &middot; Applicant: Dawar Zada, PREC<br>
+      Presented March 30, 2026 to Mayor Meghan Lahti &middot; City Manager Anna Mathewson &middot; GM Community Development Suzanne Smith<br>
+      Prepared with reference to: Bylaw 2937 &middot; LGA s.536 &middot; Bill 44 (2023) &middot; Bill 25 (2025) &middot; Port Moody SSMUH Guide (July 4, 2025)<br>
+      Verbatim transcripts: Recorded meetings &middot; December 16, 2025 &amp; February 17, 2026<br>
+      Prepared by Sheri Zada &middot; This document is a formal submission and will be retained in full.
+    </div>
+  </div>
+</section>
+
+<script>
+// Progress bar
+window.addEventListener('scroll',function(){
+  var h=document.documentElement;
+  document.getElementById('bar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+});
+
+// Scroll reveals
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}
+  });
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-slow').forEach(function(el){observer.observe(el)});
+
+// title page static — counter removed
+
+// ── PASSWORD GATE ──────────────────────────────────────────────
+(function(){
+  var PASS = 'westmount2026'; // ← change this to any password you like
+  var KEY  = 'wm_auth';
+  if(sessionStorage.getItem(KEY) === '1') return;
+
+  // Build overlay
+  var overlay = document.createElement('div');
+  overlay.id = 'pw-gate';
+  overlay.innerHTML = [
+    '<div id="pw-inner">',
+    '  <div id="pw-eyebrow">1006 Westmount Drive</div>',
+    '  <div id="pw-title">Private Document</div>',
+    '  <div id="pw-rule"></div>',
+    '  <div id="pw-sub">This document is confidential and intended only for named recipients.</div>',
+    '  <input id="pw-input" type="password" placeholder="Enter password" autocomplete="off">',
+    '  <button id="pw-btn">Enter</button>',
+    '  <div id="pw-err"></div>',
+    '</div>'
+  ].join('');
+
+  var style = document.createElement('style');
+  style.textContent = [
+    '#pw-gate{position:fixed;inset:0;z-index:99999;background:#0F1B35;',
+    '  display:flex;align-items:center;justify-content:center;}',
+    '#pw-inner{text-align:center;padding:3rem;max-width:420px;width:100%;}',
+    '#pw-eyebrow{font-family:"Source Sans 3",sans-serif;font-size:.65rem;letter-spacing:.28em;',
+    '  text-transform:uppercase;color:rgba(248,245,240,.4);margin-bottom:1.2rem;}',
+    '#pw-title{font-family:"Times New Roman",serif;font-size:1.7rem;color:#F8F5F0;',
+    '  font-weight:400;margin-bottom:1.2rem;}',
+    '#pw-rule{width:40px;height:2px;background:#7A5A0A;margin:0 auto 1.4rem;}',
+    '#pw-sub{font-family:"Source Sans 3",sans-serif;font-size:.82rem;',
+    '  color:rgba(248,245,240,.45);line-height:1.65;margin-bottom:2rem;}',
+    '#pw-input{width:100%;padding:.8rem 1rem;border:1px solid rgba(248,245,240,.18);',
+    '  background:rgba(248,245,240,.06);color:#F8F5F0;font-family:"Source Sans 3",sans-serif;',
+    '  font-size:1rem;border-radius:4px;outline:none;text-align:center;letter-spacing:.1em;}',
+    '#pw-input:focus{border-color:rgba(122,90,10,.6);background:rgba(122,90,10,.07);}',
+    '#pw-btn{display:block;width:100%;margin-top:.85rem;padding:.85rem;',
+    '  background:#7A5A0A;color:#F8F5F0;font-family:"Source Sans 3",sans-serif;',
+    '  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;border:none;',
+    '  border-radius:4px;cursor:pointer;transition:background .2s;}',
+    '#pw-btn:hover{background:#9A7215;}',
+    '#pw-err{height:1.2rem;margin-top:.7rem;font-family:"Source Sans 3",sans-serif;',
+    '  font-size:.78rem;color:rgba(200,80,80,.85);}'
+  ].join('');
+
+  document.head.appendChild(style);
+  document.body.prepend(overlay);
+  document.body.style.overflow = 'hidden';
+
+  function attempt(){
+    var val = document.getElementById('pw-input').value.trim();
+    if(val === PASS){
+      sessionStorage.setItem(KEY,'1');
+      overlay.style.opacity = '0';
+      overlay.style.transition = 'opacity .4s';
+      setTimeout(function(){ overlay.remove(); document.body.style.overflow=''; }, 420);
+    } else {
+      var err = document.getElementById('pw-err');
+      err.textContent = 'Incorrect password.';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+  document.getElementById('pw-btn').addEventListener('click', attempt);
+  document.getElementById('pw-input').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') attempt();
+    document.getElementById('pw-err').textContent = '';
+  });
+})();
+</script>
+
+</body>
+</html>
