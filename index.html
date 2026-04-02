@@ -1159,42 +1159,67 @@ body{background:var(--page-bg);color:var(--navy);font-family:var(--serif);font-s
       </a>
     </div>
 
-  /* Contradiction rows */
-.contra-rows{margin:2rem 0}
-.contra-row{
-  display:grid;grid-template-columns:2.5rem 1fr 1fr;gap:1.25rem;
-  padding:1.5rem 0;border-bottom:1px solid var(--rule);
-  align-items:start;
-}
-.contra-row:first-child{border-top:1px solid var(--rule)}
-.contra-num{
-  width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(15,27,53,.15);border-radius:50%;
-  font-family:var(--sans);font-weight:300;font-size:.75rem;
-  color:rgba(15,27,53,.4);flex-shrink:0;margin-top:.15rem;
-}
-.contra-side{padding:.1rem 0;min-width:0;word-break:break-word;overflow-wrap:break-word;}
-.contra-year-tag{
-  font-family:var(--sans);font-weight:600;font-size:.55rem;
-  letter-spacing:.1em;text-transform:uppercase;
-  padding:.15rem .45rem;border-radius:2px;
-  display:inline-block;margin-bottom:.4rem;
-}
-.y21{background:var(--green-dim);color:var(--green-light);border:1px solid var(--green-border)}
-.y25{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.25)}
-.contra-title{
-  font-family:var(--sans);font-weight:500;font-size:.8rem;
-  color:var(--white);margin-bottom:.5rem;letter-spacing:.01em;
-}
-.contra-text{
-  font-family:var(--serif);font-size:.95rem;
-  color:rgba(15,27,53,.65);line-height:1.65;
-}
-@media(max-width:650px){
-  .contra-row{grid-template-columns:2rem 1fr;}
-  .contra-side{grid-column:2;}
-  .contra-num{grid-column:1;grid-row:1;}
-}
+ <div class="contra-rows reveal">
+      <div class="contra-row">
+        <div class="contra-num">1</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">Vehicle Access</div>
+          <div class="contra-text">Driveway from Westmount permitted. Max 6m wide. A second driveway to the lane discussed as an option.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text"><strong style="color:var(--white)">Both front driveways eliminated.</strong> All access from Grouse Lane only — 20.8 feet below street grade.</div>
+        </div>
+      </div>
+      <div class="contra-row">
+        <div class="contra-num">2</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">The Ditch</div>
+          <div class="contra-text">Staff were <em>"supportive of the variance given the rationale provided."</em> Active collaboration.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text">Ditch reinstated. Culvert at developer's expense. CCTV of a 64-year-old sewer pipe required.</div>
+        </div>
+      </div>
+      <div class="contra-row">
+        <div class="contra-num">3</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">Parking</div>
+          <div class="contra-text">6 stalls required. More encouraged.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text">Maximum 4. The City <strong style="color:var(--white)">actively reduced parking below what the applicant offered (9 stalls).</strong></div>
+        </div>
+      </div>
+      <div class="contra-row">
+        <div class="contra-num">4</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">Complexity</div>
+          <div class="contra-text">Three items. $6,000 CAC. That was it.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text">23 planning comments. 22 engineering drawings. Fire plan. Geotechnical report. Knotweed plan. Bird collision strategy.</div>
+        </div>
+      </div>
+      <div class="contra-row">
+        <div class="contra-num">5</div>
+        <div class="contra-side">
+          <div class="contra-year-tag y21">2021</div>
+          <div class="contra-title">Tone</div>
+          <div class="contra-text"><em>"We look forward to your revised submission."</em> Collaborative. Professional. Constructive.</div>
+        </div>
+        <div class="contra-side">
+          <div class="contra-year-tag y25">2025</div>
+          <div class="contra-text">"Unsightly walls." Massing critique. No path forward offered. The applicant went from a partner to an obstacle.</div>
+        </div>
+      </div>
 
     <div class="infeasibility-block reveal">
       <div class="infeasibility-label">What These Requirements Actually Mean</div>
