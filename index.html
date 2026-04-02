@@ -327,18 +327,13 @@ body{background:var(--page-bg);color:var(--navy);font-family:var(--serif);font-s
   align-items:start;
 }
 .contra-row:first-child{border-top:1px solid var(--rule)}
-@media(max-width:650px){
-  .contra-row{grid-template-columns:2rem 1fr;}
-  .contra-b{grid-column:2;min-width:0;word-break:break-word;overflow-wrap:break-word;}
-  .contra-2025{grid-column:2;min-width:0;word-break:break-word;overflow-wrap:break-word;}
-}
 .contra-num{
   width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;
   border:1px solid rgba(15,27,53,.15);border-radius:50%;
   font-family:var(--sans);font-weight:300;font-size:.75rem;
   color:rgba(15,27,53,.4);flex-shrink:0;margin-top:.15rem;
 }
-.contra-side{padding:.1rem 0;min-width:0}
+.contra-side{padding:.1rem 0;min-width:0;word-break:break-word;overflow-wrap:break-word;}
 .contra-year-tag{
   font-family:var(--sans);font-weight:600;font-size:.55rem;
   letter-spacing:.1em;text-transform:uppercase;
@@ -354,6 +349,11 @@ body{background:var(--page-bg);color:var(--navy);font-family:var(--serif);font-s
 .contra-text{
   font-family:var(--serif);font-size:.95rem;
   color:rgba(15,27,53,.65);line-height:1.65;
+}
+@media(max-width:650px){
+  .contra-row{grid-template-columns:2rem 1fr;}
+  .contra-side{grid-column:2;}
+  .contra-num{grid-column:1;grid-row:1;}
 }
 /* ══════════════════════════════════
    COMPARISON CARDS
